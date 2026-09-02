@@ -132,8 +132,8 @@ export default function Home() {
   const selectedCopy = languageCopy[activeLanguage];
 
   useEffect(() => {
-    const savedPhrase = window.localStorage.getItem("lingua-aberta-saved-phrase");
-    const savedGoal = window.localStorage.getItem("lingua-aberta-weekly-goal");
+    const savedPhrase = window.localStorage.getItem("open-tongue-saved-phrase");
+    const savedGoal = window.localStorage.getItem("open-tongue-weekly-goal");
     setIsPhraseSaved(savedPhrase === selectedCopy.phrase);
     if (savedGoal) setWeeklyGoal(Number(savedGoal));
   }, [activeLanguage, selectedCopy.phrase]);
@@ -177,23 +177,48 @@ export default function Home() {
     toast("Microfone ativado", { description: "Fale uma frase curta; o tutor vai ouvir você." });
   }
 
-  function sendMessage() {
+  async function sendMessage() {
     const cleanMessage = message.trim();
     if (!cleanMessage) return;
+    const previousMessages = messages;
     setMessages((current) => [
       ...current,
       { from: "student", text: cleanMessage },
-      { from: "tutor", text: activeLanguage === "Català" ? "Molt bé! Agora tenta usar a frase-modelo em uma situação real." : activeLanguage === "English" ? "Nice! Now try the same idea using the model phrase above." : "Boa! Agora tenta falar a mesma ideia usando a frase-modelo acima." },
+      { from: "tutor", text: "Estou pensando com você..." },
     ]);
     setPracticeMinutes((minutes) => minutes + 2);
     setWeeklyGoal((goal) => Math.min(100, goal + 1));
     setMessage("");
+    try {
+      const response = await fetch("/api/tutor", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ message: cleanMessage, language: activeLanguage, history: previousMessages.map((item) => ({ role: item.from === "tutor" ? "assistant" : "user", content: item.text })) }) });
+      const data = await response.json() as { reply?: string };
+      setMessages((current) => [...current.slice(0, -1), { from: "tutor", text: data.reply || "Vamos tentar de novo juntos?" }]);
+    } catch {
+      setMessages((current) => [...current.slice(0, -1), { from: "tutor", text: activeLanguage === "Català" ? "Molt bé! Ara prova d'utilitzar la frase model en una situació real." : activeLanguage === "English" ? "Nice! Now try the same idea using the model phrase above." : "Boa! Agora tenta falar a mesma ideia usando a frase-modelo acima." }]);
+    }
   }
 
   function startLesson() {
+    const AudioContextClass = (window as any).AudioContext || (window as any).webkitAudioContext;
+    if (AudioContextClass) {
+      const audioContext = new AudioContextClass();
+      [523.25, 659.25, 783.99].forEach((frequency: number, index: number) => {
+        const oscillator = audioContext.createOscillator();
+        const gain = audioContext.createGain();
+        oscillator.frequency.value = frequency;
+        oscillator.type = "sine";
+        gain.gain.setValueAtTime(0.0001, audioContext.currentTime + index * 0.08);
+        gain.gain.exponentialRampToValueAtTime(0.12, audioContext.currentTime + index * 0.08 + 0.02);
+        gain.gain.exponentialRampToValueAtTime(0.0001, audioContext.currentTime + index * 0.08 + 0.28);
+        oscillator.connect(gain).connect(audioContext.destination);
+        oscillator.start(audioContext.currentTime + index * 0.08);
+        oscillator.stop(audioContext.currentTime + index * 0.08 + 0.3);
+      });
+    }
     toast("Aula desbloqueada", {
       description: `${selectedCourse.title} está pronta para você continuar.`,
     });
+    toast("Conquista desbloqueada: coragem para falar", { description: "+25 XP · Seu primeiro passo já conta." });
     document.getElementById("tutor")?.scrollIntoView({ behavior: "smooth", block: "start" });
   }
 
@@ -201,10 +226,10 @@ export default function Home() {
     const nextSaved = !isPhraseSaved;
     setIsPhraseSaved(nextSaved);
     if (nextSaved) {
-      window.localStorage.setItem("lingua-aberta-saved-phrase", selectedCopy.phrase);
+      window.localStorage.setItem("open-tongue-saved-phrase", selectedCopy.phrase);
       toast("Dica salva na biblioteca", { description: "Você pode voltar a esta frase sempre que quiser." });
     } else {
-      window.localStorage.removeItem("lingua-aberta-saved-phrase");
+      window.localStorage.removeItem("open-tongue-saved-phrase");
       toast("Dica removida", { description: "A frase saiu da sua biblioteca pessoal." });
     }
   }
@@ -212,7 +237,7 @@ export default function Home() {
   function adjustGoal() {
     const nextGoal = weeklyGoal >= 100 ? 50 : weeklyGoal + 10;
     setWeeklyGoal(nextGoal);
-    window.localStorage.setItem("lingua-aberta-weekly-goal", String(nextGoal));
+    window.localStorage.setItem("open-tongue-weekly-goal", String(nextGoal));
     toast("Meta atualizada", { description: nextGoal >= 100 ? "Meta fechada! Escolha 50% para começar um novo ciclo." : `Mais ${Math.max(5, 100 - nextGoal)}% para completar sua meta da semana.` });
   }
 
@@ -287,7 +312,7 @@ export default function Home() {
               <button className="grid size-10 place-items-center rounded-xl border border-ink/10 bg-white" aria-label="Abrir menu" onClick={() => setIsMobileMenuOpen(true)}>
                 <Menu className="size-5" />
               </button>
-              <span className="font-display text-lg font-black">Lingua aberta</span>
+              <span className="font-display text-lg font-black">Open Tongue</span>
             </div>
             <div className="hidden items-center gap-3 text-sm text-ink/55 lg:flex">
               <span className="font-mono text-[11px] font-bold uppercase tracking-[0.2em] text-ink/35">Quarta-feira, 18 de setembro</span>
@@ -408,7 +433,7 @@ export default function Home() {
         </main>
       </div>
 
-      {isMobileMenuOpen && <div className="fixed inset-0 z-50 flex lg:hidden"><button className="absolute inset-0 bg-ink/40 backdrop-blur-sm" aria-label="Fechar menu" onClick={() => setIsMobileMenuOpen(false)} /><aside className="relative z-10 flex h-full w-[280px] flex-col bg-paper p-6 shadow-2xl"><div className="flex items-center justify-between"><span className="font-display text-2xl font-black">Lingua aberta</span><button className="grid size-9 place-items-center rounded-lg border border-ink/10" onClick={() => setIsMobileMenuOpen(false)} aria-label="Fechar menu"><X className="size-4" /></button></div><nav className="mt-12 space-y-2">{navItems.map(({ label, icon: Icon }) => <button key={label} onClick={() => handleNav(label)} className={`flex w-full items-center gap-3 rounded-xl px-3 py-3 text-left font-bold ${activeNav === label ? "bg-ink text-white" : "text-ink/60"}`}><Icon className="size-[18px]" />{label}</button>)}</nav><div className="mt-auto rounded-2xl bg-mint p-4"><Headphones className="size-5" /><p className="mt-4 font-display text-xl font-extrabold leading-tight">Seu tutor está pronto para ouvir.</p><button onClick={() => { setIsMobileMenuOpen(false); document.getElementById("tutor")?.scrollIntoView({ behavior: "smooth" }); }} className="mt-4 text-sm font-extrabold underline underline-offset-4">Abrir tutor</button></div></aside></div>}
+      {isMobileMenuOpen && <div className="fixed inset-0 z-50 flex lg:hidden"><button className="absolute inset-0 bg-ink/40 backdrop-blur-sm" aria-label="Fechar menu" onClick={() => setIsMobileMenuOpen(false)} /><aside className="relative z-10 flex h-full w-[280px] flex-col bg-paper p-6 shadow-2xl"><div className="flex items-center justify-between"><span className="font-display text-2xl font-black">Open Tongue</span><button className="grid size-9 place-items-center rounded-lg border border-ink/10" onClick={() => setIsMobileMenuOpen(false)} aria-label="Fechar menu"><X className="size-4" /></button></div><nav className="mt-12 space-y-2">{navItems.map(({ label, icon: Icon }) => <button key={label} onClick={() => handleNav(label)} className={`flex w-full items-center gap-3 rounded-xl px-3 py-3 text-left font-bold ${activeNav === label ? "bg-ink text-white" : "text-ink/60"}`}><Icon className="size-[18px]" />{label}</button>)}</nav><div className="mt-auto rounded-2xl bg-mint p-4"><Headphones className="size-5" /><p className="mt-4 font-display text-xl font-extrabold leading-tight">Seu tutor está pronto para ouvir.</p><button onClick={() => { setIsMobileMenuOpen(false); document.getElementById("tutor")?.scrollIntoView({ behavior: "smooth" }); }} className="mt-4 text-sm font-extrabold underline underline-offset-4">Abrir tutor</button></div></aside></div>}
     </div>
   );
 }
