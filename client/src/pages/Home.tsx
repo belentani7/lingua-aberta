@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import {
   ArrowUpRight,
   BookOpen,
@@ -115,17 +115,28 @@ export default function Home() {
   const [activeLanguage, setActiveLanguage] = useState<Language>("Español");
   const [isListening, setIsListening] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isPhraseSaved, setIsPhraseSaved] = useState(false);
+  const [weeklyGoal, setWeeklyGoal] = useState(68);
+  const [practiceMinutes, setPracticeMinutes] = useState(222);
   const [message, setMessage] = useState("");
   const [messages, setMessages] = useState([
     { from: "tutor", text: "¡Hola, Rafa! Vamos a desbloquear teu espanhol hoje." },
     { from: "tutor", text: "Diz em espanhol: 'Eu estou procurando um quarto perto do metrô.'" },
   ]);
+  const recognitionRef = useRef<{ start: () => void; stop: () => void; onresult: ((event: any) => void) | null; onend: (() => void) | null } | null>(null);
 
   const selectedCourse = useMemo(
     () => courses.find((course) => course.language === activeLanguage) ?? courses[0],
     [activeLanguage],
   );
   const selectedCopy = languageCopy[activeLanguage];
+
+  useEffect(() => {
+    const savedPhrase = window.localStorage.getItem("lingua-aberta-saved-phrase");
+    const savedGoal = window.localStorage.getItem("lingua-aberta-weekly-goal");
+    setIsPhraseSaved(savedPhrase === selectedCopy.phrase);
+    if (savedGoal) setWeeklyGoal(Number(savedGoal));
+  }, [activeLanguage, selectedCopy.phrase]);
 
   function handleNav(label: string) {
     setActiveNav(label);
@@ -138,10 +149,32 @@ export default function Home() {
   }
 
   function toggleListening() {
-    setIsListening((current) => !current);
-    toast(isListening ? "Microfone pausado" : "Microfone ativado", {
-      description: isListening ? "Você pode retomar quando quiser." : "Fale uma frase curta; o tutor vai ouvir você.",
-    });
+    if (isListening) {
+      recognitionRef.current?.stop();
+      setIsListening(false);
+      return;
+    }
+
+    const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
+    if (!SpeechRecognition) {
+      toast("Microfone não disponível neste navegador", { description: "Você ainda pode escrever sua resposta no campo abaixo." });
+      return;
+    }
+
+    const recognition = new SpeechRecognition();
+    recognition.lang = activeLanguage === "Español" ? "es-ES" : activeLanguage === "Català" ? "ca-ES" : "en-GB";
+    recognition.interimResults = false;
+    recognition.continuous = false;
+    recognition.onresult = (event: any) => {
+      const transcript = event.results?.[0]?.[0]?.transcript ?? "";
+      setMessage(transcript);
+      toast("Te ouvi", { description: "Revise sua frase e envie quando estiver pronto." });
+    };
+    recognition.onend = () => setIsListening(false);
+    recognitionRef.current = recognition;
+    setIsListening(true);
+    recognition.start();
+    toast("Microfone ativado", { description: "Fale uma frase curta; o tutor vai ouvir você." });
   }
 
   function sendMessage() {
@@ -150,8 +183,10 @@ export default function Home() {
     setMessages((current) => [
       ...current,
       { from: "student", text: cleanMessage },
-      { from: "tutor", text: "Boa! Agora tenta falar a mesma ideia usando a frase-modelo acima." },
+      { from: "tutor", text: activeLanguage === "Català" ? "Molt bé! Agora tenta usar a frase-modelo em uma situação real." : activeLanguage === "English" ? "Nice! Now try the same idea using the model phrase above." : "Boa! Agora tenta falar a mesma ideia usando a frase-modelo acima." },
     ]);
+    setPracticeMinutes((minutes) => minutes + 2);
+    setWeeklyGoal((goal) => Math.min(100, goal + 1));
     setMessage("");
   }
 
@@ -160,6 +195,25 @@ export default function Home() {
       description: `${selectedCourse.title} está pronta para você continuar.`,
     });
     document.getElementById("tutor")?.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+
+  function savePhrase() {
+    const nextSaved = !isPhraseSaved;
+    setIsPhraseSaved(nextSaved);
+    if (nextSaved) {
+      window.localStorage.setItem("lingua-aberta-saved-phrase", selectedCopy.phrase);
+      toast("Dica salva na biblioteca", { description: "Você pode voltar a esta frase sempre que quiser." });
+    } else {
+      window.localStorage.removeItem("lingua-aberta-saved-phrase");
+      toast("Dica removida", { description: "A frase saiu da sua biblioteca pessoal." });
+    }
+  }
+
+  function adjustGoal() {
+    const nextGoal = weeklyGoal >= 100 ? 50 : weeklyGoal + 10;
+    setWeeklyGoal(nextGoal);
+    window.localStorage.setItem("lingua-aberta-weekly-goal", String(nextGoal));
+    toast("Meta atualizada", { description: nextGoal >= 100 ? "Meta fechada! Escolha 50% para começar um novo ciclo." : `Mais ${Math.max(5, 100 - nextGoal)}% para completar sua meta da semana.` });
   }
 
   return (
@@ -319,7 +373,7 @@ export default function Home() {
                     {messages.map((item, index) => <div key={`${item.text}-${index}`} className={`flex ${item.from === "student" ? "justify-end" : "justify-start"}`}><div className={`max-w-[80%] rounded-2xl px-4 py-3 text-sm leading-relaxed ${item.from === "student" ? "rounded-br-sm bg-ink text-white" : "rounded-bl-sm border border-ink/10 bg-white text-ink/80 shadow-sm"}`}>{item.text}</div></div>)}
                   </div>
                   <div className="mt-7 rounded-xl border border-ink/10 bg-white p-3 shadow-sm">
-                    <div className="flex items-center gap-2"><span className={`grid size-7 place-items-center rounded-lg ${selectedCourse.color}`}><Sparkles className="size-3.5" /></span><span className="font-mono text-[10px] font-bold uppercase tracking-[0.12em] text-ink/45">Dica rápida</span><button className="ml-auto text-ink/35 hover:text-ink" onClick={() => toast("Dica salva", { description: "Você pode revisitar esta frase na sua biblioteca." })}><BookOpen className="size-4" /></button></div>
+                    <div className="flex items-center gap-2"><span className={`grid size-7 place-items-center rounded-lg ${selectedCourse.color}`}><Sparkles className="size-3.5" /></span><span className="font-mono text-[10px] font-bold uppercase tracking-[0.12em] text-ink/45">Dica rápida</span><button className={`ml-auto transition ${isPhraseSaved ? "text-coral" : "text-ink/35 hover:text-ink"}`} onClick={savePhrase} aria-label={isPhraseSaved ? "Remover frase da biblioteca" : "Salvar frase na biblioteca"}><BookOpen className="size-4" fill={isPhraseSaved ? "currentColor" : "none"} /></button></div>
                     <p className="mt-3 font-display text-[19px] font-extrabold leading-tight">{selectedCopy.phrase}</p>
                     <p className="mt-1 text-xs text-ink/45">{selectedCopy.translation}</p>
                   </div>
@@ -333,8 +387,8 @@ export default function Home() {
 
               <div className="flex flex-col rounded-2xl bg-mint p-6 sm:p-7">
                 <div className="flex items-start justify-between"><span className="rounded-full border border-ink/15 px-2.5 py-1 font-mono text-[9px] font-bold uppercase tracking-[0.16em] text-ink/55">Seu impacto</span><Flame className="size-5 text-coral" fill="currentColor" /></div>
-                <div className="mt-14"><p className="font-mono text-[11px] font-bold uppercase tracking-[0.16em] text-ink/50">Horas de prática</p><p className="mt-2 font-display text-[60px] font-black leading-none tracking-[-0.07em]">03<span className="text-3xl text-ink/35">h</span>42</p><p className="mt-4 max-w-[220px] text-sm leading-relaxed text-ink/60">Você praticou mais que <strong className="text-ink">82% da comunidade</strong> esta semana.</p></div>
-                <div className="mt-auto pt-10"><div className="flex items-center justify-between text-xs font-bold"><span>Meta semanal</span><span>68%</span></div><div className="mt-2 h-2 overflow-hidden rounded-full bg-ink/10"><div className="h-full w-[68%] rounded-full bg-ink" /></div><button onClick={() => toast("Meta atualizada", { description: "Mais 18 minutos e você fecha sua meta da semana." })} className="mt-5 inline-flex items-center gap-2 text-sm font-extrabold text-ink underline decoration-ink/20 underline-offset-4 hover:decoration-ink">Ajustar minha meta <ArrowUpRight className="size-4" /></button></div>
+                <div className="mt-14"><p className="font-mono text-[11px] font-bold uppercase tracking-[0.16em] text-ink/50">Horas de prática</p><p className="mt-2 font-display text-[60px] font-black leading-none tracking-[-0.07em]">{String(Math.floor(practiceMinutes / 60)).padStart(2, "0")}<span className="text-3xl text-ink/35">h</span>{String(practiceMinutes % 60).padStart(2, "0")}</p><p className="mt-4 max-w-[220px] text-sm leading-relaxed text-ink/60">Você praticou mais que <strong className="text-ink">82% da comunidade</strong> esta semana.</p></div>
+                <div className="mt-auto pt-10"><div className="flex items-center justify-between text-xs font-bold"><span>Meta semanal</span><span>{weeklyGoal}%</span></div><div className="mt-2 h-2 overflow-hidden rounded-full bg-ink/10"><div className="h-full rounded-full bg-ink transition-all duration-500" style={{ width: `${weeklyGoal}%` }} /></div><button onClick={adjustGoal} className="mt-5 inline-flex items-center gap-2 text-sm font-extrabold text-ink underline decoration-ink/20 underline-offset-4 hover:decoration-ink">Ajustar minha meta <ArrowUpRight className="size-4" /></button></div>
               </div>
             </section>
 
