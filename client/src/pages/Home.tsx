@@ -1,4 +1,7 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
+import { useAuth } from "@/_core/hooks/useAuth";
+import { startLogin } from "@/const";
+import { trpc } from "@/lib/trpc";
 import {
   ArrowUpRight,
   BookOpen,
@@ -7,7 +10,6 @@ import {
   ChevronDown,
   ChevronRight,
   CircleHelp,
-  Clock3,
   Compass,
   Download,
   Flame,
@@ -18,11 +20,9 @@ import {
   MessageCircle,
   Mic,
   Play,
-  RotateCcw,
   Send,
   Sparkles,
   Target,
-  UserRound,
   Volume2,
   X,
   Zap,
@@ -33,6 +33,7 @@ type Language = "Español" | "Català" | "English";
 
 type Course = {
   language: Language;
+  courseSlug: string;
   label: string;
   title: string;
   subtitle: string;
@@ -46,6 +47,7 @@ type Course = {
 const courses: Course[] = [
   {
     language: "Español",
+    courseSlug: "espanol-de-la-calle",
     label: "ES",
     title: "Espanhol da rua",
     subtitle: "Falsos amigos e vida real",
@@ -57,6 +59,7 @@ const courses: Course[] = [
   },
   {
     language: "Català",
+    courseSlug: "barcelona-por-dentro",
     label: "CA",
     title: "Barcelona por dentro",
     subtitle: "Escola, bairro e comunidade",
@@ -68,6 +71,7 @@ const courses: Course[] = [
   },
   {
     language: "English",
+    courseSlug: "english-next-move",
     label: "EN",
     title: "English for your next move",
     subtitle: "Estudo, trabalho e internet",
@@ -81,21 +85,21 @@ const courses: Course[] = [
 
 const languageCopy: Record<Language, { greeting: string; prompt: string; phrase: string; translation: string; accent: string }> = {
   Español: {
-    greeting: "¡Hola, Rafa! Vamos a desbloquear teu espanhol hoje.",
+    greeting: "¡Hola, William! Vamos a desbloquear teu espanhol hoje.",
     prompt: "Diz em espanhol: 'Eu estou procurando um quarto perto do metrô.'",
     phrase: "Estoy buscando una habitación cerca del metro.",
     translation: "Estou procurando um quarto perto do metrô.",
     accent: "coral",
   },
   Català: {
-    greeting: "Ei, Rafa! Avui practiquem una frase que vas a usar de veritat.",
+    greeting: "Ei, William! Avui practiquem una frase que vas a usar de veritat.",
     prompt: "Digues en català: 'Eu estudo no instituto perto de casa.'",
     phrase: "Estudio a l'institut a prop de casa.",
     translation: "Eu estudo no instituto perto de casa.",
     accent: "mint",
   },
   English: {
-    greeting: "Hey Rafa! Let's practice the English you need for your next move.",
+    greeting: "Hey William! Let's practice the English you need for your next move.",
     prompt: "Say in English: 'Eu quero trabalhar remotamente.'",
     phrase: "I want to work remotely.",
     translation: "Eu quero trabalhar remotamente.",
@@ -111,51 +115,135 @@ const navItems = [
 ];
 
 export default function Home() {
-  const [activeNav, setActiveNav] = useState("Início");
+  const { user, loading, isAuthenticated, logout } = useAuth();
+  const dashboardQuery = trpc.learner.dashboard.useQuery(undefined, { enabled: isAuthenticated });
+  const providerQuery = trpc.platform.status.useQuery();
   const [activeLanguage, setActiveLanguage] = useState<Language>("Español");
+  const historyQuery = trpc.tutor.history.useQuery({ language: activeLanguage }, { enabled: isAuthenticated });
+  const messageMutation = trpc.tutor.message.useMutation();
+  const progressMutation = trpc.learner.updateProgress.useMutation();
+  const transcribeMutation = trpc.voice.transcribe.useMutation();
+  const synthesizeMutation = trpc.voice.synthesize.useMutation();
+
+  const [activeNav, setActiveNav] = useState("Início");
   const [isListening, setIsListening] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [message, setMessage] = useState("");
-  const [messages, setMessages] = useState([
-    { from: "tutor", text: "¡Hola, Rafa! Vamos a desbloquear teu espanhol hoje." },
-    { from: "tutor", text: "Diz em espanhol: 'Eu estou procurando um quarto perto do metrô.'" },
+  const [messages, setMessages] = useState<Array<{ from: "tutor" | "student"; text: string }>>([
+    { from: "tutor", text: "E aí William, beleza? Bem-vindo. Como foi seu dia em Barcelona?" },
+    { from: "tutor", text: "Hoje vamos praticar uma frase para pedir ajuda no instituto. Bora tentar?" },
   ]);
+  const recorderRef = useRef<MediaRecorder | null>(null);
+  const audioChunksRef = useRef<Blob[]>([]);
+
+  const profile = dashboardQuery.data?.profile;
+  const profileName = profile?.displayName || user?.name || "William Danilo Guimarães Santos";
+  const coursesForDisplay = useMemo(() => courses.map((course) => {
+    const persisted = dashboardQuery.data?.progress.find((item) => item.language === course.language);
+    return persisted ? { ...course, progress: persisted.progressPercent, lessons: `${persisted.completedLessons} de ${persisted.totalLessons} lições` } : course;
+  }), [dashboardQuery.data?.progress]);
 
   const selectedCourse = useMemo(
-    () => courses.find((course) => course.language === activeLanguage) ?? courses[0],
-    [activeLanguage],
+    () => coursesForDisplay.find((course) => course.language === activeLanguage) ?? coursesForDisplay[0],
+    [activeLanguage, coursesForDisplay],
   );
   const selectedCopy = languageCopy[activeLanguage];
+
+  useEffect(() => {
+    if (!historyQuery.data?.messages?.length) return;
+    setMessages(historyQuery.data.messages.filter((item) => item.role === "user" || item.role === "assistant").map((item) => ({ from: item.role === "user" ? "student" : "tutor", text: item.content })));
+  }, [historyQuery.data]);
 
   function handleNav(label: string) {
     setActiveNav(label);
     if (label !== "Início") {
       toast(`${label} está entrando no ar`, {
-        description: "Neste protótipo, esta área já está desenhada e será conectada ao conteúdo real.",
+        description: "Esta área está preparada para receber os próximos módulos do instituto.",
       });
     }
     setIsMobileMenuOpen(false);
   }
 
-  function toggleListening() {
-    setIsListening((current) => !current);
-    toast(isListening ? "Microfone pausado" : "Microfone ativado", {
-      description: isListening ? "Você pode retomar quando quiser." : "Fale uma frase curta; o tutor vai ouvir você.",
-    });
+  async function toggleListening() {
+    if (!isAuthenticated) {
+      startLogin();
+      return;
+    }
+    if (dashboardQuery.isLoading) {
+      toast("Preparando tu espacio", { description: "Espera un segundo mientras cargamos tu perfil protegido." });
+      return;
+    }
+    if (!profile?.guardianConsent) {
+      toast("La voz requiere acompañamiento adulto", { description: "Pide a tu tutor legal que active el modo de voz desde la configuración familiar." });
+      return;
+    }
+    if (isListening) {
+      recorderRef.current?.stop();
+      setIsListening(false);
+      return;
+    }
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      const recorder = new MediaRecorder(stream, { mimeType: "audio/webm" });
+      audioChunksRef.current = [];
+      recorder.ondataavailable = (event) => event.data.size > 0 && audioChunksRef.current.push(event.data);
+      recorder.onstop = async () => {
+        stream.getTracks().forEach((track) => track.stop());
+        const blob = new Blob(audioChunksRef.current, { type: "audio/webm" });
+        const base64 = await new Promise<string>((resolve, reject) => {
+          const reader = new FileReader();
+          reader.onloadend = () => resolve(String(reader.result).split(",")[1] || "");
+          reader.onerror = reject;
+          reader.readAsDataURL(blob);
+        });
+        transcribeMutation.mutate({ audioBase64: base64, mimeType: "audio/webm", language: activeLanguage }, {
+          onSuccess: (data) => { setMessage(data.text); toast("Te ouvi", { description: "Revise a transcrição e envie quando quiser." }); },
+          onError: (error) => toast("Não consegui transcrever", { description: error.message }),
+        });
+      };
+      recorder.start(250);
+      recorderRef.current = recorder;
+      setIsListening(true);
+      toast("Microfone ativado", { description: "Fale uma frase curta. Toque novamente para enviar a gravação." });
+    } catch {
+      toast("Microfone bloqueado", { description: "Permita o acesso ao microfone no navegador para praticar por voz." });
+    }
   }
 
   function sendMessage() {
     const cleanMessage = message.trim();
     if (!cleanMessage) return;
-    setMessages((current) => [
-      ...current,
-      { from: "student", text: cleanMessage },
-      { from: "tutor", text: "Boa! Agora tenta falar a mesma ideia usando a frase-modelo acima." },
-    ]);
+    if (!isAuthenticated) {
+      startLogin();
+      return;
+    }
+    setMessages((current) => [...current, { from: "student", text: cleanMessage }]);
     setMessage("");
+    messageMutation.mutate({ language: activeLanguage, message: cleanMessage }, {
+      onSuccess: (data) => {
+        setMessages((current) => [...current, { from: "tutor", text: data.text }]);
+        synthesizeMutation.mutate({ language: activeLanguage, text: data.text }, {
+          onSuccess: (audio) => {
+            if (audio.available && audio.audioUrl) new Audio(audio.audioUrl).play().catch(() => undefined);
+            else if (typeof window !== "undefined" && "speechSynthesis" in window) {
+              const utterance = new SpeechSynthesisUtterance(data.text);
+              utterance.lang = activeLanguage === "Català" ? "ca-ES" : activeLanguage === "Español" ? "es-ES" : "en-GB";
+              window.speechSynthesis.speak(utterance);
+            }
+          },
+        });
+      },
+      onError: (error) => toast("O tutor precisa de uma nova tentativa", { description: error.message }),
+    });
   }
 
   function startLesson() {
+    if (!isAuthenticated) {
+      startLogin();
+      return;
+    }
+    const current = dashboardQuery.data?.progress.find((item) => item.language === activeLanguage);
+    progressMutation.mutate({ language: activeLanguage, courseSlug: selectedCourse.courseSlug, progressPercent: Math.min(100, selectedCourse.progress + 5), completedLessons: current?.completedLessons || selectedCourse.progress >= 68 ? (current?.completedLessons || 4) + 1 : 1, totalLessons: current?.totalLessons || 8 }, { onSuccess: () => dashboardQuery.refetch() });
     toast("Aula desbloqueada", {
       description: `${selectedCourse.title} está pronta para você continuar.`,
     });
@@ -216,11 +304,11 @@ export default function Home() {
                 <span className="font-mono text-[11px] text-white/50">+12 XP</span>
               </div>
             </div>
-            <button className="mt-5 flex w-full items-center gap-3 rounded-xl px-3 py-2 text-left transition-colors hover:bg-white" onClick={() => toast("Perfil em breve", { description: "Aqui você vai editar seu ritmo, idiomas e objetivos." })}>
-              <span className="grid size-9 place-items-center rounded-full bg-coral text-sm font-black text-white">R</span>
+            <button className="mt-5 flex w-full items-center gap-3 rounded-xl px-3 py-2 text-left transition-colors hover:bg-white" onClick={() => isAuthenticated ? logout() : startLogin()}>
+              <span className="grid size-9 place-items-center rounded-full bg-coral text-sm font-black text-white">{profileName.slice(0, 1)}</span>
               <span className="min-w-0 flex-1">
-                <span className="block truncate text-sm font-bold">Rafa Almeida</span>
-                <span className="block font-mono text-[10px] uppercase tracking-[0.13em] text-ink/40">Nível A2 · BCN</span>
+                <span className="block truncate text-sm font-bold">{profileName}</span>
+                <span className="block font-mono text-[10px] uppercase tracking-[0.13em] text-ink/40">Nível {profile?.cefrLevel || "A2"} · BCN</span>
               </span>
               <ChevronDown className="size-4 text-ink/35" />
             </button>
@@ -249,9 +337,15 @@ export default function Home() {
                 <MessageCircle className="size-[18px]" />
                 <span className="absolute right-0.5 top-0.5 size-2 rounded-full border-2 border-paper bg-coral" />
               </button>
-              <button className="grid size-10 place-items-center rounded-full bg-coral font-display text-lg font-black text-white shadow-[0_6px_15px_rgba(234,100,75,0.25)] lg:hidden" onClick={() => toast("Perfil em breve")} aria-label="Abrir perfil">R</button>
+              {!isAuthenticated && !loading && <button className="hidden rounded-full bg-ink px-3 py-2 text-xs font-bold text-white transition hover:bg-coral sm:block" onClick={() => startLogin()}>Entrar</button>}
+              <button className="grid size-10 place-items-center rounded-full bg-coral font-display text-lg font-black text-white shadow-[0_6px_15px_rgba(234,100,75,0.25)] lg:hidden" onClick={() => isAuthenticated ? logout() : startLogin()} aria-label={isAuthenticated ? "Sair" : "Entrar"}>{profileName.slice(0, 1)}</button>
             </div>
           </header>
+
+          <div className="flex items-center justify-between gap-3 border-b border-ink/10 bg-white/60 px-5 py-2.5 sm:px-8 lg:px-10">
+            <div className="flex min-w-0 items-center gap-2 text-[11px] text-ink/55"><span className={`size-2 shrink-0 rounded-full ${providerQuery.data?.localConfigured ? "bg-mint" : "bg-saffron"}`} /><span className="truncate">Tutor conectado · {providerQuery.data?.localConfigured ? "Ollama local" : "modo seguro"}</span></div>
+            <span className="hidden font-mono text-[9px] uppercase tracking-[0.14em] text-ink/35 sm:block">{providerQuery.data?.speechToText || "Whisper"} · {providerQuery.data?.textToSpeech || "voz"}</span>
+          </div>
 
           <div className="px-5 py-7 sm:px-8 lg:px-10 lg:py-10">
             <section className="relative overflow-hidden rounded-[28px] bg-ink px-6 py-8 text-paper shadow-[0_20px_50px_rgba(14,32,53,0.14)] sm:px-10 sm:py-10 lg:min-h-[340px] lg:px-12 lg:py-12">
@@ -285,7 +379,7 @@ export default function Home() {
                 <button onClick={() => toast("Rota completa", { description: "Em breve: diagnóstico, metas vocacionais e trilhas personalizadas." })} className="group inline-flex items-center gap-2 text-sm font-extrabold text-ink/55 transition hover:text-coral">Ver rota completa <ArrowUpRight className="size-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" /></button>
               </div>
               <div className="grid gap-4 md:grid-cols-3">
-                {courses.map((course) => {
+                {coursesForDisplay.map((course) => {
                   const isSelected = course.language === activeLanguage;
                   return (
                     <button key={course.language} onClick={() => setActiveLanguage(course.language)} className={`group rounded-2xl border p-5 text-left transition-all duration-200 ${isSelected ? "border-ink bg-white shadow-[0_14px_30px_rgba(14,32,53,0.08)]" : "border-ink/10 bg-transparent hover:-translate-y-0.5 hover:border-ink/25 hover:bg-white/60"}`}>
@@ -308,7 +402,7 @@ export default function Home() {
                 <div className="flex flex-wrap items-center justify-between gap-3 border-b border-ink/10 px-5 py-5 sm:px-7">
                   <div className="flex items-center gap-3">
                     <div className="grid size-10 place-items-center rounded-xl bg-mint"><Bot className="size-5 text-ink" /></div>
-                    <div><p className="font-display text-lg font-extrabold leading-none">Fala comigo</p><p className="mt-1 text-xs text-ink/45">Seu tutor multimodal, sem julgamento.</p></div>
+                    <div><div className="flex flex-wrap items-center gap-2"><p className="font-display text-lg font-extrabold leading-none">Fala comigo</p><span className="rounded-full bg-ink/5 px-2 py-1 font-mono text-[8px] font-bold uppercase tracking-[0.14em] text-ink/45">Conta juvenil protegida</span></div><p className="mt-1 text-xs text-ink/45">Seu tutor multimodal, sem julgamento.</p></div>
                   </div>
                   <div className="flex rounded-lg bg-paper p-1" role="tablist" aria-label="Idioma do tutor">
                     {(Object.keys(languageCopy) as Language[]).map((language) => <button key={language} onClick={() => { setActiveLanguage(language); setMessages([{ from: "tutor", text: languageCopy[language].greeting }, { from: "tutor", text: languageCopy[language].prompt }]); }} className={`rounded-md px-2.5 py-1.5 text-[10px] font-bold transition ${activeLanguage === language ? "bg-ink text-white" : "text-ink/45 hover:text-ink"}`} role="tab" aria-selected={activeLanguage === language}>{language}</button>)}
@@ -358,8 +452,3 @@ export default function Home() {
     </div>
   );
 }
-
-void RotateCcw;
-void UserRound;
-void Clock3;
-void Volume2;
