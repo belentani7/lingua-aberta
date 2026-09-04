@@ -1,4 +1,5 @@
 import { invokeLLM, Message } from "./_core/llm";
+import { isElevenLabsConfigured } from "./_core/elevenlabs";
 
 export type TutorLanguage = "Español" | "Català" | "English";
 
@@ -80,7 +81,7 @@ export function getTutorProviderStatus() {
   return {
     text: process.env.OLLAMA_BASE_URL ? "ollama" : "managed-fallback",
     speechToText: process.env.WHISPER_BASE_URL ? "whisper-local" : "whisper-service",
-    textToSpeech: process.env.TTS_BASE_URL ? "piper-or-xtts" : "browser-fallback",
+    textToSpeech: isElevenLabsConfigured() ? "elevenlabs-flash-v2.5" : (process.env.TTS_BASE_URL ? "piper-or-xtts" : "browser-fallback"),
     localConfigured: Boolean(process.env.OLLAMA_BASE_URL),
   } as const;
 }

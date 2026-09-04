@@ -2,6 +2,7 @@ import { z } from "zod";
 import { COOKIE_NAME } from "@shared/const";
 import { getSessionCookieOptions } from "./_core/cookies";
 import { transcribeAudio } from "./_core/voiceTranscription";
+import { synthesizeWithElevenLabs, isElevenLabsConfigured } from "./_core/elevenlabs";
 import { systemRouter } from "./_core/systemRouter";
 import { protectedProcedure, publicProcedure, router } from "./_core/trpc";
 import { storageGetSignedUrl, storagePut } from "./storage";
@@ -123,13 +124,42 @@ export const appRouter = router({
       return { storageKey: stored.key, text: result.text, language: result.language };
     }),
     synthesize: protectedProcedure.input(z.object({ text: z.string().min(1).max(2000), language: languageSchema })).mutation(async ({ input }) => {
-      const baseUrl = process.env.TTS_BASE_URL?.replace(/\/$/, "");
-      if (!baseUrl) return { available: false, provider: "browser-fallback" as const };
-      const response = await fetch(`${baseUrl}/synthesize`, { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ text: input.text, language: input.language }) });
-      if (!response.ok) throw new Error(`El proveedor TTS respondió ${response.status}`);
-      const payload = await response.json() as { audioUrl?: string };
-      return { available: Boolean(payload.audioUrl), provider: "piper-or-xtts" as const, audioUrl: payload.audioUrl };
-    }),
+          // Priority 1: ElevenLabs Flash v2.5 (best quality, MOS 4.8/5.0)
+          if (isElevenLabsConfigured()) {
+            try {
+              const result = await synthesizeWithElevenLabs({
+                text: input.text,
+                language: input.language as "Español" | "Català" | "English",
+              });
+              return {
+                available: true,
+                provider: "elevenlabs-flash-v2.5" as const,
+                model: result.model,
+                voiceId: result.voiceId,
+                audioUrl: `data:audio/mpeg;base64,${result.audioBuffer.toString("base64")}`,
+                characterCount: result.characterCount,
+              };
+            } catch (error) {
+              console.warn("[TTS] ElevenLabs failed, falling back to Piper/XTTS:", error instanceof Error ? error.message : error);
+            }
+          }
+
+          // Priority 2: Piper or XTTS (local TTS service)
+          const baseUrl = process.env.TTS_BASE_URL?.replace(/\/$/, "");
+          if (baseUrl) {
+            const response = await fetch(`${baseUrl}/synthesize`, {
+              method: "POST",
+              headers: { "content-type": "application/json" },
+              body: JSON.stringify({ text: input.text, language: input.language }),
+            });
+            if (!response.ok) throw new Error(`El proveedor TTS respondió ${response.status}`);
+            const payload = await response.json() as { audioUrl?: string };
+            return { available: Boolean(payload.audioUrl), provider: "piper-or-xtts" as const, audioUrl: payload.audioUrl };
+          }
+
+          // Priority 3: Browser Web Speech API fallback
+          return { available: false, provider: "browser-fallback" as const };
+        }),
   }),
 });
 
