@@ -1,0 +1,198 @@
+{
+  "version": "1.0.0",
+  "name": "MIARA",
+  "title": "Módulo Interactivo de Apoyo y Refuerzo del Aprendizaje",
+  "description": "Contenido educativo abierto para William, estudiante brasileño de 14 años que vive en Cataluña. Lecciones breves y ejercicios por idioma, conectadas con la ruta real de integración escolar.",
+  "student": {
+    "name": "William Danilo Guimarães Santos",
+    "age": 14,
+    "nativeLanguage": "pt-BR",
+    "educationLevel": "3º ESO"
+  },
+  "languages": {
+    "Español": {
+      "courseSlug": "espanol-de-la-calle",
+      "title": "Español de la calle",
+      "cefr": "A2",
+      "lessons": [
+        {
+          "id": "es-1",
+          "title": "Llegar y presentarse",
+          "situation": "Primer día: te presentas y cuentas de dónde vienes.",
+          "xpReward": 30,
+          "phrases": [
+            { "text": "Hola, me llamo William.", "translation": "Oi, eu me chamo William." },
+            { "text": "Soy brasileño y acabo de llegar.", "translation": "Sou brasileiro e acabei de chegar." },
+            { "text": "Estoy en 3º de la ESO.", "translation": "Estou no 3º ano do ensino médio." }
+          ],
+          "exercises": [
+            {
+              "type": "choice",
+              "prompt": "¿Cómo te llamas?",
+              "options": ["Me llamo William.", "Tengo catorce años.", "Estoy en 3º de la ESO."],
+              "answer": "Me llamo William.",
+              "hint": "Para presentarte, primero el nombre: 'Me llamo…'."
+            },
+            {
+              "type": "fill",
+              "prompt": "Completa: Soy ______ y acabo de llegar.",
+              "answer": "brasileño",
+              "hint": "El diptongo del portugués 'brasileiro' cambia a 'brasileño' con ñ."
+            },
+            {
+              "type": "choice",
+              "prompt": "En español de España, 'embarazada' significa…",
+              "options": ["Una mujer que espera un bebé.", "Que estás avergonzado.", "Que estás ocupado."],
+              "answer": "Una mujer que espera un bebé.",
+              "hint": "Falso amigo: en portugués 'embaraçada' = avergonzada. ¡Cuidado!"
+            }
+          ]
+        },
+        {
+          "id": "es-2",
+          "title": "En el instituto",
+          "situation": "Preguntas y respuestas dentro de clase.",
+          "xpReward": 30,
+          "phrases": [
+            { "text": "¿Dónde está el aula?", "translation": "Onde fica a sala?" },
+            { "text": "La profesora explica muy bien.", "translation": "A professora explica muito bem." },
+            { "text": "¿Puedo ir al baño?", "translation": "Posso ir ao banheiro?" }
+          ],
+          "exercises": [
+            {
+              "type": "choice",
+              "prompt": "Quieres saber dónde está la clase. ¿Qué dices?",
+              "options": ["¿Dónde está el aula?", "¿Qué hora es?", "¿Dónde está el baño?"],
+              "answer": "¿Dónde está el aula?",
+              "hint": "Busca la palabra parecida a 'sala de aula'."
+            },
+            {
+              "type": "fill",
+              "prompt": "Completa: ______ puedes ir al baño?",
+              "answer": "¿Puedo",
+              "hint": "Verbo poder, primera persona: 'puedo'."
+            }
+          ]
+        }
+      ]
+    },
+    "Català": {
+      "courseSlug": "barcelona-por-dentro",
+      "title": "Barcelona por dentro",
+      "cefr": "A2",
+      "lessons": [
+        {
+          "id": "ca-1",
+          "title": "Saludar i demanar ajuda",
+          "situation": "Arribes a classe i necessites ajuda amb el català.",
+          "xpReward": 30,
+          "phrases": [
+            { "text": "Bon dia, sóc en William.", "translation": "Bom dia, sou o William." },
+            { "text": "Em pots ajudar, si us plau?", "translation": "Pode me ajudar, por favor?" },
+            { "text": "On és l'estació?", "translation": "Onde fica a estação?" }
+          ],
+          "exercises": [
+            {
+              "type": "choice",
+              "prompt": "Què diries per saludar al matí?",
+              "options": ["Bon dia!", "Bona nit!", "Adéu!"],
+              "answer": "Bon dia!",
+              "hint": "'Dia' és gairebé igual que en portuguès."
+            },
+            {
+              "type": "fill",
+              "prompt": "Completa: ______ pots ajudar, si us plau?",
+              "answer": "Em",
+              "hint": "El pronom 'em' equival al 'me' del portuguès."
+            }
+          ]
+        },
+        {
+          "id": "ca-2",
+          "title": "A l'escola",
+          "situation": "Vocabulari de l'institut per moure't amb confiança.",
+          "xpReward": 30,
+          "phrases": [
+            { "text": "Estudio a l'institut a prop de casa.", "translation": "Estudo no instituto perto de casa." },
+            { "text": "La professora explica molt bé.", "translation": "A professora explica muito bem." },
+            { "text": "Com es diu això en català?", "translation": "Como se diz isso em catalão?" }
+          ],
+          "exercises": [
+            {
+              "type": "choice",
+              "prompt": "Com es diu 'escola' en català?",
+              "options": ["escola", "institut", "biblioteca"],
+              "answer": "escola",
+              "hint": "És una paraula molt semblant al portuguès."
+            },
+            {
+              "type": "fill",
+              "prompt": "Completa: Com es ______ això en català?",
+              "answer": "diu",
+              "hint": "Verb 'dir-se', tercera persona: 'es diu'."
+            }
+          ]
+        }
+      ]
+    },
+    "English": {
+      "courseSlug": "english-next-move",
+      "title": "English for your next move",
+      "cefr": "A2",
+      "lessons": [
+        {
+          "id": "en-1",
+          "title": "Greetings and introductions",
+          "situation": "Conhece alguém novo numa escola europeia.",
+          "xpReward": 30,
+          "phrases": [
+            { "text": "Hi, my name is William.", "translation": "Oi, meu nome é William." },
+            { "text": "I'm from Brazil.", "translation": "Eu sou do Brasil." },
+            { "text": "Pleased to meet you.", "translation": "Prazer em conhecê-lo." }
+          ],
+          "exercises": [
+            {
+              "type": "choice",
+              "prompt": "How do you introduce yourself?",
+              "options": ["My name is William.", "I am fourteen years old.", "I'm from Brazil."],
+              "answer": "My name is William.",
+              "hint": "Comece com 'My name is…'."
+            },
+            {
+              "type": "fill",
+              "prompt": "Complete: Pleased to ______ you.",
+              "answer": "meet",
+              "hint": "É o mesmo 'meet' de 'encontrar/conhecer'."
+            }
+          ]
+        },
+        {
+          "id": "en-2",
+          "title": "School and the future",
+          "situation": "Conversas sobre estudos e trabalho no instituto.",
+          "xpReward": 30,
+          "phrases": [
+            { "text": "I study at school near home.", "translation": "Eu estudo na escola perto de casa." },
+            { "text": "Can I ask a question?", "translation": "Posso fazer uma pergunta?" },
+            { "text": "I want to work remotely.", "translation": "Eu quero trabalhar remotamente." }
+          ],
+          "exercises": [
+            {
+              "type": "choice",
+              "prompt": "You want to ask a question in class. What do you say?",
+              "options": ["Can I ask a question?", "Can I go to the toilet?", "What is your name?"],
+              "answer": "Can I ask a question?",
+              "hint": "Use 'Can I…?' para pedir permissão."
+            },
+            {
+              "type": "fill",
+              "prompt": "Complete: I want to ______ remotely.",
+              "answer": "work",
+              "hint": "A mesma palavra que 'trabalhar' em inglês."
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

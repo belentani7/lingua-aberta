@@ -1,0 +1,121 @@
+{
+  "module_name": "MIARA - Módulo Integral de Acogida y Refuerzo Académico",
+  "target_student": {
+    "name": "William Danilo",
+    "age": 14,
+    "origin": "Brasil",
+    "id": "BR-WD-2026-0014",
+    "native_language": "pt-BR",
+    "level": "3º ESO",
+    "cefr_base": "A2",
+    "region": "Barcelona, Cataluña"
+  },
+  "framework": {
+    "transferencia_positiva": "Aprovechar el 85-90% de similitud léxica entre portugués y español/catalán",
+    "aicle_clil": "Enseñar materias a través del idioma meta",
+    "filtro_afectivo": "IA Amiga como peer tutor, reduciendo ansiedad del hablante no nativo"
+  },
+  "linguistic_bridge": {
+    "false_friends_critical": [
+      { "pt": "Embaraçada", "es_wrong": "Embarazada", "es_correct": "Avergonzada", "ca": "Avergonyida", "en": "Embarrassed" },
+      { "pt": "Esquisito", "es_wrong": "Exquisito", "es_correct": "Raro", "ca": "Estrany", "en": "Weird" },
+      { "pt": "Oficina", "es_wrong": "Oficina", "es_correct": "Taller mecánico", "ca": "Taller", "en": "Workshop/Mechanic" },
+      { "pt": "Polvo", "es_wrong": "Polvo", "es_correct": "Pols (suciedad)", "ca": "Pols", "en": "Dust" },
+      { "pt": "Sobrenome", "es_wrong": "Sobrenombre", "es_correct": "Apellido", "ca": "Cognom", "en": "Last name" },
+      { "pt": "Rato", "es_wrong": "Rato (tiempo)", "es_correct": "Ratón", "ca": "Ratolí", "en": "Mouse" },
+      { "pt": "Vassoura", "es_wrong": "Basura", "es_correct": "Escoba", "ca": "Escombra", "en": "Broom" },
+      { "pt": "Propina", "es_wrong": "Propina", "es_correct": "Suborno", "ca": "Suborn", "en": "Bribe/Benefit" },
+      { "pt": "Época", "es_wrong": "Época", "es_correct": "Temporada", "ca": "Temporada", "en": "Season" },
+      { "pt": "Molho", "es_wrong": "Molho", "es_correct": "Salsa", "ca": "Salsa", "en": "Sauce" }
+    ],
+    "phonetic_rules": [
+      { "rule": "R inicial/RR", "pt_sound": "Suave (como H)", "es_sound": "Vibrante fuerte", "example": "Rato, Carro", "practice": "Repite: 'El perro corre rápido por la carretera'" },
+      { "rule": "J / G(e,i)", "pt_sound": "Suave (como S francesa)", "es_sound": "Fuerte (Jota)", "example": "Gente, Jirafa", "practice": "Gato, Gente, Jirafa, Gigante" },
+      { "rule": "Vocales finales", "pt_sound": "Nasales o cerradas", "es_sound": "Abiertas y claras", "example": "Casa, Leite, Pão", "practice": "Casa (no 'cas'), Leite (no 'leitch'), Pão (Pan, vocal abierta)" }
+    ],
+    "catalan_advantages": [
+      "La Ç (C trencada) suena como S fuerte (igual que PT: Coração/Coració)",
+      "La X suena como Sh (igual que PT: Xícara/Xicra)",
+      "La NY equivale a la LH en PT y la Ñ en ES (Espanya/Espanha/España)",
+      "El catalán distingue vocales abiertas/cerradas como el portugués"
+    ]
+  },
+  "academic_glossaries": {
+    "math_2eso": {
+      "es": [
+        { "concept": "Ecuación", "pt": "Equação", "ca": "Equació", "en": "Equation" },
+        { "concept": "Fracción", "pt": "Fração", "ca": "Fracció", "en": "Fraction" },
+        { "concept": "Despejar", "pt": "Isolar", "ca": "Aïllar", "en": "Isolate" },
+        { "concept": "Triángulo", "pt": "Triângulo", "ca": "Triangle", "en": "Triangle" },
+        { "concept": "Porcentaje", "pt": "Porcentagem", "ca": "Percentatge", "en": "Percentage" },
+        { "concept": "Área", "pt": "Área", "ca": "Àrea", "en": "Area" },
+        { "concept": "Volumen", "pt": "Volume", "ca": "Volum", "en": "Volume" },
+        { "concept": "Perímetro", "pt": "Perímetro", "ca": "Perímetre", "en": "Perimeter" }
+      ]
+    },
+    "science_2eso": {
+      "es": [
+        { "concept": "Célula", "pt": "Célula", "ca": "Cèl·lula", "en": "Cell" },
+        { "concept": "Átomo", "pt": "Átomo", "ca": "Àtom", "en": "Atom" },
+        { "concept": "Ecosistema", "pt": "Ecossistema", "ca": "Ecosistema", "en": "Ecosystem" },
+        { "concept": "Energía", "pt": "Energia", "ca": "Energia", "en": "Energy" },
+        { "concept": "Reacción química", "pt": "Reação química", "ca": "Reacció química", "en": "Chemical reaction" }
+      ]
+    },
+    "school_survival": {
+      "es": [
+        { "concept": "Deberes", "pt": "Tarefa de casa", "ca": "Deures", "en": "Homework" },
+        { "concept": "Examen", "pt": "Prova/Teste", "ca": "Examen/Prova", "en": "Exam" },
+        { "concept": "Instituto", "pt": "Escola/Instituto", "ca": "Institut", "en": "High school" },
+        { "concept": "Director/a", "pt": "Diretor/Diretora", "ca": "Director/Directora", "en": "Principal" },
+        { "concept": "Profesor/a", "pt": "Professor/Professora", "ca": "Professor/Professora", "en": "Teacher" },
+        { "concept": "Mochila", "pt": "Mochila", "ca": "Motxilla", "en": "Backpack" },
+        { "concept": "Cuaderno", "pt": "Caderno", "ca": "Quadern", "en": "Notebook" },
+        { "concept": "Patio/Recreo", "pt": "Recreio", "ca": "Pati", "en": "Playground/Recess" }
+      ]
+    }
+  },
+  "curriculum_alignment": {
+    "reference": "Decret 175/2022, de 27 de setembre, d'ordenació dels ensenyaments de l'educació bàsica (Catalunya)",
+    "eso_years": "2º/3º",
+    "competencies": [
+      "Matemáticas: ecuaciones de primer grado, fracciones, geometría básica",
+      "Lenguas: comprensión oral, expresión oral, lectura, escritura",
+      "Ciencias: célula, átomo, ecosistemas",
+      "Geografía e Historia: contexto local y europeo"
+    ]
+  },
+  "methodology": {
+    "aicle": "Aprendizaje Integrado de Contenidos y Lenguas Extranjeras",
+    "transferencia_positiva": "Usar portugués como puente cognitivo",
+    "correccion_socratica": "Guiar con preguntas, no dar respuestas directas",
+    "inmersión_progresiva": "70% ES + 30% PT → 90% ES + 10% PT en 4 semanas"
+  },
+  "games": [
+    { "id": "flash", "icon": "◈", "title": "Flashcards", "description": "Gira, escucha y recuerda.", "color": "coral", "detail": "Memoria" },
+    { "id": "quiz", "icon": "?", "title": "Opción múltiple", "description": "Elige la traducción exacta.", "color": "cyan", "detail": "Precisión" },
+    { "id": "match", "icon": "⌘", "title": "Empareja", "description": "Conecta palabra y significado.", "color": "gold", "detail": "Conexiones" },
+    { "id": "hang", "icon": "_", "title": "Ahorcado amable", "description": "Descubre palabra con pistas.", "color": "green", "detail": "Ortografía" },
+    { "id": "anagram", "icon": "↯", "title": "Anagrama", "description": "Ordena las letras a toda velocidad.", "color": "pink", "detail": "Agilidad" },
+    { "id": "listen", "icon": "◉", "title": "Escucha y escribe", "description": "Entrena oído y escritura.", "color": "violet", "detail": "Comprensión" },
+    { "id": "order", "icon": "≡", "title": "Ordena la frase", "description": "Construye una frase real.", "color": "blue", "detail": "Expresión" },
+    { "id": "scene", "icon": "✦", "title": "Situación real", "description": "Responde como en la vida.", "color": "lime", "detail": "Confianza" },
+    { "id": "whack", "icon": "●", "title": "Golpea al topo", "description": "Toca la palabra correcta antes de que se esconda.", "color": "coral", "detail": "Reflejos" },
+    { "id": "fall", "icon": "☄", "title": "Lluvia de palabras", "description": "Atrapa la traducción que cae del cielo.", "color": "cyan", "detail": "Rapidez" }
+  ],
+  "weekly_schedule": [
+    { "day": "Lunes", "focus": "Matemáticas + Español", "duration": "45 min", "tools": ["GeoGebra", "Khan Academy"] },
+    { "day": "Martes", "focus": "Catalán (Inmersión)", "duration": "45 min", "tools": ["Parla.cat", "Azure TTS"] },
+    { "day": "Miércoles", "focus": "Ciencias + Inglés", "duration": "45 min", "tools": ["Read&Write Chrome extension"] },
+    { "day": "Jueves", "focus": "Geografía/Historia + Español", "duration": "45 min", "tools": ["Lineage, Timeline"] },
+    { "day": "Viernes", "focus": "Repaso Gamificado", "duration": "30 min", "tools": ["Duolingo", "Quizlet"] },
+    { "day": "Fin de semana", "focus": "Inmersión Pasiva", "duration": "Flex", "tools": ["Netflix", "YouTube"] }
+  ],
+  "sources": [
+    "Decret 175/2022, de 27 de setembre, d'ordenació dels ensenyaments de l'educació bàsica (DOGC)",
+    "Plan Curricular del Instituto Cervantes (Niveles A1-B1)",
+    "Marco Común Europeo de Referencia para las Lenguas (MCER/CEFR)",
+    "Jubran, C. (2018). 'La enseñanza del español a hablantes de portugués'",
+    "Hipótesis del Filtro Afectivo (Krashen, 1982)"
+  ]
+}
