@@ -1,0 +1,2 @@
+name = "lingua-aberta"
+pages_build_output_dir = "dist/public"
