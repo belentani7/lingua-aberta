@@ -1,0 +1,38 @@
+name: tutor-ia
+
+on:
+  schedule:
+    - cron: "0 8 * * *"
+  issues:
+    types: [opened]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  issues: write
+
+jobs:
+  capsula:
+    runs-on: ubuntu-latest
+    if: github.event_name != 'issues'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Capsula didactica del dia
+        run: python campus/agente/tutor.py capsula
+
+  tutor:
+    runs-on: ubuntu-latest
+    if: github.event_name == 'issues' && github.event.action == 'opened'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Responder si tiene la etiqueta tutor
+        env:
+          ETIQUETAS: ${{ toJSON(github.event.issue.labels) }}
+        run: |
+          echo "$ETIQUETAS" | grep -qi "tutor" && python campus/agente/tutor.py issue || echo "sin etiqueta tutor"

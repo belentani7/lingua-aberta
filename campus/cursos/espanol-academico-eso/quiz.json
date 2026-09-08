@@ -1,0 +1,35 @@
+[
+  {
+    "pregunta": "Un ensayo argumentativo necesita...",
+    "opciones": [
+      "Solo opinion",
+      "Tesis + argumentos + evidencia",
+      "Resumen",
+      "Descripcion"
+    ],
+    "correcta": 1,
+    "explicacion": "Sin evidencia no es argumentativo."
+  },
+  {
+    "pregunta": "La refutacion es...",
+    "opciones": [
+      "Ignorar al contrario",
+      "Responder el contraargumento",
+      "Cambiar de tema",
+      "Repetir la tesis"
+    ],
+    "correcta": 1,
+    "explicacion": "Anticipar y responder la objecion."
+  },
+  {
+    "pregunta": "Un resumen correcto...",
+    "opciones": [
+      "Copia frases",
+      "Condensa ideas con tus palabras",
+      "Es mas largo",
+      "Solo el titulo"
+    ],
+    "correcta": 1,
+    "explicacion": "Ideas propias, fiel al original."
+  }
+]

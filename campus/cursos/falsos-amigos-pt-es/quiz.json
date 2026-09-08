@@ -1,0 +1,57 @@
+[
+  {
+    "pregunta": "'Embaraçada' en español significa...",
+    "opciones": [
+      "Embarazada",
+      "Avergonzada",
+      "Enfadada",
+      "Confundida"
+    ],
+    "correcta": 1,
+    "explicacion": "Falso amigo clasico: embaraçada = avergonzada."
+  },
+  {
+    "pregunta": "'Oficina' (PT) es...",
+    "opciones": [
+      "Oficina de trabajo",
+      "Taller mecanico",
+      "Cocina",
+      "Escritorio"
+    ],
+    "correcta": 1,
+    "explicacion": "La oficina en ES es 'escritorio'."
+  },
+  {
+    "pregunta": "'Esquisito' (PT) = ...",
+    "opciones": [
+      "Exquisito",
+      "Raro/extrano",
+      "Delicado",
+      "Sencillo"
+    ],
+    "correcta": 1,
+    "explicacion": "Exquisito en ES es 'delicioso'."
+  },
+  {
+    "pregunta": "'Sobrenome' (PT) = ...",
+    "opciones": [
+      "Sobrenombre",
+      "Apellido",
+      "Nickname",
+      "Seudonimo"
+    ],
+    "correcta": 1,
+    "explicacion": "El apodo en PT es 'apelido'."
+  },
+  {
+    "pregunta": "'Vassoura' (PT) = ...",
+    "opciones": [
+      "Basura",
+      "Escoba",
+      "Vasija",
+      "Cesta"
+    ],
+    "correcta": 1,
+    "explicacion": "La basura en ES es 'lixo'."
+  }
+]

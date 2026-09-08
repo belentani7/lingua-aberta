@@ -1,0 +1,21 @@
+{
+  "idiomas": {
+    "es": {
+      "voz": "es-ES-ElviraNeural",
+      "guion": "Bienvenido a tu campus abierto. Aprende a tu ritmo, con material gratuito y sin barreras."
+    },
+    "ca": {
+      "voz": "ca-ES-JoanaNeural",
+      "guion": "Benvingut al teu campus obert. Aprèn al teu ritme, amb material gratuït i sense barreres."
+    },
+    "pt": {
+      "voz": "pt-BR-FranciscaNeural",
+      "guion": "Bem-vindo ao seu campus aberto. Aprenda no seu ritmo, com material gratuito e sem barreiras."
+    },
+    "en": {
+      "voz": "en-US-AriaNeural",
+      "guion": "Welcome to your open campus. Learn at your own pace, with free materials and no barriers."
+    }
+  },
+  "nota": "audio generado por eduforge.voice (edge-tts gratuito o Kokoro via Hugging Face)"
+}

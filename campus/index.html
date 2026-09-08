@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0c1018">
+  <meta name="description" content="Campus abierto lingua-aberta: cursos gratuitos estilo Harvard/Coursera, offline-first.">
+  <title>Campus lingua-aberta</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="stylesheet" href="tokens.css">
+</head>
+<body>
+  <a class="skip-link" href="#cursos">Saltar al contenido</a>
+  <header class="topbar">
+    <div class="brand">Campus <span>lingua-aberta</span></div>
+    <nav aria-label="Principal">
+      <a class="btn btn-ghost" href="#cursos">Cursos</a>
+      <a class="btn btn-ghost" href="#quiz">Quiz</a>
+      <a class="btn btn-ghost" href="#voz">Voz IA</a>
+    </nav>
+  </header>
+
+  <main class="wrap">
+    <section class="hero">
+      <h1>Educación abierta, sin barreras.</h1>
+      <p class="lead">Cursos modulares con evidencia, material de bancos
+      abiertos y voz humana en 4 idiomas. Funciona sin conexión.</p>
+    </section>
+
+    <section id="cursos" class="grid-cursos">
+      <article class="card">
+        <span class="badge">PT · A2-B1</span>
+        <h3><a href="cursos/falsos-amigos-pt-es/syllabus.md">Puente PT->ES: Falsos Amigos</a></h3>
+        <p>Curso intensivo para jovenes brasileños: domina los falsos amigos mas peligrosos entre portugues y español y deja de cometer error…</p>
+        <p class="meta">4 semanas · 12 h · quiz 5 items</p>
+        <div><a class="btn" href="cursos/falsos-amigos-pt-es/syllabus.md">Ver syllabus</a></div>
+      </article>
+      <article class="card">
+        <span class="badge">CA · A1</span>
+        <h3><a href="cursos/catalan-a1-brasileiros/syllabus.md">Catalán A1: Supervivencia</a></h3>
+        <p>Catalan desde cero con pistas en portugues: saludos, instituto, ciudad y verbos basicos. Disenado para jovenes brasileños recien l…</p>
+        <p class="meta">4 semanas · 16 h · quiz 5 items</p>
+        <div><a class="btn" href="cursos/catalan-a1-brasileiros/syllabus.md">Ver syllabus</a></div>
+      </article>
+      <article class="card">
+        <span class="badge">ES · B1</span>
+        <h3><a href="cursos/espanol-academico-eso/syllabus.md">Español Académico para la ESO</a></h3>
+        <p>Lectura critica, ensayo y argumentacion en español para rendir en el instituto catalan.…</p>
+        <p class="meta">3 semanas · 10 h · quiz 3 items</p>
+        <div><a class="btn" href="cursos/espanol-academico-eso/syllabus.md">Ver syllabus</a></div>
+      </article>
+    </section>
+
+    <section id="quiz" aria-label="Quiz de ejemplo">
+      <h2>Quiz interactivo</h2>
+      <div class="quiz-box quiz-json"
+           data-src="cursos/falsos-amigos-pt-es/quiz.json">
+        <h3 class="quiz-titulo">Cargando quiz…</h3>
+        <div class="opciones"></div>
+        <p class="feedback" aria-live="polite"></p>
+        <p class="marcador"></p>
+        <button class="btn quiz-siguiente" hidden>Siguiente</button>
+      </div>
+    </section>
+
+    <section id="voz" aria-label="Voz IA">
+      <h2>Voz humana por idioma</h2>
+      <div class="voz-player">
+        <label for="idioma">Idioma:</label>
+        <select id="idioma" class="opcion" style="width:auto;min-height:44px">
+          <option value="es">ES</option>
+          <option value="ca">CA</option>
+          <option value="pt">PT</option>
+          <option value="en">EN</option>
+        </select>
+        <audio id="audio" controls aria-label="Reproducir bienvenida">
+          <source id="audio-src" src="voces/bienvenida-es.mp3" type="audio/mpeg">
+        </audio>
+      </div>
+      <p class="meta">Voces generadas por edge-tts (gratuito) o Kokoro vía
+      Hugging Face. Sin coste, con acento humano real.</p>
+    </section>
+
+    <section id="agente" aria-label="Agente tutor">
+      <h2>Agente tutor vivo en GitHub</h2>
+      <p>Este campus tiene un agente IA que vive en GitHub Actions
+      (caja Linux): responde issues etiquetados <code>tutor</code> y publica
+      una cápsula didáctica diaria en <code>campus/capsulas/</code>.</p>
+      <p class="meta">Cero secretos: usa el token efímero de GitHub y modelos
+      gratuitos con fallback local.</p>
+    </section>
+  </main>
+
+  <footer class="wrap">
+    <p>Material abierto: Khan Academy · Parla.cat · GCF Global · MIT OCW ·
+    Drive do Pobre. Generado por edu-forge.</p>
+  </footer>
+  <script>
+    const sel = document.getElementById('idioma');
+    if (sel) sel.addEventListener('change', e => {
+      const a = document.getElementById('audio-src');
+      a.src = `voces/bienvenida-${e.target.value}.mp3`;
+      document.getElementById('audio').load();
+    });
+  </script>
+  <script src="app.js"></script>
+</body>
+</html>
