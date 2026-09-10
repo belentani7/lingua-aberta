@@ -1,0 +1,19 @@
+# AIO lingua-aberta — build client+server en una imagen
+FROM node:20-alpine AS build
+WORKDIR /app
+RUN corepack enable
+COPY package.json pnpm-lock.yaml ./
+RUN pnpm install --no-frozen-lockfile
+COPY . .
+RUN pnpm build
+
+FROM node:20-alpine AS run
+WORKDIR /app
+ENV NODE_ENV=production
+ENV PORT=8000
+COPY --from=build /app/dist ./dist
+COPY --from=build /app/dist/public ./dist/public
+COPY package.json ./
+RUN npm i -g pnpm 2>/dev/null; npm pkg delete scripts.prepare 2>/dev/null; true
+EXPOSE 8000
+CMD ["node","dist/index.js"]
