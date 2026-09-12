@@ -1,0 +1,3 @@
+# lingua-aberta
+
+VERDE
