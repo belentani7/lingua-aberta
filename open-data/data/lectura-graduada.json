@@ -1,0 +1,49 @@
+{
+  "tema": "lectura-graduada",
+  "portal": "lingua-aberta",
+  "registros": [
+    {
+      "fuente": "Project Gutenberg",
+      "spec": "gutenberg:1342",
+      "ok": true,
+      "datos": {
+        "id": 1342,
+        "titulo": "The Project Gutenberg eBook of Pride and Prejudice",
+        "caracteres": 763082,
+        "url": "https://www.gutenberg.org/ebooks/1342"
+      }
+    },
+    {
+      "fuente": "Open Library",
+      "spec": "openlibrary:portuguese literature",
+      "ok": true,
+      "datos": [
+        {
+          "titulo": "Portuguese literature",
+          "autor": "Aubrey F. G. Bell",
+          "anio": 1922
+        },
+        {
+          "titulo": "A revisionary history of Portuguese literature",
+          "autor": "Miguel Tamen",
+          "anio": 1999
+        },
+        {
+          "titulo": "Studies in Portuguese literature",
+          "autor": "Aubrey F. G. Bell",
+          "anio": 1914
+        },
+        {
+          "titulo": "A companion to Portuguese literature",
+          "autor": "Stephen Parkinson",
+          "anio": 2009
+        },
+        {
+          "titulo": "India in Portuguese literature",
+          "autor": "Ethel M. Pope",
+          "anio": 1937
+        }
+      ]
+    }
+  ]
+}
