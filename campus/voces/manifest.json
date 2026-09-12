@@ -1,21 +1,42 @@
 {
+  "portal": "lingua-aberta",
+  "dominio": "Idiomas (PT > ES > EN > CA)",
+  "orden_idiomas": [
+    "pt",
+    "es",
+    "en",
+    "ca"
+  ],
+  "generado_utc": "2026-09-12T21:58:07+00:00",
+  "motor": "edge-tts (voces neuronales, sin API key)",
   "idiomas": {
-    "es": {
-      "voz": "es-ES-ElviraNeural",
-      "guion": "Bienvenido a tu campus abierto. Aprende a tu ritmo, con material gratuito y sin barreras."
-    },
-    "ca": {
-      "voz": "ca-ES-JoanaNeural",
-      "guion": "Benvingut al teu campus obert. Aprèn al teu ritme, amb material gratuït i sense barreres."
-    },
     "pt": {
       "voz": "pt-BR-FranciscaNeural",
-      "guion": "Bem-vindo ao seu campus aberto. Aprenda no seu ritmo, com material gratuito e sem barreiras."
+      "guion": "Bem-vindo ao portal de referência lingua-aberta. Domínio: Idiomas (PT > ES > EN > CA). Reúne 4 temas construídos a partir de 9 fontes de dados abertos verificadas: vocabulario basico, lectura graduada, cultura y contexto, media para clase. Tudo gratuito, sem credenciais, e funciona sem ligação à Internet.",
+      "archivo": "voces/pt/bienvenida.mp3",
+      "bytes": 133488,
+      "sha256": "0dfcb401845b2d0dc6a7d74b802e2b6659581ff02ba16253ee6be09a9a3b16d0"
+    },
+    "es": {
+      "voz": "es-ES-ElviraNeural",
+      "guion": "Bienvenido al portal de referencia lingua-aberta. Dominio: Idiomas (PT > ES > EN > CA). Reúne 4 temas construidos a partir de 9 fuentes de datos abiertos verificadas: vocabulario basico, lectura graduada, cultura y contexto, media para clase. Todo gratuito, sin credenciales, y funciona sin conexión.",
+      "archivo": "voces/es/bienvenida.mp3",
+      "bytes": 130752,
+      "sha256": "fa48945d6402c7b3935db5fb85cb85c47a193547e15db124e40832f42604bca9"
     },
     "en": {
       "voz": "en-US-AriaNeural",
-      "guion": "Welcome to your open campus. Learn at your own pace, with free materials and no barriers."
+      "guion": "Welcome to the lingua-aberta reference portal. Domain: Idiomas (PT > ES > EN > CA). It brings together 4 topics built from 9 verified open data sources: vocabulario basico, lectura graduada, cultura y contexto, media para clase. All free, no credentials, and it works offline.",
+      "archivo": "voces/en/bienvenida.mp3",
+      "bytes": 134496,
+      "sha256": "f6c3370b2d092c7ecfa670f5c6978e56cc501229849a13fa57a97329bc89adce"
+    },
+    "ca": {
+      "voz": "ca-ES-JoanaNeural",
+      "guion": "Benvingut al portal de referència lingua-aberta. Domini: Idiomas (PT > ES > EN > CA). Aplega 4 temes construïts a partir de 9 fonts de dades obertes verificades: vocabulario basico, lectura graduada, cultura y contexto, media para clase. Tot gratuït, sense credencials, i funciona sense connexió.",
+      "archivo": "voces/ca/bienvenida.mp3",
+      "bytes": 172656,
+      "sha256": "719ca054f0f9dd0fa8c4ea6b2ac2215702732d48ba1455f7c562c606467b28a4"
     }
-  },
-  "nota": "audio generado por eduforge.voice (edge-tts gratuito o Kokoro via Hugging Face)"
+  }
 }
