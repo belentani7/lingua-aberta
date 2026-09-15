@@ -5,45 +5,8 @@
     {
       "fuente": "Openverse",
       "spec": "openverse:language learning classroom",
-      "ok": true,
-      "datos": [
-        {
-          "titulo": "Students learning Spanish in Alicante",
-          "licencia": "by-nc-nd",
-          "url": "https://live.staticflickr.com/2253/2265450227_282787d4b9_b.jpg",
-          "origen": "https://www.flickr.com/photos/59268002@N00/2265450227"
-        },
-        {
-          "titulo": "Students practice sign language with a teacher",
-          "licencia": "by-nc-nd",
-          "url": "https://live.staticflickr.com/4073/4886284832_08241ea840_b.jpg",
-          "origen": "https://www.flickr.com/photos/10816734@N03/4886284832"
-        },
-        {
-          "titulo": "Second grade students reciting Chinese phonetics",
-          "licencia": "by-nc-nd",
-          "url": "https://live.staticflickr.com/5284/5229397625_316f5a8362_b.jpg",
-          "origen": "https://www.flickr.com/photos/10816734@N03/5229397625"
-        },
-        {
-          "titulo": "A teacher works with a hearing impaired student",
-          "licencia": "by-nc-nd",
-          "url": "https://live.staticflickr.com/4142/4885681811_6317b81846_b.jpg",
-          "origen": "https://www.flickr.com/photos/10816734@N03/4885681811"
-        },
-        {
-          "titulo": "The Nestlé Healthy Kids - Ajyal Salima",
-          "licencia": "by-nc-nd",
-          "url": "https://live.staticflickr.com/3819/20071811219_cfcbbb0394_b.jpg",
-          "origen": "https://www.flickr.com/photos/28056346@N06/20071811219"
-        },
-        {
-          "titulo": "Students in Primary Seven at Zanaki Primary School",
-          "licencia": "by-nc-nd",
-          "url": "https://live.staticflickr.com/3834/33552617685_4723f42290_b.jpg",
-          "origen": "https://www.flickr.com/photos/10816734@N03/33552617685"
-        }
-      ]
+      "ok": false,
+      "error": "The read operation timed out"
     }
   ]
 }

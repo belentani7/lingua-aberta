@@ -2,7 +2,7 @@
   "portal": "lingua-aberta",
   "repo": "belentani7/lingua-aberta",
   "dominio": "Idiomas (PT > ES > EN > CA)",
-  "generado_utc": "2026-09-12T21:22:53+00:00",
+  "generado_utc": "2026-09-15T14:33:19+00:00",
   "orden_idiomas": [
     "pt",
     "es",
@@ -32,7 +32,8 @@
       "tema": "vocabulario-basico",
       "fuente": "Tatoeba EN",
       "spec": "tatoeba:eng:obrigado",
-      "ok": true
+      "ok": false,
+      "error": "HTTP Error 429: Too Many Requests"
     },
     {
       "tema": "lectura-graduada",
@@ -62,13 +63,45 @@
       "tema": "media-para-clase",
       "fuente": "Openverse",
       "spec": "openverse:language learning classroom",
+      "ok": false,
+      "error": "The read operation timed out"
+    },
+    {
+      "tema": "practica-frases",
+      "fuente": "Tatoeba PT",
+      "spec": "tatoeba:por:obrigado",
+      "ok": true
+    },
+    {
+      "tema": "practica-frases",
+      "fuente": "Tatoeba EN",
+      "spec": "tatoeba:eng:thank you",
+      "ok": false,
+      "error": "HTTP Error 429: Too Many Requests"
+    },
+    {
+      "tema": "gramatica-ca",
+      "fuente": "Viccionari CA",
+      "spec": "mediawiki:ca.wiktionary.org:casa",
+      "ok": true
+    },
+    {
+      "tema": "enciclopedia-infantil",
+      "fuente": "Vikidia PT",
+      "spec": "mediawiki:pt.vikidia.org:escola",
+      "ok": true
+    },
+    {
+      "tema": "enciclopedia-infantil",
+      "fuente": "Vikidia ES",
+      "spec": "mediawiki:es.vikidia.org:escuela",
       "ok": true
     }
   ],
   "temas": [
     {
       "tema": "vocabulario-basico",
-      "fuentes_ok": 4,
+      "fuentes_ok": 3,
       "fuentes_total": 4
     },
     {
@@ -83,8 +116,23 @@
     },
     {
       "tema": "media-para-clase",
+      "fuentes_ok": 0,
+      "fuentes_total": 1
+    },
+    {
+      "tema": "practica-frases",
+      "fuentes_ok": 1,
+      "fuentes_total": 2
+    },
+    {
+      "tema": "gramatica-ca",
       "fuentes_ok": 1,
       "fuentes_total": 1
+    },
+    {
+      "tema": "enciclopedia-infantil",
+      "fuentes_ok": 2,
+      "fuentes_total": 2
     }
   ]
 }

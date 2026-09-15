@@ -45,8 +45,8 @@
         {
           "categoria": "Verb",
           "definiciones": [
-            "<span class=\"usage-label-sense\" about=\"#mwt217\" typeof=\"mw:Transclusion\"></span> To <a rel=\"mw:WikiLink\" href=\"/wiki/keep\" title=\"keep\">keep</a> within a structure or container.",
-            "<span class=\"usage-label-sense\" about=\"#mwt222\" typeof=\"mw:Transclusion\"></span> To admit to residence; to <a rel=\"mw:WikiLink\" href=\"/wiki/harbor\" title=\"harbor\">harbor</a>.",
+            "<span class=\"usage-label-sense\" about=\"#mwt221\" typeof=\"mw:Transclusion\"></span> To <a rel=\"mw:WikiLink\" href=\"/wiki/keep\" title=\"keep\">keep</a> within a structure or container.",
+            "<span class=\"usage-label-sense\" about=\"#mwt226\" typeof=\"mw:Transclusion\"></span> To admit to residence; to <a rel=\"mw:WikiLink\" href=\"/wiki/harbor\" title=\"harbor\">harbor</a>.",
             "To take shelter or lodging; to abide; to lodge."
           ]
         },
@@ -60,7 +60,7 @@
         {
           "categoria": "Noun",
           "definiciones": [
-            "<span class=\"usage-label-sense\" about=\"#mwt423\" typeof=\"mw:Transclusion\"></span> <a rel=\"mw:WikiLink\" href=\"/wiki/mansion\" title=\"mansion\">mansion</a>; large <a rel=\"mw:WikiLink\" href=\"/wiki/house#English\" class=\"mw-selflink-fragment\">house</a> <span style=\"padding-left:15px; font-size:80%\" about=\"#mwt424\" typeof=\"mw:Transclusion\"><span style=\"background:var(--wikt-palette-cyan, #eaffff);color:inherit\">(<i>Classifier</i>: <span class=\"Hant\" lang=\"zh-Hant\"><a rel=\"mw:WikiLink\" href=\"/wiki/間#Chinese\" title=\"間\">間</a></span><span class=\"Hani\" lang=\"zh\">／</span><span class=\"Hans\" lang=\"zh-Hans\"><a rel=\"mw:WikiLink\" href=\"/wiki/间#Chinese\" title=\"间\">间</a></span> <span style=\"border-bottom: 1px dotted var(--wikt-palette-black, #202122); cursor:help\" title=\"Cantonese\"><i>c</i></span>)</span></span><link rel=\"mw:PageProp/Category\" href=\"./Category:Chinese_nouns_classified_by_間/间#HOUSE\" about=\"#mwt424\">"
+            "<span class=\"usage-label-sense\" about=\"#mwt427\" typeof=\"mw:Transclusion\"></span> <a rel=\"mw:WikiLink\" href=\"/wiki/mansion\" title=\"mansion\">mansion</a>; large <a rel=\"mw:WikiLink\" href=\"/wiki/house#English\" class=\"mw-selflink-fragment\">house</a> <span style=\"padding-left:15px; font-size:80%\" about=\"#mwt428\" typeof=\"mw:Transclusion\"><span style=\"background:var(--wikt-palette-cyan, #eaffff);color:inherit\">(<i>Classifier</i>: <span class=\"Hant\" lang=\"zh-Hant\"><a rel=\"mw:WikiLink\" href=\"/wiki/間#Chinese\" title=\"間\">間</a></span><span class=\"Hani\" lang=\"zh\">／</span><span class=\"Hans\" lang=\"zh-Hans\"><a rel=\"mw:WikiLink\" href=\"/wiki/间#Chinese\" title=\"间\">间</a></span> <span style=\"border-bottom: 1px dotted var(--wikt-palette-black, #202122); cursor:help\" title=\"Cantonese\"><i>c</i></span>)</span></span><link rel=\"mw:PageProp/Category\" href=\"./Category:Chinese_nouns_classified_by_間/间#HOUSE\" about=\"#mwt428\">"
           ]
         }
       ]
@@ -99,33 +99,8 @@
     {
       "fuente": "Tatoeba EN",
       "spec": "tatoeba:eng:obrigado",
-      "ok": true,
-      "datos": [
-        {
-          "origen": "Obrigada.",
-          "traduccion": "Nyá:węh."
-        },
-        {
-          "origen": "Obrigado.",
-          "traduccion": "Juspajaraña."
-        },
-        {
-          "origen": "Obrigada!",
-          "traduccion": "Merci!"
-        },
-        {
-          "origen": "Obrigado!",
-          "traduccion": "Иҭабуп!"
-        },
-        {
-          "origen": "Obrigado, amigo.",
-          "traduccion": "Dankon, kamarado."
-        },
-        {
-          "origen": "Mudei. Obrigado.",
-          "traduccion": "I changed it. Thanks."
-        }
-      ]
+      "ok": false,
+      "error": "HTTP Error 429: Too Many Requests"
     }
   ]
 }

@@ -1,0 +1,43 @@
+{
+  "tema": "practica-frases",
+  "portal": "lingua-aberta",
+  "registros": [
+    {
+      "fuente": "Tatoeba PT",
+      "spec": "tatoeba:por:obrigado",
+      "ok": true,
+      "datos": [
+        {
+          "origen": "Obrigada.",
+          "traduccion": "Nyá:węh."
+        },
+        {
+          "origen": "Obrigado.",
+          "traduccion": "Juspajaraña."
+        },
+        {
+          "origen": "Obrigada!",
+          "traduccion": "Merci!"
+        },
+        {
+          "origen": "Obrigado!",
+          "traduccion": "Иҭабуп!"
+        },
+        {
+          "origen": "Sim. Obrigada.",
+          "traduccion": "Ja. Danke!"
+        },
+        {
+          "origen": "Sim. Obrigado.",
+          "traduccion": "Ja. Danke!"
+        }
+      ]
+    },
+    {
+      "fuente": "Tatoeba EN",
+      "spec": "tatoeba:eng:thank you",
+      "ok": false,
+      "error": "HTTP Error 429: Too Many Requests"
+    }
+  ]
+}
