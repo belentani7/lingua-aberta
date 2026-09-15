@@ -23,7 +23,12 @@
  * ```
  */
 
-export type ElevenLabsLanguage = "Español" | "Català" | "English";
+/**
+ * El tutor usa el portugués brasileño como lengua puente (la L1 de William),
+ * además de los tres idiomas que enseña. Sin "Português" aquí, cualquier frase
+ * en portugués caía en la voz española y sonaba con acento equivocado.
+ */
+export type ElevenLabsLanguage = "Português" | "Español" | "Català" | "English";
 
 export interface ElevenLabsSynthesizeOptions {
   text: string;
@@ -44,10 +49,18 @@ export interface ElevenLabsSynthesizeResult {
   characterCount: number;
 }
 
-const DEFAULT_VOICE_IDS: Record<ElevenLabsLanguage, string> = {
-  Español: "JBFqnCBsd6RMkjVDRZzb",   // Antoni — natural Spanish male
-  Català: "FL8stG5T8mH3VQ3j9n5l",   // Bella — warm Catalan female
-  English: "SOYVLZyOoHc8T7sWQ3qM",  // Harry — clear British male
+/**
+ * Orden del ecosistema: PT > ES > EN > CA.
+ *
+ * Cada voz se puede sobrescribir por variable de entorno para no tener que
+ * tocar el código al cambiarla en la cuenta de ElevenLabs.
+ */
+const DEFAULT_VOICE_IDS: Record<ElevenLabsLanguage, string | undefined> = {
+  // Pendiente: pegar aquí el ID de una voz pt-BR de tu cuenta de ElevenLabs.
+  Português: process.env.ELEVENLABS_VOICE_ID_PT,
+  Español: process.env.ELEVENLABS_VOICE_ID_ES || "JBFqnCBsd6RMkjVDRZzb",
+  English: process.env.ELEVENLABS_VOICE_ID_EN || "SOYVLZyOoHc8T7sWQ3qM",
+  Català: process.env.ELEVENLABS_VOICE_ID_CA || "FL8stG5T8mH3VQ3j9n5l",
 };
 
 const DEFAULT_MODEL = "eleven_multilingual_v2";
@@ -66,6 +79,14 @@ export async function synthesizeWithElevenLabs(
   }
 
   const voiceId = options.voiceId || DEFAULT_VOICE_IDS[options.language];
+  if (!voiceId) {
+    // Antes esto era `undefined` en la URL y ElevenLabs devolvía un error opaco,
+    // o peor: se usaba la voz de otro idioma. Mejor fallar diciendo qué falta.
+    throw new Error(
+      `No hay voz configurada para "${options.language}". ` +
+        `Define ELEVENLABS_VOICE_ID_${options.language === "Português" ? "PT" : options.language === "Español" ? "ES" : options.language === "English" ? "EN" : "CA"}.`
+    );
+  }
   const modelId = options.modelId || DEFAULT_MODEL;
 
   const response = await fetch(`${ELEVENLABS_BASE_URL}/text-to-speech/${voiceId}`, {
@@ -105,7 +126,7 @@ export async function synthesizeWithElevenLabs(
 /**
  * Get the ElevenLabs voice ID for a given language
  */
-export function getElevenLabsVoiceId(language: ElevenLabsLanguage): string {
+export function getElevenLabsVoiceId(language: ElevenLabsLanguage): string | undefined {
   return DEFAULT_VOICE_IDS[language];
 }
 

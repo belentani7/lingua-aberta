@@ -17,7 +17,15 @@ import {
 } from "./db";
 import { generateTutorReply, getTutorProviderStatus, TutorLanguage } from "./tutor";
 
+/** Los tres módulos que el tutor ENSEÑA. */
 const languageSchema = z.enum(["Español", "Català", "English"]);
+
+/**
+ * Los idiomas que el tutor PRONUNCIA. Incluye el portugués porque es la lengua
+ * puente de William: el tutor lo usa para explicar, aunque no sea un módulo.
+ * Orden del ecosistema: PT > ES > EN > CA.
+ */
+const voiceLanguageSchema = z.enum(["Português", "Español", "English", "Català"]);
 
 const fallbackProgress = [
   { language: "Español", courseSlug: "espanol-de-la-calle", progressPercent: 68, completedLessons: 4, totalLessons: 6 },
@@ -123,13 +131,13 @@ export const appRouter = router({
       if ("error" in result) throw new Error(result.error);
       return { storageKey: stored.key, text: result.text, language: result.language };
     }),
-    synthesize: protectedProcedure.input(z.object({ text: z.string().min(1).max(2000), language: languageSchema })).mutation(async ({ input }) => {
+    synthesize: protectedProcedure.input(z.object({ text: z.string().min(1).max(2000), language: voiceLanguageSchema })).mutation(async ({ input }) => {
           // Priority 1: ElevenLabs Flash v2.5 (best quality, MOS 4.8/5.0)
           if (isElevenLabsConfigured()) {
             try {
               const result = await synthesizeWithElevenLabs({
                 text: input.text,
-                language: input.language as "Español" | "Català" | "English",
+                language: input.language,
               });
               return {
                 available: true,
