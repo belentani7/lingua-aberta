@@ -1,0 +1,12 @@
+{
+  "tema": "media-para-clase",
+  "portal": "lingua-aberta",
+  "registros": [
+    {
+      "fuente": "Openverse",
+      "spec": "openverse:language learning classroom",
+      "ok": false,
+      "error": "The read operation timed out"
+    }
+  ]
+}

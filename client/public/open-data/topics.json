@@ -1,0 +1,138 @@
+{
+  "portal": "lingua-aberta",
+  "repo": "belentani7/lingua-aberta",
+  "dominio": "Idiomas (PT > ES > EN > CA)",
+  "generado_utc": "2026-09-15T14:33:19+00:00",
+  "orden_idiomas": [
+    "pt",
+    "es",
+    "en",
+    "ca"
+  ],
+  "fuentes": [
+    {
+      "tema": "vocabulario-basico",
+      "fuente": "Wiktionary ES",
+      "spec": "wikt_es:casa",
+      "ok": true
+    },
+    {
+      "tema": "vocabulario-basico",
+      "fuente": "Wiktionary EN",
+      "spec": "wikt_en:house",
+      "ok": true
+    },
+    {
+      "tema": "vocabulario-basico",
+      "fuente": "Tatoeba ES",
+      "spec": "tatoeba:spa:obrigado",
+      "ok": true
+    },
+    {
+      "tema": "vocabulario-basico",
+      "fuente": "Tatoeba EN",
+      "spec": "tatoeba:eng:obrigado",
+      "ok": false,
+      "error": "HTTP Error 429: Too Many Requests"
+    },
+    {
+      "tema": "lectura-graduada",
+      "fuente": "Project Gutenberg",
+      "spec": "gutenberg:1342",
+      "ok": true
+    },
+    {
+      "tema": "lectura-graduada",
+      "fuente": "Open Library",
+      "spec": "openlibrary:portuguese literature",
+      "ok": true
+    },
+    {
+      "tema": "cultura-y-contexto",
+      "fuente": "Wikipedia PT",
+      "spec": "wiki:pt:Língua portuguesa",
+      "ok": true
+    },
+    {
+      "tema": "cultura-y-contexto",
+      "fuente": "Wikipedia ES",
+      "spec": "wiki:es:Idioma portugués",
+      "ok": true
+    },
+    {
+      "tema": "media-para-clase",
+      "fuente": "Openverse",
+      "spec": "openverse:language learning classroom",
+      "ok": false,
+      "error": "The read operation timed out"
+    },
+    {
+      "tema": "practica-frases",
+      "fuente": "Tatoeba PT",
+      "spec": "tatoeba:por:obrigado",
+      "ok": true
+    },
+    {
+      "tema": "practica-frases",
+      "fuente": "Tatoeba EN",
+      "spec": "tatoeba:eng:thank you",
+      "ok": false,
+      "error": "HTTP Error 429: Too Many Requests"
+    },
+    {
+      "tema": "gramatica-ca",
+      "fuente": "Viccionari CA",
+      "spec": "mediawiki:ca.wiktionary.org:casa",
+      "ok": true
+    },
+    {
+      "tema": "enciclopedia-infantil",
+      "fuente": "Vikidia PT",
+      "spec": "mediawiki:pt.vikidia.org:escola",
+      "ok": true
+    },
+    {
+      "tema": "enciclopedia-infantil",
+      "fuente": "Vikidia ES",
+      "spec": "mediawiki:es.vikidia.org:escuela",
+      "ok": true
+    }
+  ],
+  "temas": [
+    {
+      "tema": "vocabulario-basico",
+      "fuentes_ok": 3,
+      "fuentes_total": 4
+    },
+    {
+      "tema": "lectura-graduada",
+      "fuentes_ok": 2,
+      "fuentes_total": 2
+    },
+    {
+      "tema": "cultura-y-contexto",
+      "fuentes_ok": 2,
+      "fuentes_total": 2
+    },
+    {
+      "tema": "media-para-clase",
+      "fuentes_ok": 0,
+      "fuentes_total": 1
+    },
+    {
+      "tema": "practica-frases",
+      "fuentes_ok": 1,
+      "fuentes_total": 2
+    },
+    {
+      "tema": "gramatica-ca",
+      "fuentes_ok": 1,
+      "fuentes_total": 1
+    },
+    {
+      "tema": "enciclopedia-infantil",
+      "fuentes_ok": 2,
+      "fuentes_total": 2
+    }
+  ]
+}

@@ -1,0 +1,106 @@
+{
+  "tema": "vocabulario-basico",
+  "portal": "lingua-aberta",
+  "registros": [
+    {
+      "fuente": "Wiktionary ES",
+      "spec": "wikt_es:casa",
+      "ok": true,
+      "datos": [
+        {
+          "titulo": "casa",
+          "fragmento": " Entradas similares:  Casa, casá, casà, casă, cåsa, časa, čaša, Čaša, caŝa, cassa, càssa Del latín casa (&#039;choza&#039;), de origen incierto. casa ¦ plural: casas"
+        },
+        {
+          "titulo": "casá",
+          "fragmento": " Entradas similares:  Casa, casa, casà, casă, cåsa, časa, čaša, Čaša, caŝa, cassa, càssa 1 Segunda persona del singular (vos) del imperativo de casar."
+        },
+        {
+          "titulo": "caŝa",
+          "fragmento": " Entradas similares:  casa, Casa, casà, casă, cåsa, časa, čaša, Čaša, cassa, càssa, casá Del latín casa 1 Casa. Ámbito: Chipilo. Ortografía Veneciana Unificada"
+        },
+        {
+          "titulo": "em casa",
+          "fragmento": "1 En casa (a saber, en la casa propia)."
+        },
+        {
+          "titulo": "casa de câmbio",
+          "fragmento": "Compuesto de casa (&#039;casa&#039;) y câmbio (&#039;cambio&#039;). casa de câmbio (no copulativa) ¦ plural: casas de câmbio 1 Economía Oficina de cambio."
+        }
+      ]
+    },
+    {
+      "fuente": "Wiktionary EN",
+      "spec": "wikt_en:house",
+      "ok": true,
+      "datos": [
+        {
+          "categoria": "Noun",
+          "definiciones": [
+            "",
+            "A structure built or serving as an <a rel=\"mw:WikiLink\" href=\"/wiki/abode\" title=\"abode\">abode</a> of human beings. <style data-mw-deduplicate=\"TemplateStyles:r90144991\" typeof=\"mw:Extension/templatestyles\" about=\"#mwt95\">.mw-parser-output .defdate{font-size:smaller}</style>",
+            "<span class=\"usage-label-sense\"></span> An <a rel=\"mw:WikiLink\" href=\"/wiki/apartment_building\" title=\"apartment building\">apartment building</a> within a <a rel=\"mw:WikiLink\" href=\"/wiki/public\" title=\"public\">public</a> <a rel=\"mw:WikiLink\" href=\"/wiki/housing_estate\" title=\"housing estate\">housing estate</a>."
+          ]
+        },
+        {
+          "categoria": "Verb",
+          "definiciones": [
+            "<span class=\"usage-label-sense\" about=\"#mwt221\" typeof=\"mw:Transclusion\"></span> To <a rel=\"mw:WikiLink\" href=\"/wiki/keep\" title=\"keep\">keep</a> within a structure or container.",
+            "<span class=\"usage-label-sense\" about=\"#mwt226\" typeof=\"mw:Transclusion\"></span> To admit to residence; to <a rel=\"mw:WikiLink\" href=\"/wiki/harbor\" title=\"harbor\">harbor</a>.",
+            "To take shelter or lodging; to abide; to lodge."
+          ]
+        },
+        {
+          "categoria": "Noun",
+          "definiciones": [
+            "",
+            "<span class=\"usage-label-sense\"></span> <a rel=\"mw:WikiLink\" href=\"/wiki/house_music\" title=\"house music\">House music</a>."
+          ]
+        },
+        {
+          "categoria": "Noun",
+          "definiciones": [
+            "<span class=\"usage-label-sense\" about=\"#mwt427\" typeof=\"mw:Transclusion\"></span> <a rel=\"mw:WikiLink\" href=\"/wiki/mansion\" title=\"mansion\">mansion</a>; large <a rel=\"mw:WikiLink\" href=\"/wiki/house#English\" class=\"mw-selflink-fragment\">house</a> <span style=\"padding-left:15px; font-size:80%\" about=\"#mwt428\" typeof=\"mw:Transclusion\"><span style=\"background:var(--wikt-palette-cyan, #eaffff);color:inherit\">(<i>Classifier</i>: <span class=\"Hant\" lang=\"zh-Hant\"><a rel=\"mw:WikiLink\" href=\"/wiki/間#Chinese\" title=\"間\">間</a></span><span class=\"Hani\" lang=\"zh\">／</span><span class=\"Hans\" lang=\"zh-Hans\"><a rel=\"mw:WikiLink\" href=\"/wiki/间#Chinese\" title=\"间\">间</a></span> <span style=\"border-bottom: 1px dotted var(--wikt-palette-black, #202122); cursor:help\" title=\"Cantonese\"><i>c</i></span>)</span></span><link rel=\"mw:PageProp/Category\" href=\"./Category:Chinese_nouns_classified_by_間/间#HOUSE\" about=\"#mwt428\">"
+          ]
+        }
+      ]
+    },
+    {
+      "fuente": "Tatoeba ES",
+      "spec": "tatoeba:spa:obrigado",
+      "ok": true,
+      "datos": [
+        {
+          "origen": "Obrigada.",
+          "traduccion": "Nyá:węh."
+        },
+        {
+          "origen": "Obrigado.",
+          "traduccion": "Juspajaraña."
+        },
+        {
+          "origen": "Obrigada!",
+          "traduccion": "Merci!"
+        },
+        {
+          "origen": "Obrigado!",
+          "traduccion": "Иҭабуп!"
+        },
+        {
+          "origen": "Entendi! Obrigada.",
+          "traduccion": "わかった！ありがとう。"
+        },
+        {
+          "origen": "Obrigado, Tom.",
+          "traduccion": "汤姆，谢谢你。"
+        }
+      ]
+    },
+    {
+      "fuente": "Tatoeba EN",
+      "spec": "tatoeba:eng:obrigado",
+      "ok": false,
+      "error": "HTTP Error 429: Too Many Requests"
+    }
+  ]
+}

@@ -1,0 +1,57 @@
+[
+  {
+    "pregunta": "¿Como se dice 'gracias' en catalan?",
+    "opciones": [
+      "Obrigado",
+      "Gracies/Merci",
+      "Grazie",
+      "Thanks"
+    ],
+    "correcta": 1,
+    "explicacion": "Gracies o merci; 'obrigado' es portugues."
+  },
+  {
+    "pregunta": "'Deures' significa...",
+    "opciones": [
+      "Deberes/tarea",
+      "Duros",
+      "Deudas",
+      "Dudas"
+    ],
+    "correcta": 0,
+    "explicacion": "Deures = deberes escolares."
+  },
+  {
+    "pregunta": "Presente de ANAR, 1a persona singular:",
+    "opciones": [
+      "vaig",
+      "va",
+      "anem",
+      "vagi"
+    ],
+    "correcta": 0,
+    "explicacion": "Jo vaig a l'institut."
+  },
+  {
+    "pregunta": "'Pati' en el instituto es...",
+    "opciones": [
+      "Patio/recreo",
+      "Clase",
+      "Comedor",
+      "Gimnasio"
+    ],
+    "correcta": 0,
+    "explicacion": "Pati = patio de recreo."
+  },
+  {
+    "pregunta": "Los dias de la semana en CA empiezan por...",
+    "opciones": [
+      "lunes...",
+      "dilluns...",
+      "segunda...",
+      "diumenge..."
+    ],
+    "correcta": 1,
+    "explicacion": "Dilluns, dimarts, dimecres, dijous, divendres."
+  }
+]

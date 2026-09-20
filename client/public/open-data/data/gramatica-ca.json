@@ -1,0 +1,38 @@
+{
+  "tema": "gramatica-ca",
+  "portal": "lingua-aberta",
+  "registros": [
+    {
+      "fuente": "Viccionari CA",
+      "spec": "mediawiki:ca.wiktionary.org:casa",
+      "ok": true,
+      "datos": [
+        {
+          "titulo": "casa",
+          "url": "https://ca.wiktionary.org/wiki/casa",
+          "fragmento": "Potser volíeu: CASA, Casa, casà, casă Pronúncia(i): oriental /ˈka.zə/, occidental /ˈka.za/ Rimes: -aza Etimologia: Del llatí casa ‎(‘cabana’), d’origen"
+        },
+        {
+          "titulo": "CASA",
+          "url": "https://ca.wiktionary.org/wiki/CASA",
+          "fragmento": "Potser volíeu: casa, Casa, casà, casă Configuracions de la mà: bimanual 5 inclinat   CASA casa, habitatge, domicili, edifici Altres llocs: Wikisign, Sematos"
+        },
+        {
+          "titulo": "Casa",
+          "url": "https://ca.wiktionary.org/wiki/Casa",
+          "fragmento": "Potser volíeu: casa, CASA, casà, casă Pronúncia(i): oriental /ˈka.zə/, occidental /ˈka.za/ Rimes: -aza Etimologia: De casa com refugi, lloc d’habitació"
+        },
+        {
+          "titulo": "casà",
+          "url": "https://ca.wiktionary.org/wiki/cas%C3%A0",
+          "fragmento": "Potser volíeu: casa, CASA, Casa, casă Pronúncia(i): oriental /kəˈza/, occidental /kaˈza/ Rimes: -a Homòfon: casar casà (literari) Tercera persona del"
+        },
+        {
+          "titulo": "casă",
+          "url": "https://ca.wiktionary.org/wiki/cas%C4%83",
+          "fragmento": "Potser volíeu: casa, CASA, Casa, casà Pronúncia (AFI): /ˈka.sə/ Etimologia: Del llatí casa. casă f. ‎(plural case) casa Article corresponent a la Viquipèdia"
+        }
+      ]
+    }
+  ]
+}

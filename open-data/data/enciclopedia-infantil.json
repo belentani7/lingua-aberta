@@ -1,0 +1,70 @@
+{
+  "tema": "enciclopedia-infantil",
+  "portal": "lingua-aberta",
+  "registros": [
+    {
+      "fuente": "Vikidia PT",
+      "spec": "mediawiki:pt.vikidia.org:escola",
+      "ok": true,
+      "datos": [
+        {
+          "titulo": "Italiano",
+          "url": "https://pt.vikidia.org/wiki/Italiano",
+          "fragmento": "respectivamente. «Italiano, dezenas de artigos e gramática da língua italiana». Brasil Escola. Consultado em 27 de maio de 2023  «Países onde se fala Italiano». DadosMundiais"
+        },
+        {
+          "titulo": "Barack Obama",
+          "url": "https://pt.vikidia.org/wiki/Barack_Obama",
+          "fragmento": "ao casamento gay e propôs o controle de armas como resultado da Tiro na escola de Sandy Hook. Ele foi reeleito em 2012. Durante seu segundo mandato, o"
+        },
+        {
+          "titulo": "2023",
+          "url": "https://pt.vikidia.org/wiki/2023",
+          "fragmento": "França em 2023. 4 : Finlândia junta-se oficialmente à NATO. 5: Ataque na Escola Blumenau 11 : 130 pessoas mortas em Birmânia durante o Massacre de Pazigyi"
+        },
+        {
+          "titulo": "Pedagogia",
+          "url": "https://pt.vikidia.org/wiki/Pedagogia",
+          "fragmento": "meninas eram quase inteiramente educadas em casa, mas muitos meninos iam à escola mesmo tendo um tutor. Etymology Site on-line (pedagogue) Educação"
+        },
+        {
+          "titulo": "Juan Carlos da Espanha",
+          "url": "https://pt.vikidia.org/wiki/Juan_Carlos_da_Espanha",
+          "fragmento": "Ele tinha duas irmãs e um irmão. Juan Carlos estudou na Escola da Marinha Espanhola e na Escola da Força Aérea Espanhola em 1960-61. Estudou Direito, Economia"
+        }
+      ]
+    },
+    {
+      "fuente": "Vikidia ES",
+      "spec": "mediawiki:es.vikidia.org:escuela",
+      "ok": true,
+      "datos": [
+        {
+          "titulo": "Colegio",
+          "url": "https://es.vikidia.org/wiki/Colegio",
+          "fragmento": "Una escuela, o colegio, (aunque vulgarmente se le llama cole) es un establecimiento público o privado que imparta educación o enseñanza. Son edificios"
+        },
+        {
+          "titulo": "Facebook",
+          "url": "https://es.vikidia.org/wiki/Facebook",
+          "fragmento": "grupos de usuarios. Estos grupos pueden ser para un lugar de trabajo, la escuela o la universidad, o de otros intereses. Facebook fue creado por Mark Zuckerberg"
+        },
+        {
+          "titulo": "Construcción",
+          "url": "https://es.vikidia.org/wiki/Construcci%C3%B3n",
+          "fragmento": "obreros. La construcción puede servir para crear: Casas Escuelas Puentes Edificios Casa Casa Escuela Escuela Puente Puente Edificio Edificio Definición de construcción"
+        },
+        {
+          "titulo": "Educación",
+          "url": "https://es.vikidia.org/wiki/Educaci%C3%B3n",
+          "fragmento": "etc. Cuando decimos la palabra educación, inmediatamente pensamos en la escuela. Sin embargo, cuando hacemos algo poco conveniente, nos dicen que somos"
+        },
+        {
+          "titulo": "León Tolstói",
+          "url": "https://es.vikidia.org/wiki/Le%C3%B3n_Tolst%C3%B3i",
+          "fragmento": "Tolstói también se interesó por la educación. En Yásnaia Poliana creó una escuela gratuita para hijos de campesinos, donde experimentó con métodos educativos"
+        }
+      ]
+    }
+  ]
+}

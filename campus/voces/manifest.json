@@ -1,0 +1,43 @@
+{
+  "portal": "lingua-aberta",
+  "dominio": "Idiomas (PT > ES > EN > CA)",
+  "orden_idiomas": [
+    "pt",
+    "es",
+    "en",
+    "ca"
+  ],
+  "generado_utc": "2026-09-12T21:58:07+00:00",
+  "motor": "edge-tts (voces neuronales, sin API key)",
+  "idiomas": {
+    "pt": {
+      "voz": "pt-BR-FranciscaNeural",
+      "guion": "Bem-vindo ao portal de referencia lingua-aberta. Dominio: Linguas (PT > ES > EN > CA). Reune 4 temas construidos a partir de 9 fontes de dados abertos verificadas: vocabulario basico, leitura graduada, cultura e contexto, midia para a aula. Tudo gratuito, sem credenciais, e funciona sem ligacao a Internet.",
+      "archivo": "voces/pt/bienvenida.mp3",
+      "bytes": 129168,
+      "sha256": "e452d5db6faa6f2665b92bd21ceeb88e7a21e2042147558cef54ed4c6ef3d1fa"
+    },
+    "es": {
+      "voz": "es-ES-ElviraNeural",
+      "guion": "Bienvenido al portal de referencia lingua-aberta. Dominio: Idiomas (PT > ES > EN > CA). Reune 4 temas construidos a partir de 9 fuentes de datos abiertos verificadas: vocabulario basico, lectura graduada, cultura y contexto, media para clase. Todo gratuito, sin credenciales, y funciona sin conexion.",
+      "archivo": "voces/es/bienvenida.mp3",
+      "bytes": 130752,
+      "sha256": "22e3d64c16d23b902626db0d651e0d5ff9e08b2f7f4c4980d2cc75675c6320dd"
+    },
+    "en": {
+      "voz": "en-US-AriaNeural",
+      "guion": "Welcome to the lingua-aberta reference portal. Domain: Languages (PT > ES > EN > CA). It brings together 4 topics built from 9 verified open data sources: basic vocabulary, graded reading, culture and context, classroom media. All free, no credentials, and it works offline.",
+      "archivo": "voces/en/bienvenida.mp3",
+      "bytes": 130464,
+      "sha256": "2a580f995ee59a2ac7b5c581c70e51705938d538c7c41e472580d2a54b56e94d"
+    },
+    "ca": {
+      "voz": "ca-ES-JoanaNeural",
+      "guion": "Benvingut al portal de referencia lingua-aberta. Domini: Llengues (PT > ES > EN > CA). Aplega 4 temes construits a partir de 9 fonts de dades obertes verificades: vocabulari basic, lectura graduada, cultura i context, media per a classe. Tot gratuit, sense credencials, i funciona sense connexio.",
+      "archivo": "voces/ca/bienvenida.mp3",
+      "bytes": 167040,
+      "sha256": "016bffb16470e34deb9feaff29638be201e8e94d1882e80bb76d2071f155eae1"
+    }
+  },
+  "nota_correccion": "2026-09-15: guiones PT/EN/CA contenian dominio y temas en espanol; traducidos y audio regenerado."
+}

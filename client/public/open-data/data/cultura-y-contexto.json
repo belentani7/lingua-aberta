@@ -1,0 +1,26 @@
+{
+  "tema": "cultura-y-contexto",
+  "portal": "lingua-aberta",
+  "registros": [
+    {
+      "fuente": "Wikipedia PT",
+      "spec": "wiki:pt:Língua portuguesa",
+      "ok": true,
+      "datos": {
+        "titulo": "Língua portuguesa",
+        "resumen": "Língua portuguesa, também designada português, é uma língua indo-europeia românica flexiva ocidental originada no galego-português falado no Reino da Galiza e no norte de Portugal. Com a criação do Reino de Portugal em 1139 e a expansão para o sul na sequência da Reconquista, deu-se a difusão da língua pelas terras conquistadas e, mais tarde, com as descobertas portuguesas, para o Brasil, África e outras partes do mundo. O português foi usado, naquela época, não somente nas cidades conquistadas pelos portugueses, mas também por muitos governantes locais nos seus contatos com outros estrangeiros poderosos. Especialmente nessa altura, a língua portuguesa também influenciou várias línguas.",
+        "url": "https://pt.wikipedia.org/wiki/L%C3%ADngua_portuguesa"
+      }
+    },
+    {
+      "fuente": "Wikipedia ES",
+      "spec": "wiki:es:Idioma portugués",
+      "ok": true,
+      "datos": {
+        "titulo": "Idioma portugués",
+        "resumen": "El portugués () es una lengua romance flexiva, perteneciente a la familia de lenguas indoeuropeas y procedente del galaicoportugués. Tras la independencia de Portugal del Reino de Galicia y del Reino de León en 1139 y la posterior Reconquista hacia el sur, el galaicoportugués se fue expandiendo por los límites del actual Portugal. Asimismo, la lengua se fue difundiendo en el periodo de los descubrimientos por Brasil, seis países en África y otras partes del mundo.",
+        "url": "https://es.wikipedia.org/wiki/Idioma_portugu%C3%A9s"
+      }
+    }
+  ]
+}
