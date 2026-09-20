@@ -105,9 +105,9 @@ def capsula_diaria() -> None:
         f"# Cápsula {hoy} [{lang.upper()}]\n\n{texto}\n\n"
         f"*Generada por el agente tutor que vive en GitHub Actions.*\n",
         encoding="utf-8")
-    subprocess.run(["git", "config", "user.name", "tutor-ia"], check=True)
+    subprocess.run(["git", "config", "user.name", "Belentani"], check=True)
     subprocess.run(["git", "config", "user.email",
-                    "tutor-ia@users.noreply.github.com"], check=True)
+                    "belentani7pedro@gmail.com"], check=True)
     subprocess.run(["git", "add", str(archivo)], check=True)
     subprocess.run(["git", "commit", "-m",
                     f"tutor-ia: capsula didactica {hoy} [{lang}]"],
