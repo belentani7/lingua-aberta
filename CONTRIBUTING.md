@@ -1,15 +1,20 @@
-# Contributing to Belentani Project
+Contributing to Belentani Project
+
 ## Getting Started
-Fork, clone, install (npm install / pip install -r requirements.txt), create branch.
 
-## Development Workflow
-Run lint/test/build. Follow conventional commits.
+1. Fork the repository and clone it locally
+2. Install dependencies: npm ci
+3. Create a branch
 
-## Pull Request Process
-Submit PR with description, link issues.
+## Development
+
+- Run lint and tests
+- Submit PR with description
 
 ## Code Standards
-Use ESLint/Prettier (JS) or ruff/black (Python). Write tests.
+
+Follow ESLint/Prettier for TypeScript projects
 
 ## Reporting Issues
-Use .github/ISSUE_TEMPLATE/bug_report.yml.
+
+Use bug report template
