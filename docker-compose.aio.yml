@@ -8,7 +8,7 @@ services:
     environment:
       - NODE_ENV=production
       - PORT=8000
-      - DATABASE_URL=${DATABASE_URL:-postgres://studio:studio_secret@postgres:5432/studio}
+      - DATABASE_URL=${DATABASE_URL:-${DATABASE_URL:?Set DATABASE_URL in the environment}}
       - REDIS_URL=${REDIS_URL:-redis://redis:6379}
     env_file:
       - .env
@@ -20,7 +20,7 @@ services:
     environment:
       POSTGRES_DB: studio
       POSTGRES_USER: studio
-      POSTGRES_PASSWORD: ${DB_PASSWORD:-studio_secret}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:?Set DB_PASSWORD in the environment}
     volumes:
       - pg_data:/var/lib/postgresql/data
   redis:
