@@ -23,7 +23,7 @@ class CazaFalsosAmigos:
 
     def jugar(self, rondas=5):
         print("\n=== CAZA-FALSOS AMIGOS ===")
-        print("William dice una palabra en PORTUGUES. Elige la traduccion "
+        print("Alex dice una palabra en PORTUGUES. Elige la traduccion "
               "CORRECTA al ESPAÑOL. Una opcion es TRAMPA.")
         time.sleep(1)
         random.shuffle(self.falsos_amigos)
