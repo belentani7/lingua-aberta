@@ -80,9 +80,9 @@ export default function GameArena({
   const [xp, setXp] = useState(38);
   const [voiceOn, setVoiceOn] = useState(true);
   const [lunaTalking, setLunaTalking] = useState(false);
-  const [lunaText, setLunaText] = useState("Oi William. Avui desbloquegem paraules noves. Tu pots!");
+  const [lunaText, setLunaText] = useState("Oi Alex. Avui desbloquegem paraules noves. Tu pots!");
   const [lunaParts, setLunaParts] = useState<{ text: string; lang: Lang }[]>([
-    { text: "Oi William.", lang: "pt" },
+    { text: "Oi Alex.", lang: "pt" },
     { text: "Avui desbloquegem paraules noves. Tu pots!", lang: "ca" },
   ]);
   const [showMenu, setShowMenu] = useState(false);
@@ -126,7 +126,7 @@ export default function GameArena({
   useEffect(() => {
     if (!booted || !voiceOn) return;
     const timer = window.setTimeout(() => {
-      speakSequence([{ text: "Oi William.", lang: "pt" }, { text: "Avui desbloquegem paraules noves. Tu pots!", lang: "ca" }]);
+      speakSequence([{ text: "Oi Alex.", lang: "pt" }, { text: "Avui desbloquegem paraules noves. Tu pots!", lang: "ca" }]);
       setLunaTalking(true);
       window.setTimeout(() => setLunaTalking(false), 2600);
     }, 520);
@@ -231,7 +231,7 @@ export default function GameArena({
   }, [sourceLang, targetLang, talk]);
 
   const lessonCards = [
-    { title: "Llegar y saludar", body: "Bon dia, sóc en William. Em dic William.", note: "Català de bienvenida" },
+    { title: "Llegar y saludar", body: "Bon dia, sóc en Alex. Em dic Alex.", note: "Català de bienvenida" },
     { title: "Pedir ayuda", body: "Em pots ajudar, si us plau?", note: "Una frase que abre puertas" },
     { title: "Moverte por la ciudad", body: "On és l'estació?", note: "Pregunta corta, gran autonomía" },
   ];
@@ -244,7 +244,7 @@ export default function GameArena({
         <div className="boot-content">
           <div className="boot-mark"><img src="/manus-storage/belentani-mark_3f5c56fd.png" alt="" /></div>
           <p className="eyebrow">LINGUA ABERTA · MÓDULO POLYGLOT</p>
-          <h1>PolyGlot<br /><span>William</span></h1>
+          <h1>PolyGlot<br /><span>Alex</span></h1>
           <p className="boot-subtitle">Un arcade de idiomas para llegar más lejos.</p>
           <div className="boot-language-row"><span>PT-BR</span><i /> <span>ES</span><i /> <span>CA</span><i /> <span>EN</span></div>
           <button className="boot-cta"><span className="pulse-dot" /> Toca para entrar <ChevronRight size={17} /></button>
@@ -267,7 +267,7 @@ export default function GameArena({
             <span className="brand-icon"><img src="/manus-storage/belentani-mark_3f5c56fd.png" alt="" /></span>
             <span><strong>Lingua</strong><small>abierta</small></span>
           </button>
-          <div className="top-status"><span className="status-light" /> online <b>WILLIAM</b></div>
+          <div className="top-status"><span className="status-light" /> online <b>Alex</b></div>
           <button className="icon-button" onClick={() => setShowMenu((value) => !value)} aria-label="Abrir menú"><Menu size={19} /></button>
         </header>
 
@@ -348,13 +348,13 @@ export default function GameArena({
 
               {selectedGame === "fall" && <div className="fall-game"><span className="game-instruction">ATRAPA LA PALABRA QUE CAE · TRADUCCIÓN DE <b>{source}</b></span><ArcadeTimer key={word.id} seconds={7} onExpire={() => { if (feedback === "idle") resolve(false); }} /><div className="fall-lanes">{whackChoices.choices.map((choice, index) => <button key={choice.id} className={`fall-drop ${feedback !== "idle" && choice.id === whackChoices.correctId ? "drop-hit" : ""}`} style={{ animationDelay: `${index * 0.15}s` }} disabled={feedback !== "idle"} onClick={() => resolve(choice.id === whackChoices.correctId, "¡Atrapada al vuelo! Buen ojo.", "es")}>{choice.label}</button>)}</div></div>}
 
-              {feedback !== "idle" && <div className="feedback-toast"><span className={feedback === "correct" ? "feedback-icon good" : "feedback-icon bad"}>{feedback === "correct" ? <Check size={18} /> : <X size={18} />}</span><span><strong>{feedback === "correct" ? "¡Bien hecho!" : "Casi, William"}</strong><small>{feedback === "correct" ? "Luna ha sumado XP a tu ruta." : `Prueba otra vez: ${target}.`}</small></span></div>}
+              {feedback !== "idle" && <div className="feedback-toast"><span className={feedback === "correct" ? "feedback-icon good" : "feedback-icon bad"}>{feedback === "correct" ? <Check size={18} /> : <X size={18} />}</span><span><strong>{feedback === "correct" ? "¡Bien hecho!" : "Casi, Alex"}</strong><small>{feedback === "correct" ? "Luna ha sumado XP a tu ruta." : `Prueba otra vez: ${target}.`}</small></span></div>}
             </section>
             <div className="next-row"><button className="soft-button" onClick={() => talk(`Pista: ${word.hint}`, "es")}><Lightbulb size={16} /> Pista</button><button className="next-button" onClick={next}>Siguiente misión <ChevronRight size={17} /></button></div>
           </main>
         )}
 
-        <nav className="bottom-nav"><button className={screen === "home" ? "active" : ""} onClick={() => setScreen("home")}><Gamepad2 size={18} /><span>Jugar</span></button><button className={screen === "lesson" ? "active" : ""} onClick={() => setScreen("lesson")}><BookOpen size={18} /><span>Lecciones</span></button><button onClick={() => talk("Tu racha está en construcción. Vuelve mañana y suma una nueva chispa.", "es")}><Trophy size={18} /><span>Racha</span></button><button onClick={() => talk("Perfil de William: explorador de idiomas, nivel inicial.", "es")}><Star size={18} /><span>Perfil</span></button></nav>
+        <nav className="bottom-nav"><button className={screen === "home" ? "active" : ""} onClick={() => setScreen("home")}><Gamepad2 size={18} /><span>Jugar</span></button><button className={screen === "lesson" ? "active" : ""} onClick={() => setScreen("lesson")}><BookOpen size={18} /><span>Lecciones</span></button><button onClick={() => talk("Tu racha está en construcción. Vuelve mañana y suma una nueva chispa.", "es")}><Trophy size={18} /><span>Racha</span></button><button onClick={() => talk("Perfil de Alex: explorador de idiomas, nivel inicial.", "es")}><Star size={18} /><span>Perfil</span></button></nav>
       </div>
     </div>
   );

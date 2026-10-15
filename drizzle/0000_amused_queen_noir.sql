@@ -49,7 +49,7 @@ CREATE TABLE `learner_profiles` (
 	`age` int NOT NULL,
 	`nativeLanguage` varchar(16) NOT NULL DEFAULT 'pt-BR',
 	`region` varchar(80) NOT NULL DEFAULT 'Cataluña',
-	`educationLevel` varchar(80) NOT NULL DEFAULT '3º ESO',
+	`educationLevel` varchar(80) NOT NULL DEFAULT 'nivel de prueba',
 	`cefrLevel` varchar(8) NOT NULL DEFAULT 'A2',
 	`goals` text,
 	`guardianConsent` int NOT NULL DEFAULT 0,

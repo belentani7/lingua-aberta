@@ -8,6 +8,7 @@
     "build": "vite build",
     "start": "vite preview",
     "check": "tsc --noEmit",
+    "typecheck": "tsc --noEmit",
     "format": "prettier --write ."
   },
   "dependencies": {

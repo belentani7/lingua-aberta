@@ -1,5 +1,5 @@
 // Minigames types and logic for Lingua Abierta
-// Adapted from william.game (PolyGlot William)
+// Adapted from Alex.game (PolyGlot Alex)
 
 export type Lang = "pt" | "es" | "ca" | "en";
 export type GameId =
@@ -35,7 +35,7 @@ export const LANGS: { id: Lang; label: string; flag: string }[] = [
 
 // Vocabulary adapted for Brazilian student in Catalonia (ESO 2/3)
 export const WORDS: Word[] = [
-  { id: 1, topic: "llegada", pt: "olá", es: "hola", ca: "hola", en: "hello", phrase: "Hola, sóc en William.", hint: "Un saludo simple para conocer a alguien." },
+  { id: 1, topic: "llegada", pt: "olá", es: "hola", ca: "hola", en: "hello", phrase: "Hola, sóc en Alex.", hint: "Un saludo simple para conocer a alguien." },
   { id: 2, topic: "llegada", pt: "obrigado", es: "gracias", ca: "gràcies", en: "thank you", phrase: "Gràcies per ajudar-me.", hint: "Una palabra para agradecer." },
   { id: 3, topic: "instituto", pt: "escola", es: "escuela", ca: "escola", en: "school", phrase: "La meva escola és aquí.", hint: "Donde estudias cada día." },
   { id: 4, topic: "ciudad", pt: "estação", es: "estación", ca: "estació", en: "station", phrase: "On és l'estació?", hint: "Un lugar donde esperas el tren o metro." },
