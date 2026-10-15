@@ -1,0 +1,11 @@
+# Ownership por defecto
+* @belentani7
+
+# Rutas sensibles: requieren revision explicita
+.github/workflows/     @belentani7
+.github/               @belentani7
+**/auth/               @belentani7
+**/api/                @belentani7
+**/server/             @belentani7
+**/*.env*              @belentani7
+LICENSE                @belentani7
