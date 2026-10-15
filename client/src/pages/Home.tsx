@@ -235,7 +235,7 @@ export default function Home() {
     setMessages((current) => [...current, { from: "student", text: cleanMessage }]);
     setMessage("");
     messageMutation.mutate({ language: activeLanguage, message: cleanMessage }, {
-      onSuccess: (data) => {
+      onSuccess: (data: TutorMessageResult) => {
         setMessages((current) => [...current, { from: "tutor", text: data.text }]);
         synthesizeMutation.mutate({ language: activeLanguage, text: data.text }, {
           onSuccess: (audio: SynthesizedAudio) => {
