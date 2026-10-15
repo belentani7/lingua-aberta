@@ -1,10 +1,25 @@
-# Politica de seguridad
+# Security Policy
 
-## Reportar una vulnerabilidad
+## Reporting a Vulnerability
 
-Escribe de forma privada a belentani7pedro@gmail.com. No abras un issue
-publico para fallos de seguridad.
+Please report security vulnerabilities via email to belentani7pedro@gmail.com.
 
-## Alcance
+## Code Scanning
 
-Cualquier secreto expuesto, escape de sandbox o ejecucion remota de codigo.
+This project uses GitHub CodeQL for automated security scanning. All security issues detected by CodeQL will be addressed with priority.
+
+## Dependabot
+
+Dependabot alerts security vulnerabilities in dependencies. Dependabot security updates will be accepted via Pull Request.
+
+## Secret Protection
+
+GitHub Secret Protection scans for hardcoded secrets. Do not commit API keys, tokens, or passwords to this repository.
+
+## Advanced Security
+
+Enable GitHub Advanced Security for:
+- Dependabot alerts
+- CodeQL analysis
+- Secret scanning
+- Push protection
