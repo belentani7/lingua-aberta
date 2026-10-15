@@ -1,21 +1,26 @@
-name: ci
+name: CI
 on:
   push:
-    branches: [ main, master ]
+    branches: [main]
   pull_request:
+    branches: [main]
+permissions:
+  contents: read
+
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v5
-      - uses: pnpm/action-setup@v4
-      - uses: actions/setup-node@v5
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
-          node-version: 22
-          cache: pnpm
-      - name: Install
-        run: pnpm install --no-frozen-lockfile
-      - name: Build
-        run: pnpm build
+          node-version: '22'
+          cache: 'pnpm'
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
       - name: Typecheck
-        run: pnpm check
+        run: pnpm run check
+      - name: Build
+        run: pnpm run build
+      - name: Test (placeholder until tests exist)
+        run: echo "No test script defined; add vitest tests" && exit 0
