@@ -1,0 +1,78 @@
+# Gitleaks configuration — Belentani / NOIACORE
+# Ref: https://github.com/gitleaks/gitleaks
+
+[[policies]]
+description = "Allow .env.example template placeholders"
+[policies.allowlist]
+    description = "Template placeholders that are safe to commit"
+    paths = [
+        '''\.env\.example$''',
+        '''\.env\.sample$''',
+        '''.*\.env\.template$''',
+    ]
+    regexes = [
+        '''your_.*''',
+        '''xxx.*xxx''',
+        '''<.*>''',
+        '''changeme''',
+        '''REPLACE_WITH_.*''',
+        '''your-.*-here''',
+    ]
+
+[config]
+# Enable scanning of all file types, including binary
+file_type = "all"
+# Don't stop scanning after first finding (report all)
+no-git = false
+# Entropy thresholds
+entropy = 3.5
+entropy-max = 6.5
+
+[[rules]]
+description = "Generic API key"
+regex = '''['\"]?(?:api[_-]?key|apikey|api[_-]?secret|client[_-]?secret|clientid|secret)['\"]?\s*[:=]\s*['\"][A-Za-z0-9/+\-]{32,}['\"]'''
+tags = ["key", "api-key"]
+
+[[rules]]
+description = "AWS Access Key"
+regex = '''AKIA[0-9A-Z]{16}'''
+tags = ["aws", "access-key"]
+
+[[rules]]
+description = "AWS Secret Key"
+regex = '''(?i)['\"][0-9a-zA-Z/+=]{40}['\"]'''
+tags = ["aws", "secret-key"]
+
+[[rules]]
+description = "Google API key"
+regex = '''AIza[0-9A-Za-z\-_]{35}'''
+tags = ["google", "api-key"]
+
+[[rules]]
+description = "GitHub token"
+regex = '''gh[pousr]_[A-Za-z0-9]{36}'''
+tags = ["github", "token"]
+
+[[rules]]
+description = "Generic password assignment"
+regex = '''(?i)(?:password|passwd|pwd|pass).*=.*['\"]{1}[^\s]{8,}['\"]{1}'''
+tags = ["password", "generic"]
+
+[[rules]]
+description = "Generic secret assignment"
+regex = '''(?i)(?:secret|token|key).*=.*['\"]{1}[^\s]{12,}['\"]{1}'''
+tags = ["secret", "generic"]
+
+[extend]
+# Blocklist files that should never be committed
+[extend.paths]
+denylist = [
+    ".*\.pem$",
+    ".*\.key$",
+    ".*\.p12$",
+    ".*\.pfx$",
+    "id_rsa",
+    "id_dsa",
+    "id_ecdsa",
+    "id_ed25519",
+]
