@@ -33,11 +33,10 @@ jobs:
       - name: Build
         if: steps.creds.outputs.ready == 'true'
         run: pnpm build
-      - uses: cloudflare/pages-action@v1
+      - name: Deploy to Cloudflare Pages
         if: steps.creds.outputs.ready == 'true'
+        uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          projectName: lingua-aberta
-          directory: ./dist/public
-          branch: main
+          command: pages deploy ./dist/public --project-name=lingua-aberta --branch=main
