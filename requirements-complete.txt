@@ -51,7 +51,7 @@ google-cloud-bigquery==3.14.0
 google-auth==2.25.2
 
 ## UX/Effects Tools
-pillow==10.1.0
+pillow==12.3.0
 opencv-python==4.8.1.78
 scikit-image==0.22.0
 
