@@ -32,7 +32,7 @@ beautifulsoup4==4.12.2
 openai==1.3.5
 langchain==0.0.325
 huggingface-hub==0.19.1
-transformers==4.35.2
+transformers==5.19.0
 
 ## Audio Processing (Lingua)
 librosa==0.10.0
