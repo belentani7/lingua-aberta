@@ -114,8 +114,8 @@ def capsula_diaria() -> None:
         return
 
     archivo.write_text(
-        f"# Cápsula {hoy} [{lang.upper()}]\\n\\n{CAPSULAS[lang]}\\n\\n"
-        "*Generada por el agente tutor; pendiente de revisión en PR.*\\n",
+        f"# Cápsula {hoy} [{lang.upper()}]\n\n{CAPSULAS[lang]}\n\n"
+        "*Generada por el agente tutor; pendiente de revisión en PR.*\n",
         encoding="utf-8",
     )
     subprocess.run(["git", "config", "user.name", "Belentani Tutor Bot"], check=True)
