@@ -32,6 +32,19 @@ import { toast } from "sonner";
 
 type Language = "Español" | "Català" | "English";
 
+type ProgressRecord = {
+  language: Language;
+  progressPercent: number;
+  completedLessons?: number;
+  totalLessons?: number;
+};
+
+type HistoryMessage = { role: string; content: string };
+type TutorMessageResult = { text: string };
+type TranscriptionResult = { text: string };
+type SynthesizedAudio = { available?: boolean; audioUrl?: string };
+type ClientError = { message: string };
+
 type Course = {
   language: Language;
   courseSlug: string;
@@ -141,7 +154,7 @@ export default function Home() {
   const profile = dashboardQuery.data?.profile;
   const profileName = profile?.displayName || user?.name || "William Danilo Guimarães Santos";
   const coursesForDisplay = useMemo(() => courses.map((course) => {
-    const persisted = dashboardQuery.data?.progress.find((item) => item.language === course.language);
+    const persisted = dashboardQuery.data?.progress.find((item: ProgressRecord) => item.language === course.language);
     return persisted ? { ...course, progress: persisted.progressPercent, lessons: `${persisted.completedLessons} de ${persisted.totalLessons} lições` } : course;
   }), [dashboardQuery.data?.progress]);
 
@@ -153,7 +166,7 @@ export default function Home() {
 
   useEffect(() => {
     if (!historyQuery.data?.messages?.length) return;
-    setMessages(historyQuery.data.messages.filter((item) => item.role === "user" || item.role === "assistant").map((item) => ({ from: item.role === "user" ? "student" : "tutor", text: item.content })));
+    setMessages(historyQuery.data.messages.filter((item: HistoryMessage) => item.role === "user" || item.role === "assistant").map((item: HistoryMessage) => ({ from: item.role === "user" ? "student" : "tutor", text: item.content })));
   }, [historyQuery.data]);
 
   function handleNav(label: string) {
@@ -199,8 +212,8 @@ export default function Home() {
           reader.readAsDataURL(blob);
         });
         transcribeMutation.mutate({ audioBase64: base64, mimeType: "audio/webm", language: activeLanguage }, {
-          onSuccess: (data) => { setMessage(data.text); toast("Te ouvi", { description: "Revise a transcrição e envie quando quiser." }); },
-          onError: (error) => toast("Não consegui transcrever", { description: error.message }),
+          onSuccess: (data: TranscriptionResult) => { setMessage(data.text); toast("Te ouvi", { description: "Revise a transcrição e envie quando quiser." }); },
+          onError: (error: ClientError) => toast("Não consegui transcrever", { description: error.message }),
         });
       };
       recorder.start(250);
@@ -222,10 +235,10 @@ export default function Home() {
     setMessages((current) => [...current, { from: "student", text: cleanMessage }]);
     setMessage("");
     messageMutation.mutate({ language: activeLanguage, message: cleanMessage }, {
-      onSuccess: (data) => {
+      onSuccess: (data: TutorMessageResult) => {
         setMessages((current) => [...current, { from: "tutor", text: data.text }]);
         synthesizeMutation.mutate({ language: activeLanguage, text: data.text }, {
-          onSuccess: (audio) => {
+          onSuccess: (audio: SynthesizedAudio) => {
             if (audio.available && audio.audioUrl) new Audio(audio.audioUrl).play().catch(() => undefined);
             else if (typeof window !== "undefined" && "speechSynthesis" in window) {
               const utterance = new SpeechSynthesisUtterance(data.text);
@@ -235,7 +248,7 @@ export default function Home() {
           },
         });
       },
-      onError: (error) => toast("O tutor precisa de uma nova tentativa", { description: error.message }),
+      onError: (error: ClientError) => toast("O tutor precisa de uma nova tentativa", { description: error.message }),
     });
   }
 
@@ -244,7 +257,7 @@ export default function Home() {
       startLogin();
       return;
     }
-    const current = dashboardQuery.data?.progress.find((item) => item.language === activeLanguage);
+    const current = dashboardQuery.data?.progress.find((item: ProgressRecord) => item.language === activeLanguage);
     progressMutation.mutate({ language: activeLanguage, courseSlug: selectedCourse.courseSlug, progressPercent: Math.min(100, selectedCourse.progress + 5), completedLessons: current?.completedLessons || selectedCourse.progress >= 68 ? (current?.completedLessons || 4) + 1 : 1, totalLessons: current?.totalLessons || 8 }, { onSuccess: () => dashboardQuery.refetch() });
     toast("Aula desbloqueada", {
       description: `${selectedCourse.title} está pronta para você continuar.`,
