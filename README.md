@@ -87,7 +87,7 @@ con `pnpm check` en verde.
 
 ## Licencia
 
-[AGPL-3.0](./LICENSE) — copyleft fuerte: si alguien lo despliega como servicio, el
+[MIT](./LICENSE) — copyleft fuerte: si alguien lo despliega como servicio, el
 código sigue siendo libre. Es una decisión deliberada para proteger el proyecto y a
 quien lo usa.
 
