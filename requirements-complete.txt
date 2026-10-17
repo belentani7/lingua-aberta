@@ -58,7 +58,7 @@ scikit-image==0.22.0
 ## Content Management
 python-markdown==3.5.1
 slugify==0.0.1
-bleach==6.1.0
+bleach==6.4.0
 
 ## Testing & QA
 pytest==7.4.3
