@@ -20,7 +20,7 @@ jobs:
           fi
       - uses: actions/checkout@v5
         if: steps.creds.outputs.ready == 'true'
-      - uses: pnpm/action-setup@v4
+      - uses: pnpm/action-setup@v6
         if: steps.creds.outputs.ready == 'true'
       - uses: actions/setup-node@v5
         if: steps.creds.outputs.ready == 'true'
