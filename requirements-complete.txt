@@ -107,7 +107,7 @@ typer==0.9.0
 rich==13.7.0
 
 ## Google AI Studio Integration
-google-generativeai==0.3.0
+google-generativeai==0.8.6
 
 ## Version Control Utils
 gitpython==3.1.40
