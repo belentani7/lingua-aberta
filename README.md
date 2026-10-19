@@ -4,7 +4,7 @@
 > aprender una lengua desde cero, a su ritmo y sin conexión obligatoria.
 
 [![CI](https://github.com/belentani7/lingua-aberta/actions/workflows/ci.yml/badge.svg)](https://github.com/belentani7/lingua-aberta/actions/workflows/ci.yml)
-[![Licencia: AGPL-3.0](https://img.shields.io/badge/License-AGPL%203.0-00E676.svg)](./LICENSE)
+[![Licencia: MIT](https://img.shields.io/badge/License-MIT-00E676.svg)](./LICENSE)
 [![Seguridad](https://img.shields.io/badge/security--policy-brightgreen.svg)](./SECURITY.md)
 
 **En desarrollo** — el proyecto nace de una idea: el acceso al idioma no puede depender de un
@@ -87,9 +87,9 @@ antes de publicar el producto como funcional.
 
 ## Licencia
 
-[AGPL-3.0](./LICENSE) — copyleft fuerte: si alguien lo despliega como servicio, el
-código sigue siendo libre. Es una decisión deliberada para proteger el proyecto y a
-quien lo usa.
+[MIT](./LICENSE) — licencia permisiva. Permite usar, modificar, distribuir y
+comercializar el código, conservando el aviso de copyright y la licencia.
+No impone copyleft ni obliga a publicar el código de los despliegues.
 
 <sub>Abierto · en desarrollo</sub>
 
