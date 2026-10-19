@@ -1,7 +1,6 @@
-import { useEffect, useMemo, useRef, useState } from "react";
-import { useAuth } from "@/_core/hooks/useAuth";
-import { startLogin } from "@/const";
-import { trpc } from "@/lib/trpc";
+import { useMemo, useState } from "react";
+import { useLocation } from "wouter";
+import { courseCompletion, learningCourses, readLocalProgress } from "@/lib/local-learning";
 import {
   ArrowUpRight,
   BookOpen,
@@ -32,19 +31,6 @@ import { toast } from "sonner";
 
 type Language = "Español" | "Català" | "English";
 
-type ProgressRecord = {
-  language: Language;
-  progressPercent: number;
-  completedLessons?: number;
-  totalLessons?: number;
-};
-
-type HistoryMessage = { role: string; content: string };
-type TutorMessageResult = { text: string };
-type TranscriptionResult = { text: string };
-type SynthesizedAudio = { available?: boolean; audioUrl?: string };
-type ClientError = { message: string };
-
 type Course = {
   language: Language;
   courseSlug: string;
@@ -65,11 +51,11 @@ const courses: Course[] = [
     label: "ES",
     title: "Espanhol da rua",
     subtitle: "Falsos amigos e vida real",
-    progress: 68,
-    lessons: "4 de 6 lições",
+    progress: 0,
+    lessons: "0 de 2 lições",
     color: "bg-coral",
     accent: "text-coral",
-    tag: "Em andamento",
+    tag: "Para começar",
   },
   {
     language: "Català",
@@ -77,11 +63,11 @@ const courses: Course[] = [
     label: "CA",
     title: "Barcelona por dentro",
     subtitle: "Escola, bairro e comunidade",
-    progress: 42,
-    lessons: "3 de 8 lições",
+    progress: 0,
+    lessons: "0 de 2 lições",
     color: "bg-mint",
     accent: "text-ink",
-    tag: "Próxima aula",
+    tag: "Disponível",
   },
   {
     language: "English",
@@ -89,8 +75,8 @@ const courses: Course[] = [
     label: "EN",
     title: "English for your next move",
     subtitle: "Estudo, trabalho e internet",
-    progress: 24,
-    lessons: "2 de 8 lições",
+    progress: 0,
+    lessons: "0 de 2 lições",
     color: "bg-saffron",
     accent: "text-ink",
     tag: "Recomendado",
@@ -130,44 +116,29 @@ const navItems = [
 ];
 
 export default function Home() {
-  const { user, loading, isAuthenticated, logout } = useAuth();
-  const dashboardQuery = trpc.learner.dashboard.useQuery(undefined, { enabled: isAuthenticated });
-  const providerQuery = trpc.platform.status.useQuery();
+  const [, navigate] = useLocation();
+  const [localProgress, setLocalProgress] = useState(() => readLocalProgress());
   const [activeLanguage, setActiveLanguage] = useState<Language>("Español");
-  const historyQuery = trpc.tutor.history.useQuery({ language: activeLanguage }, { enabled: isAuthenticated });
-  const messageMutation = trpc.tutor.message.useMutation();
-  const progressMutation = trpc.learner.updateProgress.useMutation();
-  const transcribeMutation = trpc.voice.transcribe.useMutation();
-  const synthesizeMutation = trpc.voice.synthesize.useMutation();
 
   const [activeNav, setActiveNav] = useState("Início");
-  const [isListening, setIsListening] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [message, setMessage] = useState("");
   const [messages, setMessages] = useState<Array<{ from: "tutor" | "student"; text: string }>>([
-    { from: "tutor", text: "E aí Alex, beleza? Bem-vindo. Como foi seu dia em Barcelona?" },
-    { from: "tutor", text: "Hoje vamos praticar uma frase para pedir ajuda no instituto. Bora tentar?" },
+    { from: "tutor", text: "Olá! Sou o tutor guiado local de Lingua Aberta. Posso ajudar a praticar as frases do currículo disponível neste navegador. Não sou uma IA generativa." },
   ]);
-  const recorderRef = useRef<MediaRecorder | null>(null);
-  const audioChunksRef = useRef<Blob[]>([]);
-
-  const profile = dashboardQuery.data?.profile;
-  const profileName = profile?.displayName || user?.name || "Estudante";
+  const profileName = "Estudante";
   const coursesForDisplay = useMemo(() => courses.map((course) => {
-    const persisted = dashboardQuery.data?.progress.find((item: ProgressRecord) => item.language === course.language);
-    return persisted ? { ...course, progress: persisted.progressPercent, lessons: `${persisted.completedLessons} de ${persisted.totalLessons} lições` } : course;
-  }), [dashboardQuery.data?.progress]);
+    const current = courseCompletion(course.courseSlug, localProgress);
+    return { ...course, progress: current.percent,
+      lessons: `${current.completed} de ${current.total} lições`,
+      tag: current.completed ? "Em andamento" : "Começar" };
+  }), [localProgress]);
 
   const selectedCourse = useMemo(
     () => coursesForDisplay.find((course) => course.language === activeLanguage) ?? coursesForDisplay[0],
     [activeLanguage, coursesForDisplay],
   );
   const selectedCopy = languageCopy[activeLanguage];
-
-  useEffect(() => {
-    if (!historyQuery.data?.messages?.length) return;
-    setMessages(historyQuery.data.messages.filter((item: HistoryMessage) => item.role === "user" || item.role === "assistant").map((item: HistoryMessage) => ({ from: item.role === "user" ? "student" : "tutor", text: item.content })));
-  }, [historyQuery.data]);
 
   function handleNav(label: string) {
     setActiveNav(label);
@@ -179,90 +150,33 @@ export default function Home() {
     setIsMobileMenuOpen(false);
   }
 
-  async function toggleListening() {
-    if (!isAuthenticated) {
-      startLogin();
+  function toggleListening() {
+    const text = [...messages].reverse().find((item) => item.from === "tutor")?.text;
+    if (!text || !("speechSynthesis" in window) || !("SpeechSynthesisUtterance" in window)) {
+      toast("Leitura por voz indisponível", { description: "Você ainda pode praticar as lições e frases por escrito." });
       return;
     }
-    if (dashboardQuery.isLoading) {
-      toast("Preparando tu espacio", { description: "Espera un segundo mientras cargamos tu perfil protegido." });
-      return;
-    }
-    if (!profile?.guardianConsent) {
-      toast("La voz requiere acompañamiento adulto", { description: "Pide a tu tutor legal que active el modo de voz desde la configuración familiar." });
-      return;
-    }
-    if (isListening) {
-      recorderRef.current?.stop();
-      setIsListening(false);
-      return;
-    }
-    try {
-      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-      const recorder = new MediaRecorder(stream, { mimeType: "audio/webm" });
-      audioChunksRef.current = [];
-      recorder.ondataavailable = (event) => event.data.size > 0 && audioChunksRef.current.push(event.data);
-      recorder.onstop = async () => {
-        stream.getTracks().forEach((track) => track.stop());
-        const blob = new Blob(audioChunksRef.current, { type: "audio/webm" });
-        const base64 = await new Promise<string>((resolve, reject) => {
-          const reader = new FileReader();
-          reader.onloadend = () => resolve(String(reader.result).split(",")[1] || "");
-          reader.onerror = reject;
-          reader.readAsDataURL(blob);
-        });
-        transcribeMutation.mutate({ audioBase64: base64, mimeType: "audio/webm", language: activeLanguage }, {
-          onSuccess: (data: TranscriptionResult) => { setMessage(data.text); toast("Te ouvi", { description: "Revise a transcrição e envie quando quiser." }); },
-          onError: (error: ClientError) => toast("Não consegui transcrever", { description: error.message }),
-        });
-      };
-      recorder.start(250);
-      recorderRef.current = recorder;
-      setIsListening(true);
-      toast("Microfone ativado", { description: "Fale uma frase curta. Toque novamente para enviar a gravação." });
-    } catch {
-      toast("Microfone bloqueado", { description: "Permita o acesso ao microfone no navegador para praticar por voz." });
-    }
+    const utterance = new SpeechSynthesisUtterance(text.slice(0, 800));
+    utterance.lang = "pt-BR";
+    window.speechSynthesis.cancel();
+    window.speechSynthesis.speak(utterance);
+    toast("Lendo tutor guiado", { description: "A voz utiliza os recursos disponíveis no seu navegador." });
   }
 
   function sendMessage() {
-    const cleanMessage = message.trim();
-    if (!cleanMessage) return;
-    if (!isAuthenticated) {
-      startLogin();
-      return;
-    }
-    setMessages((current) => [...current, { from: "student", text: cleanMessage }]);
+    const clean = message.trim().slice(0, 500);
+    if (!clean) return;
+    const firstLesson = learningCourses[activeLanguage].lessons[0];
+    const firstPhrase = firstLesson.phrases[0];
+    const reply = /pron[uú]n|fala|listen|ouvir|sound/i.test(clean)
+      ? `Pratique esta frase em ${activeLanguage}: ${firstPhrase.text}. Toque em 'Ouvir' na lição para escutar o navegador.`
+      : `Tutoria guiada local (sem IA remota): comece por "${firstLesson.title}". Exemplo: "${firstPhrase.text}" significa "${firstPhrase.translation}". Abra a lição e faça os exercícios para registrar progresso real.`;
+    setMessages((current) => [...current.slice(-17), { from: "student", text: clean }, { from: "tutor", text: reply }]);
     setMessage("");
-    messageMutation.mutate({ language: activeLanguage, message: cleanMessage }, {
-      onSuccess: (data: TutorMessageResult) => {
-        setMessages((current) => [...current, { from: "tutor", text: data.text }]);
-        synthesizeMutation.mutate({ language: activeLanguage, text: data.text }, {
-          onSuccess: (audio: SynthesizedAudio) => {
-            if (audio.available && audio.audioUrl) new Audio(audio.audioUrl).play().catch(() => undefined);
-            else if (typeof window !== "undefined" && "speechSynthesis" in window) {
-              const utterance = new SpeechSynthesisUtterance(data.text);
-              utterance.lang = activeLanguage === "Català" ? "ca-ES" : activeLanguage === "Español" ? "es-ES" : "en-GB";
-              window.speechSynthesis.speak(utterance);
-            }
-          },
-        });
-      },
-      onError: (error: ClientError) => toast("O tutor precisa de uma nova tentativa", { description: error.message }),
-    });
   }
 
   function startLesson() {
-    if (!isAuthenticated) {
-      startLogin();
-      return;
-    }
-    const current = dashboardQuery.data?.progress.find((item: ProgressRecord) => item.language === activeLanguage);
-    progressMutation.mutate({ language: activeLanguage, courseSlug: selectedCourse.courseSlug, progressPercent: Math.min(100, selectedCourse.progress + 5), completedLessons: current?.completedLessons || selectedCourse.progress >= 68 ? (current?.completedLessons || 4) + 1 : 1, totalLessons: current?.totalLessons || 8 }, { onSuccess: () => dashboardQuery.refetch() });
-    toast("Aula desbloqueada", {
-      description: `${selectedCourse.title} está pronta para você continuar.`,
-    });
-    document.getElementById("tutor")?.scrollIntoView({ behavior: "smooth", block: "start" });
+    navigate(`/study/${selectedCourse.courseSlug}`);
   }
 
   return (
