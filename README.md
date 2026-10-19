@@ -80,10 +80,10 @@ En desarrollo activo. El campus, el corpus y el tutor se iteran por sprints cort
 Las incidencias y propuestas se gestionan como issues; toda contribución pasa por PR
 con `pnpm check` en verde.
 
-El build del frontend no acredita autenticación, progreso remoto, tutor, transcripción
-ni síntesis de voz: la pantalla principal solicita `/api/trpc`, pero no existe su
-implementación en este repositorio. Esos recorridos deben implementarse y probarse
-antes de publicar el producto como funcional.
+El build del frontend no acredita autenticación, progreso remoto, tutor de IA generativa, transcripción
+ni síntesis de voz remota: otras vistas todavía solicitan `/api/trpc`, pero no existe su
+implementación en este repositorio. Esos recorridos necesitan una API real y validación
+antes de publicarse como servicios funcionales.
 
 ## Licencia
 
@@ -96,3 +96,31 @@ No impone copyleft ni obliga a publicar el código de los despliegues.
 ## Verificación de esta integración — 2026-10-17
 
 Node 20.20.2 y pnpm 10.4.1: instalación congelada con scripts de dependencias desactivados, `pnpm check` y `pnpm build` correctos. Vite conserva una advertencia de tamaño del bundle. No se ejecutó un recorrido de usuario ni se verificó la API ausente. El HTML permite ampliar la página y no carga analítica con una URL sin configurar.
+
+## Recuperación funcional de MIARA — 19-10-2026
+
+La portada ahora enlaza a **seis lecciones reales ya existentes en el corpus**
+`server/miara_content.json`: dos de español, dos de catalán y dos de inglés.
+Las rutas `/study/:slug` incluyen frases, ejercicios de selección y escritura,
+corrección determinista, síntesis de voz del navegador (cuando esté disponible)
+y seguimiento de finalización **solo cuando todas las respuestas sean correctas**.
+
+El progreso comienza en cero, se valida antes de leerlo de `localStorage`, no
+inventa estudiantes, porcentajes ni rachas, y puede exportarse o borrarse en la
+misma vista de práctica. No requiere cuenta, cookies de OAuth, ni API remota.
+El contenido MIARA es la única fuente: Vite permite importarlo desde `server/`
+sin copiarlo a una segunda carpeta.
+
+La conversación en portada usa ahora un **tutor guiado local, no IA generativa**.
+Su lectura por voz se apoya en el navegador. El motor de juegos remoto, la cuenta,
+la transcripción y una API tRPC siguen pendientes de implementación y no deben
+anunciarse como servicios conectados. Tampoco debe describirse esto como una
+plataforma certificada, una PWA offline completa o un campus con todos los cursos
+publicados: solo seis lecciones han sido verificadas en el corpus.
+
+Para verificar el contrato de contenido:
+```sh
+node --test tests/privacy-fixtures.test.mjs tests/miara-learning.test.mjs
+pnpm check
+pnpm build
+```
