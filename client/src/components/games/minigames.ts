@@ -1,5 +1,5 @@
 // Minigames types and logic for Lingua Abierta
-// Adapted from william.game (PolyGlot Alex)
+// Adapted from the original PolyGlot games prototype
 
 export type Lang = "pt" | "es" | "ca" | "en";
 export type GameId =
