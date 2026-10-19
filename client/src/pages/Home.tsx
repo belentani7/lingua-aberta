@@ -117,7 +117,7 @@ const navItems = [
 
 export default function Home() {
   const [, navigate] = useLocation();
-  const [localProgress, setLocalProgress] = useState(() => readLocalProgress());
+  const [localProgress] = useState(() => readLocalProgress());
   const [activeLanguage, setActiveLanguage] = useState<Language>("Español");
 
   const [activeNav, setActiveNav] = useState("Início");
@@ -216,31 +216,20 @@ export default function Home() {
           </div>
 
           <div className="mt-auto">
-            <div className="overflow-hidden rounded-2xl bg-ink p-4 text-paper shadow-[0_14px_30px_rgba(14,32,53,0.16)]">
-              <div className="mb-7 flex items-start justify-between">
-                <span className="rounded-full border border-white/20 px-2 py-1 font-mono text-[9px] font-bold uppercase tracking-[0.18em] text-white/60">Ritmo</span>
-                <Zap className="size-4 text-saffron" fill="currentColor" />
-              </div>
-              <p className="font-display text-[21px] font-extrabold leading-[1.04]">Você está em uma sequência de 7 dias.</p>
-              <div className="mt-5 flex items-end justify-between">
-                <div className="flex gap-1.5" aria-label="7 dias de sequência">
-                  {[1, 1, 1, 1, 1, 1, 0].map((active, index) => (
-                    <span key={index} className={`grid size-5 place-items-center rounded-full text-[9px] font-bold ${active ? "bg-saffron text-ink" : "border border-white/30 text-white/40"}`}>
-                      {active ? <Check className="size-3" strokeWidth={3} /> : index + 1}
-                    </span>
-                  ))}
-                </div>
-                <span className="font-mono text-[11px] text-white/50">+12 XP</span>
-              </div>
+            <div className="rounded-2xl bg-ink p-5 text-paper">
+              <p className="font-mono text-xs font-bold uppercase tracking-wider text-saffron">Aprendizagem local</p>
+              <p className="mt-3 text-xl font-extrabold">Seu progresso é real e privado.</p>
+              <p className="mt-2 text-sm text-white/70">
+                ${Object.values(localProgress).reduce((sum, ids) => sum + ids.length, 0)} lições concluídas neste navegador. Nenhuma conta necessária.
+              </p>
             </div>
-            <button className="mt-5 flex w-full items-center gap-3 rounded-xl px-3 py-2 text-left transition-colors hover:bg-white" onClick={() => isAuthenticated ? logout() : startLogin()}>
-              <span className="grid size-9 place-items-center rounded-full bg-coral text-sm font-black text-white">{profileName.slice(0, 1)}</span>
+            <div className="mt-5 flex items-center gap-3 px-3 py-2">
+              <span className="grid size-9 place-items-center rounded-full bg-coral text-sm font-black text-white">E</span>
               <span className="min-w-0 flex-1">
-                <span className="block truncate text-sm font-bold">{profileName}</span>
-                <span className="block font-mono text-[10px] uppercase tracking-[0.13em] text-ink/40">Nível {profile?.cefrLevel || "A2"} · BCN</span>
+                <span className="block text-sm font-bold">{profileName}</span>
+                <span className="block text-xs text-ink/50">Modo local · sem cadastro</span>
               </span>
-              <ChevronDown className="size-4 text-ink/35" />
-            </button>
+            </div>
           </div>
         </aside>
 
@@ -253,27 +242,26 @@ export default function Home() {
               <span className="font-display text-lg font-black">Lingua aberta</span>
             </div>
             <div className="hidden items-center gap-3 text-sm text-ink/55 lg:flex">
-              <span className="font-mono text-[11px] font-bold uppercase tracking-[0.2em] text-ink/35">Quarta-feira, 18 de setembro</span>
+              <span className="font-mono text-[11px] font-bold uppercase tracking-[0.2em] text-ink/35">Campus linguístico aberto</span>
               <span className="size-1 rounded-full bg-coral" />
-              <span>Barcelona, 18º</span>
+              <span>Aulas em PT · ES · CA · EN</span>
             </div>
             <div className="flex items-center gap-3">
-              <button className="hidden items-center gap-2 rounded-full border border-ink/10 bg-white px-3 py-2 text-xs font-bold text-ink/65 transition hover:border-ink/30 sm:flex" onClick={() => toast("Modo dados reduzidos ativado", { description: "As próximas aulas serão preparadas para consumir menos dados." })}>
+              <button className="hidden items-center gap-2 rounded-full border border-ink/10 bg-white px-3 py-2 text-xs font-bold text-ink/65 transition hover:border-ink/30 sm:flex" onClick={() => toast("Aulas locais", { description: "Os exercícios MIARA incluídos no aplicativo não precisam de uma API de IA." })}>
                 <Download className="size-3.5" />
                 Baixo consumo
               </button>
-              <button className="relative grid size-10 place-items-center rounded-full border border-ink/10 bg-white transition hover:border-coral" aria-label="Abrir mensagens" onClick={() => toast("Você está em dia", { description: "Nenhuma nova mensagem da comunidade." })}>
+              <button className="relative grid size-10 place-items-center rounded-full border border-ink/10 bg-white transition hover:border-coral" aria-label="Abrir mensagens" onClick={() => toast("Comunidade em desenvolvimento", { description: "Não existe ainda uma caixa de mensagens sincronizada." })}>
                 <MessageCircle className="size-[18px]" />
-                <span className="absolute right-0.5 top-0.5 size-2 rounded-full border-2 border-paper bg-coral" />
               </button>
-              {!isAuthenticated && !loading && <button className="hidden rounded-full bg-ink px-3 py-2 text-xs font-bold text-white transition hover:bg-coral sm:block" onClick={() => startLogin()}>Entrar</button>}
-              <button className="grid size-10 place-items-center rounded-full bg-coral font-display text-lg font-black text-white shadow-[0_6px_15px_rgba(234,100,75,0.25)] lg:hidden" onClick={() => isAuthenticated ? logout() : startLogin()} aria-label={isAuthenticated ? "Sair" : "Entrar"}>{profileName.slice(0, 1)}</button>
+              <span className="hidden rounded-full bg-ink px-3 py-2 text-xs font-bold text-white sm:block">Sem conta</span>
+              <span className="grid size-10 place-items-center rounded-full bg-coral font-display text-lg font-black text-white shadow-[0_6px_15px_rgba(234,100,75,0.25)] lg:hidden" aria-label="Modo local sem cadastro">E</span>
             </div>
           </header>
 
           <div className="flex items-center justify-between gap-3 border-b border-ink/10 bg-white/60 px-5 py-2.5 sm:px-8 lg:px-10">
-            <div className="flex min-w-0 items-center gap-2 text-[11px] text-ink/55"><span className={`size-2 shrink-0 rounded-full ${providerQuery.data?.localConfigured ? "bg-mint" : "bg-saffron"}`} /><span className="truncate">Tutor conectado · {providerQuery.data?.localConfigured ? "Ollama local" : "modo seguro"}</span></div>
-            <span className="hidden font-mono text-[9px] uppercase tracking-[0.14em] text-ink/35 sm:block">{providerQuery.data?.speechToText || "Whisper"} · {providerQuery.data?.textToSpeech || "voz"}</span>
+            <div className="flex min-w-0 items-center gap-2 text-[11px] text-ink/55"><span className="size-2 shrink-0 rounded-full bg-mint" /><span className="truncate">Tutor guiado local · sem IA remota</span></div>
+            <span className="hidden font-mono text-[9px] uppercase tracking-[0.14em] text-ink/35 sm:block">Voz de leitura: recursos do navegador</span>
           </div>
 
           <div className="px-5 py-7 sm:px-8 lg:px-10 lg:py-10">
@@ -342,22 +330,31 @@ export default function Home() {
                     {messages.map((item, index) => <div key={`${item.text}-${index}`} className={`flex ${item.from === "student" ? "justify-end" : "justify-start"}`}><div className={`max-w-[80%] rounded-2xl px-4 py-3 text-sm leading-relaxed ${item.from === "student" ? "rounded-br-sm bg-ink text-white" : "rounded-bl-sm border border-ink/10 bg-white text-ink/80 shadow-sm"}`}>{item.text}</div></div>)}
                   </div>
                   <div className="mt-7 rounded-xl border border-ink/10 bg-white p-3 shadow-sm">
-                    <div className="flex items-center gap-2"><span className={`grid size-7 place-items-center rounded-lg ${selectedCourse.color}`}><Sparkles className="size-3.5" /></span><span className="font-mono text-[10px] font-bold uppercase tracking-[0.12em] text-ink/45">Dica rápida</span><button className="ml-auto text-ink/35 hover:text-ink" onClick={() => toast("Dica salva", { description: "Você pode revisitar esta frase na sua biblioteca." })}><BookOpen className="size-4" /></button></div>
+                    <div className="flex items-center gap-2"><span className={`grid size-7 place-items-center rounded-lg ${selectedCourse.color}`}><Sparkles className="size-3.5" /></span><span className="font-mono text-[10px] font-bold uppercase tracking-[0.12em] text-ink/45">Dica rápida</span><button className="ml-auto text-ink/35 hover:text-ink" onClick={startLesson}><BookOpen className="size-4" /></button></div>
                     <p className="mt-3 font-display text-[19px] font-extrabold leading-tight">{selectedCopy.phrase}</p>
                     <p className="mt-1 text-xs text-ink/45">{selectedCopy.translation}</p>
                   </div>
                 </div>
                 <div className="flex items-center gap-2 border-t border-ink/10 bg-white p-4 sm:p-5">
-                  <button onClick={toggleListening} className={`grid size-11 shrink-0 place-items-center rounded-xl transition-all active:scale-95 ${isListening ? "bg-coral text-white shadow-[0_8px_18px_rgba(234,100,75,0.25)]" : "bg-paper text-ink hover:bg-mint"}`} aria-label={isListening ? "Parar de ouvir" : "Falar com o tutor"}>{isListening ? <span className="flex items-end gap-0.5"><span className="h-3 w-0.5 animate-pulse bg-white" /><span className="h-5 w-0.5 animate-pulse bg-white [animation-delay:100ms]" /><span className="h-4 w-0.5 animate-pulse bg-white [animation-delay:200ms]" /></span> : <Mic className="size-[18px]" />}</button>
-                  <input value={message} onChange={(event) => setMessage(event.target.value)} onKeyDown={(event) => { if (event.key === "Enter") sendMessage(); }} placeholder="Escreva ou toque no microfone..." className="min-w-0 flex-1 bg-transparent px-2 text-sm outline-none placeholder:text-ink/35" aria-label="Mensagem para o tutor" />
+                  <button onClick={toggleListening} className="grid size-11 shrink-0 place-items-center rounded-xl bg-paper text-ink hover:bg-mint" aria-label="Ouvir tutor guiado em voz alta"><Volume2 className="size-[18px]" /></button>
+                  <input value={message} onChange={(event) => setMessage(event.target.value)} onKeyDown={(event) => { if (event.key === "Enter") sendMessage(); }} placeholder="Escreva para o tutor guiado local..." className="min-w-0 flex-1 bg-transparent px-2 text-sm outline-none placeholder:text-ink/35" aria-label="Mensagem para o tutor" />
                   <button onClick={sendMessage} className="grid size-10 place-items-center rounded-xl bg-ink text-white transition hover:bg-coral active:scale-95" aria-label="Enviar mensagem"><Send className="size-4" /></button>
                 </div>
               </div>
 
               <div className="flex flex-col rounded-2xl bg-mint p-6 sm:p-7">
                 <div className="flex items-start justify-between"><span className="rounded-full border border-ink/15 px-2.5 py-1 font-mono text-[9px] font-bold uppercase tracking-[0.16em] text-ink/55">Seu impacto</span><Flame className="size-5 text-coral" fill="currentColor" /></div>
-                <div className="mt-14"><p className="font-mono text-[11px] font-bold uppercase tracking-[0.16em] text-ink/50">Horas de prática</p><p className="mt-2 font-display text-[60px] font-black leading-none tracking-[-0.07em]">03<span className="text-3xl text-ink/35">h</span>42</p><p className="mt-4 max-w-[220px] text-sm leading-relaxed text-ink/60">Você praticou mais que <strong className="text-ink">82% da comunidade</strong> esta semana.</p></div>
-                <div className="mt-auto pt-10"><div className="flex items-center justify-between text-xs font-bold"><span>Meta semanal</span><span>68%</span></div><div className="mt-2 h-2 overflow-hidden rounded-full bg-ink/10"><div className="h-full w-[68%] rounded-full bg-ink" /></div><button onClick={() => toast("Meta atualizada", { description: "Mais 18 minutos e você fecha sua meta da semana." })} className="mt-5 inline-flex items-center gap-2 text-sm font-extrabold text-ink underline decoration-ink/20 underline-offset-4 hover:decoration-ink">Ajustar minha meta <ArrowUpRight className="size-4" /></button></div>
+                <div className="mt-14">
+                  <p className="font-mono text-[11px] font-bold uppercase tracking-[0.16em] text-ink/50">Lições concluídas neste navegador</p>
+                  <p className="mt-2 font-display text-[60px] font-black leading-none tracking-[-0.07em]">${""}</p>
+                  <p className="mt-2 font-display text-[60px] font-black leading-none">{Object.values(localProgress).reduce((sum, ids) => sum + ids.length, 0)}</p>
+                  <p className="mt-3 text-sm text-ink/60">Sem estatísticas inventadas ou comparações com outros estudantes.</p>
+                </div>
+                <div className="mt-auto pt-10">
+                  <div className="flex items-center justify-between text-xs font-bold"><span>Progresso no idioma selecionado</span><span>{selectedCourse.progress}%</span></div>
+                  <div className="mt-2 h-2 overflow-hidden rounded-full bg-ink/10"><div className="h-full rounded-full bg-ink" style={{ width: `${selectedCourse.progress}%` }} /></div>
+                  <button onClick={startLesson} className="mt-5 inline-flex items-center gap-2 text-sm font-extrabold text-ink underline decoration-ink/20 underline-offset-4 hover:decoration-ink">Continuar aprendendo <ArrowUpRight className="size-4" /></button>
+                </div>
               </div>
             </section>
 
