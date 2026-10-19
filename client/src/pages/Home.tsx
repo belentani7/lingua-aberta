@@ -5,8 +5,6 @@ import {
   ArrowUpRight,
   BookOpen,
   Bot,
-  Check,
-  ChevronDown,
   ChevronRight,
   CircleHelp,
   Compass,
@@ -18,14 +16,12 @@ import {
   MapPin,
   Menu,
   MessageCircle,
-  Mic,
   Play,
   Send,
   Sparkles,
   Target,
   Volume2,
   X,
-  Zap,
 } from "lucide-react";
 import { toast } from "sonner";
 
@@ -85,21 +81,21 @@ const courses: Course[] = [
 
 const languageCopy: Record<Language, { greeting: string; prompt: string; phrase: string; translation: string; accent: string }> = {
   Español: {
-    greeting: "¡Hola, Alex! Vamos a desbloquear teu espanhol hoje.",
+    greeting: "Olá! Vamos praticar espanhol com frases reais.",
     prompt: "Diz em espanhol: 'Eu estou procurando um quarto perto do metrô.'",
     phrase: "Estoy buscando una habitación cerca del metro.",
     translation: "Estou procurando um quarto perto do metrô.",
     accent: "coral",
   },
   Català: {
-    greeting: "Ei, Alex! Avui practiquem una frase que vas a usar de veritat.",
+    greeting: "Ei! Avui practiquem una frase útil en català.",
     prompt: "Digues en català: 'Eu estudo no instituto perto de casa.'",
     phrase: "Estudio a l'institut a prop de casa.",
     translation: "Eu estudo no instituto perto de casa.",
     accent: "mint",
   },
   English: {
-    greeting: "Hey Alex! Let's practice the English you need for your next move.",
+    greeting: "Hello! Practice English with real-world phrases.",
     prompt: "Say in English: 'Eu quero trabalhar remotamente.'",
     phrase: "I want to work remotely.",
     translation: "Eu quero trabalhar remotamente.",
@@ -220,7 +216,7 @@ export default function Home() {
               <p className="font-mono text-xs font-bold uppercase tracking-wider text-saffron">Aprendizagem local</p>
               <p className="mt-3 text-xl font-extrabold">Seu progresso é real e privado.</p>
               <p className="mt-2 text-sm text-white/70">
-                ${Object.values(localProgress).reduce((sum, ids) => sum + ids.length, 0)} lições concluídas neste navegador. Nenhuma conta necessária.
+                {Object.values(localProgress).reduce((sum, ids) => sum + ids.length, 0)} lições concluídas neste navegador. Nenhuma conta necessária.
               </p>
             </div>
             <div className="mt-5 flex items-center gap-3 px-3 py-2">
@@ -266,7 +262,7 @@ export default function Home() {
 
           <div className="px-5 py-7 sm:px-8 lg:px-10 lg:py-10">
             <section className="relative overflow-hidden rounded-[28px] bg-ink px-6 py-8 text-paper shadow-[0_20px_50px_rgba(14,32,53,0.14)] sm:px-10 sm:py-10 lg:min-h-[340px] lg:px-12 lg:py-12">
-              <img src="/manus-storage/lingua-orbit_087ec75c.jpg" alt="Ondas de cor sobre Barcelona ao entardecer" className="absolute inset-0 size-full object-cover opacity-75 mix-blend-screen" />
+              <div aria-hidden="true" className="absolute inset-0 bg-[radial-gradient(ellipse_at_85%_20%,rgba(106,205,220,0.35),transparent_55%),radial-gradient(ellipse_at_72%_80%,rgba(233,173,87,0.15),transparent_60%)]" />
               <div className="absolute inset-0 bg-gradient-to-r from-ink via-ink/90 to-transparent" />
               <div className="relative z-10 max-w-[510px]">
                 <div className="mb-8 flex items-center gap-2">
@@ -346,7 +342,6 @@ export default function Home() {
                 <div className="flex items-start justify-between"><span className="rounded-full border border-ink/15 px-2.5 py-1 font-mono text-[9px] font-bold uppercase tracking-[0.16em] text-ink/55">Seu impacto</span><Flame className="size-5 text-coral" fill="currentColor" /></div>
                 <div className="mt-14">
                   <p className="font-mono text-[11px] font-bold uppercase tracking-[0.16em] text-ink/50">Lições concluídas neste navegador</p>
-                  <p className="mt-2 font-display text-[60px] font-black leading-none tracking-[-0.07em]">${""}</p>
                   <p className="mt-2 font-display text-[60px] font-black leading-none">{Object.values(localProgress).reduce((sum, ids) => sum + ids.length, 0)}</p>
                   <p className="mt-3 text-sm text-ink/60">Sem estatísticas inventadas ou comparações com outros estudantes.</p>
                 </div>
