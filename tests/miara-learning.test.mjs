@@ -52,3 +52,54 @@ test('home must not invent progress, streaks, authenticated users or AI connecti
   assert.match(home, /courseCompletion\(/);
   assert.match(home, /Sem conta/);
 });
+
+
+test('a real MIARA JSON backup can be restored only with known courses and lessons', async () => {
+  const ts = await import('typescript');
+  const { runInNewContext } = await import('node:vm');
+  const source = readFileSync(resolve(root, 'client/src/lib/local-learning.ts'), 'utf8');
+  const compiled = ts.default.transpileModule(source, {
+    compilerOptions: { module: ts.default.ModuleKind.CommonJS, target: ts.default.ScriptTarget.ES2020, esModuleInterop: true },
+  }).outputText;
+  const exports = {};
+  runInNewContext(compiled, {
+    exports,
+    require: (name) => {
+      if (!name.endsWith('miara_content.json')) throw new Error('Unexpected import ' + name);
+      return data;
+    },
+  }, { filename: 'local-learning.transpiled.js', timeout: 2_000 });
+  const { validateProgressBackup } = exports;
+
+  const first = data.languages['Español'];
+  const knownId = first.lessons[0].id;
+  const good = validateProgressBackup(JSON.stringify({
+    version: 1,
+    progress: { [first.courseSlug]: [knownId, knownId] },
+  }));
+  assert.equal(good.ok, true);
+  assert.equal(good.progress[first.courseSlug].length, 1);
+  assert.equal(good.progress[first.courseSlug][0], knownId);
+
+  for (const invalid of [
+    'not-json',
+    JSON.stringify({ version: 2, progress: {} }),
+    JSON.stringify({ version: 1, progress: { unknown: [knownId] } }),
+    JSON.stringify({ version: 1, progress: { [first.courseSlug]: ['unknown-id'] } }),
+    JSON.stringify({ version: 1, progress: { [first.courseSlug]: 'not-an-array' } }),
+    JSON.stringify({ version: 1, progress: { [first.courseSlug]: [knownId, null] } }),
+    JSON.stringify({ version: 1, progress: { ['__proto__']: [knownId] }, unexpected: true }),
+    ' '.repeat(16_385),
+  ]) {
+    const result = validateProgressBackup(invalid);
+    assert.equal(result.ok, false, 'unexpected acceptance: ' + invalid.slice(0, 70));
+  }
+});
+
+test('restoring progress stays local and requires user confirmation', () => {
+  assert.match(practice, /validateProgressBackup\(await file\.text\(\)\)/);
+  assert.match(practice, /window\.confirm\("Restaurar esta cópia\?/);
+  assert.match(practice, /window\.localStorage\.setItem\(PROGRESS_KEY/);
+  assert.match(practice, /file\.size > 16_384/);
+  assert.doesNotMatch(practice, /fetch\(.+restore/i);
+});
