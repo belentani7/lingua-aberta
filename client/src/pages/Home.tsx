@@ -99,21 +99,21 @@ const courses: Course[] = [
 
 const languageCopy: Record<Language, { greeting: string; prompt: string; phrase: string; translation: string; accent: string }> = {
   Español: {
-    greeting: "¡Hola, William! Vamos a desbloquear teu espanhol hoje.",
+    greeting: "¡Hola, Alex! Vamos a desbloquear teu espanhol hoje.",
     prompt: "Diz em espanhol: 'Eu estou procurando um quarto perto do metrô.'",
     phrase: "Estoy buscando una habitación cerca del metro.",
     translation: "Estou procurando um quarto perto do metrô.",
     accent: "coral",
   },
   Català: {
-    greeting: "Ei, William! Avui practiquem una frase que vas a usar de veritat.",
+    greeting: "Ei, Alex! Avui practiquem una frase que vas a usar de veritat.",
     prompt: "Digues en català: 'Eu estudo no instituto perto de casa.'",
     phrase: "Estudio a l'institut a prop de casa.",
     translation: "Eu estudo no instituto perto de casa.",
     accent: "mint",
   },
   English: {
-    greeting: "Hey William! Let's practice the English you need for your next move.",
+    greeting: "Hey Alex! Let's practice the English you need for your next move.",
     prompt: "Say in English: 'Eu quero trabalhar remotamente.'",
     phrase: "I want to work remotely.",
     translation: "Eu quero trabalhar remotamente.",
@@ -145,14 +145,14 @@ export default function Home() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [message, setMessage] = useState("");
   const [messages, setMessages] = useState<Array<{ from: "tutor" | "student"; text: string }>>([
-    { from: "tutor", text: "E aí William, beleza? Bem-vindo. Como foi seu dia em Barcelona?" },
+    { from: "tutor", text: "E aí Alex, beleza? Bem-vindo. Como foi seu dia em Barcelona?" },
     { from: "tutor", text: "Hoje vamos praticar uma frase para pedir ajuda no instituto. Bora tentar?" },
   ]);
   const recorderRef = useRef<MediaRecorder | null>(null);
   const audioChunksRef = useRef<Blob[]>([]);
 
   const profile = dashboardQuery.data?.profile;
-  const profileName = profile?.displayName || user?.name || "William Danilo Guimarães Santos";
+  const profileName = profile?.displayName || user?.name || "Alex Danilo Guimarães Santos";
   const coursesForDisplay = useMemo(() => courses.map((course) => {
     const persisted = dashboardQuery.data?.progress.find((item: ProgressRecord) => item.language === course.language);
     return persisted ? { ...course, progress: persisted.progressPercent, lessons: `${persisted.completedLessons} de ${persisted.totalLessons} lições` } : course;
