@@ -1,10 +1,10 @@
 # Open Tongue
 
-Open Tongue es un instituto de idiomas local-first para Willian. La experiencia acompaña el aprendizaje de **español, catalán e inglés** desde el portugués brasileño, con situaciones reales de Barcelona, práctica corta y seguimiento visible.
+Open Tongue es un instituto de idiomas local-first para estudiantes de prueba. La experiencia acompaña el aprendizaje de **español, catalán e inglés** desde el portugués brasileño, con situaciones reales de Barcelona, práctica corta y seguimiento visible.
 
 ## Qué está incluido
 
-- Curso estructurado de 12 módulos y 48 lecciones en `data/course-willian.json`.
+- Curso estructurado de 12 módulos y 48 lecciones en `data/course-test-student.json`.
 - Tutor conversacional con memoria de sesión en el navegador y respuestas adaptadas al idioma.
 - Reconocimiento de voz del navegador como primera capa, sin subir audio a Manus.
 - API local opcional para Ollama en `POST /api/tutor`.
