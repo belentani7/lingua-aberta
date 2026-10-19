@@ -6,11 +6,13 @@ import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import GameArena from "./components/games/GameArena";
 import Home from "./pages/Home";
+import Practice from "./pages/Practice";
 
 function Router() {
   return (
     <Switch>
       <Route path={"/"} component={Home} />
+      <Route path="/study/:slug" component={Practice} />
       <Route path={"/games"}>
         <GameArena />
       </Route>
