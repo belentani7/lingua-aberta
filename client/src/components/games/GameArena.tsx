@@ -267,7 +267,7 @@ export default function GameArena({
             <span className="brand-icon"><img src="/manus-storage/belentani-mark_3f5c56fd.png" alt="" /></span>
             <span><strong>Lingua</strong><small>abierta</small></span>
           </button>
-          <div className="top-status"><span className="status-light" /> online <b>WILLIAM</b></div>
+          <div className="top-status"><span className="status-light" /> online <b>ESTUDANTE</b></div>
           <button className="icon-button" onClick={() => setShowMenu((value) => !value)} aria-label="Abrir menú"><Menu size={19} /></button>
         </header>
 
