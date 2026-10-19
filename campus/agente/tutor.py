@@ -137,10 +137,12 @@ def capsula_diaria() -> None:
         capture_output=True, text=True, check=False, timeout=45,
     )
     if pr.returncode != 0:
-        raise RuntimeError(
-            f"Cápsula subida a {rama}, pero no se pudo abrir el PR. "
-            "Comprobar el permiso 'Allow GitHub Actions to create and approve pull requests'."
-        )
+        # The capsule is already preserved on a review branch. Repository
+        # settings may prohibit GITHUB_TOKEN from opening pull requests.
+        # Report this as a warning, not as a failed content-generation job.
+        print("::warning::La cápsula fue guardada en una rama, pero GitHub Actions no puede crear PRs.")
+        print(f"[capsula] revisión manual: {rama}; habilitar creación de PRs para automatizarla")
+        return
     print(f"[capsula] PR creado para {hoy} [{lang}]: {pr.stdout.strip()}")
 
 def main() -> int:
