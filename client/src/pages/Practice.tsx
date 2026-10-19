@@ -1,8 +1,8 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState, type ChangeEvent } from "react";
 import { Link, useParams } from "wouter";
 import {
   LEARNING_LANGUAGES, learningCourses, readLocalProgress, saveCompletedLesson,
-  courseCompletion, PROGRESS_KEY, type LearningLanguage, type LocalProgress,
+  courseCompletion, PROGRESS_KEY, validateProgressBackup, type LearningLanguage, type LocalProgress,
 } from "@/lib/local-learning";
 
 function normalizeAnswer(input: string) {
@@ -67,6 +67,31 @@ export default function Practice() {
     anchor.click();
     setTimeout(() => URL.revokeObjectURL(url), 0);
     setNotice("Cópia do progresso criada neste dispositivo, sem enviar dados para um servidor.");
+  }
+
+  async function importProgress(event: ChangeEvent<HTMLInputElement>) {
+    const input = event.currentTarget;
+    const file = input.files?.[0];
+    if (!file) return;
+    try {
+      if (!file.name.toLowerCase().endsWith(".json") || file.size > 16_384) {
+        setNotice("Selecione uma cópia JSON de até 16 KiB.");
+        return;
+      }
+      const result = validateProgressBackup(await file.text());
+      if (!result.ok) {
+        setNotice(result.error);
+        return;
+      }
+      if (!window.confirm("Restaurar esta cópia? O progresso atual deste navegador será substituído.")) return;
+      window.localStorage.setItem(PROGRESS_KEY, JSON.stringify(result.progress));
+      setProgress(result.progress);
+      setNotice("Cópia restaurada e validada neste navegador. Nenhum dado foi enviado ao servidor.");
+    } catch {
+      setNotice("O navegador não permitiu restaurar esta cópia. O progresso atual foi mantido.");
+    } finally {
+      input.value = "";
+    }
   }
 
   function deleteProgress() {
@@ -150,6 +175,10 @@ export default function Practice() {
         </article>
         <div className="mt-8 flex flex-wrap gap-3 text-sm">
           <button type="button" className="rounded-lg border border-ink/20 bg-white px-4 py-2" onClick={exportProgress}>Exportar progresso</button>
+          <label className="cursor-pointer rounded-lg border border-ink/20 bg-white px-4 py-2">
+            Restaurar cópia
+            <input type="file" className="sr-only" accept=".json,application/json" aria-label="Restaurar cópia local de progresso JSON" onChange={importProgress} />
+          </label>
           <button type="button" className="rounded-lg border border-ink/20 bg-white px-4 py-2" onClick={deleteProgress}>Apagar progresso</button>
         </div>
         <p className="mt-4 max-w-2xl text-xs text-ink/60">
