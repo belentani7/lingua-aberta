@@ -103,3 +103,15 @@ test('restoring progress stays local and requires user confirmation', () => {
   assert.match(practice, /file\.size > 16_384/);
   assert.doesNotMatch(practice, /fetch\(.+restore/i);
 });
+
+
+test('Vercel deep links resolve only implemented client routes and never mask APIs', () => {
+  const config = JSON.parse(readFileSync(resolve(root, 'vercel.json'), 'utf8'));
+  const expected = ['/study/:slug', '/games', '/games/:game', '/404'];
+  assert.deepEqual(config.rewrites.map(rule => rule.source), expected);
+  assert.ok(config.rewrites.every(rule => rule.destination === '/index.html'));
+  assert.ok(config.rewrites.every(rule => !rule.source.includes('(.*)')), 'No blanket rewrite over /api or open-data');
+  assert.equal(config.outputDirectory, 'dist/public');
+  assert.match(app, /path="\/study\/:slug"/);
+  assert.match(app, /path="\/games\/:game"/);
+});
