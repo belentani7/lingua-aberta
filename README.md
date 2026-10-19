@@ -7,30 +7,30 @@
 [![Licencia: AGPL-3.0](https://img.shields.io/badge/License-AGPL%203.0-00E676.svg)](./LICENSE)
 [![Seguridad](https://img.shields.io/badge/security--policy-brightgreen.svg)](./SECURITY.md)
 
-**VERDE** — el proyecto nace de una idea: el acceso al idioma no puede depender de un
+**En desarrollo** — el proyecto nace de una idea: el acceso al idioma no puede depender de un
 pago, de un servidor en un país concreto ni de una conexión estable.
 
 ---
 
 ## Qué es
 
-`lingua-aberta` es un campus lingüístico completo que funciona como aplicación web
-(Vite + React) y como servicio:
+`lingua-aberta` es un prototipo de campus lingüístico con una aplicación web
+(Vite + React). El servicio API que solicita el frontend todavía no está implementado:
 
 | Capa | Qué aporta |
 |---|---|
 | `client/` + `campus/` | Interfaz React, campus y rutas de aprendizaje |
-| `server/` | API, tutor conversacional y Static Data (S3) |
+| `server/` | Contenido estático (`miara_content.json`); no contiene una API ejecutable |
 | `open-data/` | Corpus y datos abiertos con atribución (`NOTICE-ATRIBUCIONES.md`) |
 | `knowledge_base.json` | Base de conocimiento del tutor, versionable y auditable |
 | `shared/` | Contratos y tipos compartidos cliente/servidor |
 | `drizzle/` + `data/` | Esquema y migraciones de persistencia |
-| `tests/` | Suite de tests del proyecto |
+| `tests/` | Archivos de pruebas existentes; no hay un script de tests ejecutable declarado en package.json |
 
 - **Multilingüe por diseño**: interfaz y contenido en español, catalán, portugués e inglés.
 - **Offline-first**: los datos de aprendizaje se empaquetan para funcionar sin red.
 - **Datos abiertos con atribución explícita**, no con contenido difuso.
-- **Deploy flexible**: Vercel, Netlify, Cloudflare (wrangler) y Docker (`Dockerfile.aio`).
+- **Configuraciones de despliegue existentes**: Vercel, Netlify, Cloudflare y Docker; necesitan validación de integración.
 
 ## Por qué existe
 
@@ -46,7 +46,7 @@ pnpm install
 cp .env.example .env      # rellena lo que tu entorno necesite
 pnpm dev                  # vite
 
-# Opción B — stack completo en Docker
+# Configuración Docker existente (integración API todavía pendiente)
 docker compose -f docker-compose.aio.yml up
 ```
 
@@ -61,16 +61,11 @@ pnpm format     # prettier
 
 ## Arquitectura
 
-```
-┌──────────────┐   HTTP/JSON   ┌──────────────┐
-│  client/     │ ────────────► │  server/     │
-│  React+Vite  │ ◄──────────── │  API + tutor │
-└──────────────┘               └──────┬───────┘
-                                      │
-                        ┌─────────────┼─────────────┐
-                        ▼             ▼             ▼
-                 open-data/     drizzle/       S3 (static)
-```
+| Estado | Relación |
+|---|---|
+| Implementado | Vite sirve la interfaz y el contenido estático. |
+| Pendiente | El cliente solicita `/api/trpc`; falta el servidor que atiende esas peticiones. |
+| Pendiente de comprobar | Integración de persistencia, tutor y voz. |
 
 ## Documentación
 
@@ -85,10 +80,19 @@ En desarrollo activo. El campus, el corpus y el tutor se iteran por sprints cort
 Las incidencias y propuestas se gestionan como issues; toda contribución pasa por PR
 con `pnpm check` en verde.
 
+El build del frontend no acredita autenticación, progreso remoto, tutor, transcripción
+ni síntesis de voz: la pantalla principal solicita `/api/trpc`, pero no existe su
+implementación en este repositorio. Esos recorridos deben implementarse y probarse
+antes de publicar el producto como funcional.
+
 ## Licencia
 
 [AGPL-3.0](./LICENSE) — copyleft fuerte: si alguien lo despliega como servicio, el
 código sigue siendo libre. Es una decisión deliberada para proteger el proyecto y a
 quien lo usa.
 
-<sub>VERDE · abierto · para todos</sub>
+<sub>Abierto · en desarrollo</sub>
+
+## Verificación de esta integración — 2026-10-17
+
+Node 20.20.2 y pnpm 10.4.1: instalación congelada con scripts de dependencias desactivados, `pnpm check` y `pnpm build` correctos. Vite conserva una advertencia de tamaño del bundle. No se ejecutó un recorrido de usuario ni se verificó la API ausente. El HTML permite ampliar la página y no carga analítica con una URL sin configurar.
