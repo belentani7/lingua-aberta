@@ -152,7 +152,7 @@ export default function Home() {
   const audioChunksRef = useRef<Blob[]>([]);
 
   const profile = dashboardQuery.data?.profile;
-  const profileName = profile?.displayName || user?.name || "Alex Danilo Guimarães Santos";
+  const profileName = profile?.displayName || user?.name || "Estudante";
   const coursesForDisplay = useMemo(() => courses.map((course) => {
     const persisted = dashboardQuery.data?.progress.find((item: ProgressRecord) => item.language === course.language);
     return persisted ? { ...course, progress: persisted.progressPercent, lessons: `${persisted.completedLessons} de ${persisted.totalLessons} lições` } : course;
