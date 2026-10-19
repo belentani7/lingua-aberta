@@ -167,7 +167,7 @@ export default function Home() {
     const reply = /pron[uú]n|fala|listen|ouvir|sound/i.test(clean)
       ? `Pratique esta frase em ${activeLanguage}: ${firstPhrase.text}. Toque em 'Ouvir' na lição para escutar o navegador.`
       : `Tutoria guiada local (sem IA remota): comece por "${firstLesson.title}". Exemplo: "${firstPhrase.text}" significa "${firstPhrase.translation}". Abra a lição e faça os exercícios para registrar progresso real.`;
-    setMessages((current) => [...current.slice(-17), { from: "student", text: clean }, { from: "tutor", text: reply }]);
+    setMessages((current) => [...current.slice(-17), { from: "student" as const, text: clean }, { from: "tutor" as const, text: reply }]);
     setMessage("");
   }
 
