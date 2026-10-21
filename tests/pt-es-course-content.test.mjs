@@ -16,7 +16,7 @@ test("all four lessons contain actual worked practice, solutions and study sched
     const source = read(name);
     assert.ok(source.split(/\s+/).length >= 600, name + " lacks substantive course material");
     assert.ok(source.includes("# Semana " + i), name + " has no week title");
-    assert.ok(source.includes("180 min") || source.includes("3 horas"), name + " lacks a realistic practice plan");
+    assert.ok(source.includes("180 min") || source.includes("3 horas") || source.includes("tres horas"), name + " lacks a realistic practice plan");
     assert.ok(syllabus.includes("(" + name + ")"), name + " is absent from syllabus");
   }
   assert.match(read("semana-01.md"), /Soluciones razonadas/);
