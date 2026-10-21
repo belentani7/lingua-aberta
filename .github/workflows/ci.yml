@@ -1,41 +1,35 @@
-name: CI
-
+name: Lingua Aberta / full learning contract
 on:
   push:
-    branches: [main]
+    branches: [main, "release/**"]
   pull_request:
     branches: [main]
   workflow_dispatch:
-
 permissions:
   contents: read
-
 jobs:
   quality:
-    name: Node.js quality gates
+    name: Education, content, privacy and production gates
     runs-on: ubuntu-latest
     timeout-minutes: 20
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Set up pnpm
-        uses: pnpm/action-setup@v4
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
         with:
-          node-version: 20
+          version: 10.4.1
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
           cache: pnpm
-
-      - name: Install dependencies
+      - name: Reproducible dependency install
         run: pnpm install --frozen-lockfile
-
-      - name: Typecheck
+      - name: JavaScript syntax and static course pack contract
+        run: |
+          node --check campus/app.js
+          node --check campus/course-data.mjs
+          node --check campus/sw.js
+          node --test tests/privacy-fixtures.test.mjs tests/miara-learning.test.mjs tests/campus-product.test.mjs
+      - name: TypeScript checks
         run: pnpm run check
-
-      - name: Protect synthetic learner data and local learning contract
-        run: node --test tests/privacy-fixtures.test.mjs tests/miara-learning.test.mjs
-
-      - name: Production build
+      - name: Production frontend
         run: pnpm run build
