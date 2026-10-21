@@ -66,7 +66,7 @@ export function validateQuiz(value) {
       typeof explicacion !== "string" || !explicacion.trim() || explicacion.length > 1000) {
       throw new Error("Pregunta " + (index + 1) + " no supera la validación.");
     }
-    const id = index + ":" + pregunta;
+    const id = pregunta.trim().toLocaleLowerCase("es");
     if (ids.has(id)) throw new Error("Pregunta duplicada.");
     ids.add(id);
     return { pregunta, opciones, correcta, explicacion };
