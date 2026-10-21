@@ -13,9 +13,15 @@ jobs:
     timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 9.0.0
       - uses: actions/setup-node@v4
         with:
           node-version: "22"
+          cache: pnpm
+      - name: Install test dependencies
+        run: pnpm install --frozen-lockfile
       - name: Curriculum, entrypoint and student route tests
         run: node --test tests/student-site.test.mjs tests/miara-learning.test.mjs tests/privacy-fixtures.test.mjs
       - name: Source integrity
