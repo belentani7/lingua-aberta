@@ -124,3 +124,40 @@ node --test tests/privacy-fixtures.test.mjs tests/miara-learning.test.mjs
 pnpm check
 pnpm build
 ```
+
+
+## Campus navegable y paquete de estudio sin conexión — 21 octubre 2026
+
+Esta entrega mantiene intactos los materiales existentes y añade un **campus funcional independiente** dentro de `campus/`, sin sustituir el frontend React de `client/` ni fingir que su API tRPC ausente está conectada.
+
+- Identidad renovada con símbolo de libro-puente original (`campus/icon.svg`), estilo corporativo azul frío/negro, estructura de lectura clara y navegación móvil.
+- **Tres cursos del catálogo real**, once unidades de estudio y los documentos originales de presentación y fuentes. La nueva vista `#leer` permite explorar los archivos Markdown en el propio sitio, insertándolos como texto seguro.
+- **Tres cuestionarios reales**, cada uno enlazado a su propio `quiz.json`. Validación estricta de preguntas, respuestas con explicación, repetición y calificación al finalizar.
+- El progreso se conserva en el almacenamiento local del navegador con máximo resultado y número de intentos por curso. Se considera superado **solo** cuando el cuestionario completo alcanza al menos 70 %; la visita a una página no genera puntos ni certificados.
+- Exportación JSON de los resultados y borrado confirmado, sin creación de cuentas ni envío a un backend.
+- Worker local `campus/sw.js` que precarga exactamente los tres cursos (sílabos, unidades, recursos y cuestionarios), las cuatro grabaciones de bienvenida y los archivos del campus. Solo intercepta GET de su propio origen y ámbito, y solo limpia cachés con prefijo `lingua-aberta-campus-`.
+- Este comportamiento sin conexión se obtiene **después de cargar el campus correctamente bajo HTTPS o localhost con Internet**. Abrir archivos con `file://` o abortar la instalación no instala el paquete. No se promete que todos los recursos ajenos al campus funcionen offline.
+
+### Cómo estudiar
+
+```bash
+pnpm install --frozen-lockfile
+pnpm dev
+```
+
+El campus es contenido estático: además del frontend principal se puede servir el directorio `campus/` desde un servidor HTTP estático para usar `campus/index.html`. Selecciona el curso, abre una de sus unidades en `#leer`, responde al cuestionario en `#quiz` y revisa los resultados en `#progreso`.
+
+### Comprobaciones nuevas
+
+```bash
+node --check campus/app.js
+node --check campus/course-data.mjs
+node --check campus/sw.js
+node --test tests/campus-product.test.mjs tests/miara-learning.test.mjs tests/privacy-fixtures.test.mjs
+pnpm check
+pnpm build
+```
+
+Las pruebas de campus verifican existencia y contenido de las once unidades y tres kits, integridad del precache, seguridad de las entradas JSON, compatibilidad del HTML con los controles y rechazo de resultados inválidos. Además de la suite hay que comprobar en navegador real el primer uso con red y la segunda visita sin red.
+
+**Separación de estados**: la API remota, autenticación, tutor de IA en vivo, motor de voz generativo, juegos dependientes de servicios y despliegues externos siguen siendo tareas distintas. No presentar esta rama como publicación completa del monorepositorio ni fusionarla sin resultado verificable de los gates.
