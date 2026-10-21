@@ -1,0 +1,27 @@
+name: Catalan A1 and ESO curriculum acceptance
+on:
+  pull_request:
+    paths:
+      - "campus/cursos/catalan-a1-brasileiros/**"
+      - "campus/cursos/espanol-academico-eso/**"
+      - "campus/index.html"
+      - "tests/catalan-eso-curriculum.test.mjs"
+      - ".github/workflows/catalan-eso-curriculum.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  authentic-coursework:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: "22"
+      - name: Enforce full Catalan A1 and ESO curricula
+        run: node --test tests/catalan-eso-curriculum.test.mjs
