@@ -1,0 +1,37 @@
+name: Lingua Aberta complete campus acceptance
+on:
+  pull_request:
+    paths:
+      - "campus/**"
+      - "tests/*campus*.test.mjs"
+      - "tests/pt-es-course-content.test.mjs"
+      - "tests/catalan-eso-curriculum.test.mjs"
+      - ".github/workflows/full-campus-acceptance.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: lingua-campus-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  real-curriculum:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288ca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: "22"
+      - name: Check browser module and offline worker syntax
+        run: |
+          node --check campus/app.js
+          node --check campus/course-data.mjs
+          node --check campus/sw.js
+      - name: Prove three complete course contracts, offline and privacy
+        run: |
+          node --test tests/campus-product.test.mjs tests/pt-es-course-content.test.mjs tests/catalan-eso-curriculum.test.mjs tests/full-campus-integration.test.mjs
