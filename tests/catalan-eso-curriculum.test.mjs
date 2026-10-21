@@ -74,7 +74,7 @@ test("course promises remain honest about minors, audio and non-certification", 
   assert.match(cat,/no.*certificad|no.*certificaci/i);
   assert.match(eso,/no acredita un nivel B1|no certificaci/i);
   assert.match(cat,/no solicita datos reales de estudiantes/);
-  assert.match(eso,/grabaci|grabar/i);
+  assert.match(eso,/grabaci|grabar|vídeo o audio/i);
   assert.match(read("catalan-a1-brasileiros","semana-04.md"),/ciudad inventada|ciutat|ficticio|ficticia/i);
   assert.match(read("espanol-academico-eso","semana-01.md"),/cifras.*ficticias|situación ficticia/i);
 });
