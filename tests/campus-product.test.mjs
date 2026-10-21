@@ -22,7 +22,7 @@ test("three real courses have full independent reading and quiz packs", () => {
     assert.ok(course.purpose.length > 25);
     assert.ok(course.duration);
     for (const item of files) {
-      assert.match(item, /^cursos\/[a-z0-9-]+\/[a-z0-9-.]+$/);
+      assert.match(item, /^cursos\/[a-z0-9-]+\/[a-z0-9.-]+$/);
       assert.ok(existsSync(join(base, item)), "Course asset missing: " + item);
       assert.ok(read(item).length > 100, "Course asset empty: " + item);
     }
