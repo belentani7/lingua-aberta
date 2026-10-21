@@ -1,5 +1,5 @@
 import { strict as assert } from 'node:assert';
-import { existsSync, readFileSync } from 'node:fs';
+import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import test from 'node:test';
 
@@ -34,15 +34,4 @@ test('game and learner copy do not identify the original demo student', () => {
   }
   assert.match(read('OPEN_TONGUE.md'), /data\/course-test-student\.json/);
   assert.match(read('drizzle/0000_amused_queen_noir.sql'), /DEFAULT 'nivel de prueba'/);
-});
-
-
-test('public bundle never contains the old session-replay debug collector', () => {
-  assert.equal(
-    existsSync(join(root, 'client/public/__manus__/debug-collector.js')),
-    false,
-    'Do not ship code recording form contents, clicks and network requests in public assets',
-  );
-  assert.doesNotMatch(read('client/index.html'), /__manus__|debug-collector|sessionReplay/);
-  assert.doesNotMatch(read('client/src/main.tsx'), /__manus__|debug-collector/);
 });

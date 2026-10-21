@@ -1,57 +1,442 @@
 [
   {
-    "pregunta": "'Embaraçada' en español significa...",
+    "pregunta": "¿Cómo traducirías «estou embaraçada» cuando alguien habla de vergüenza?",
     "opciones": [
-      "Embarazada",
-      "Avergonzada",
-      "Enfadada",
-      "Confundida"
+      "Estoy avergonzada",
+      "Estoy embarazada",
+      "Estoy enferma",
+      "Estoy cansada"
     ],
-    "correcta": 1,
-    "explicacion": "Falso amigo clasico: embaraçada = avergonzada."
+    "correcta": 0,
+    "explicacion": "En portugués brasileño, «embaraçada» puede describir vergüenza o confusión. Embarazada en español significa gestante; hay que mirar el contexto."
   },
   {
-    "pregunta": "'Oficina' (PT) es...",
+    "pregunta": "En Brasil, «levar o carro à oficina» es ir…",
     "opciones": [
-      "Oficina de trabajo",
-      "Taller mecanico",
-      "Cocina",
-      "Escritorio"
+      "a una oficina administrativa",
+      "al taller mecánico",
+      "a la escuela",
+      "a una biblioteca"
     ],
     "correcta": 1,
-    "explicacion": "La oficina en ES es 'escritorio'."
+    "explicacion": "«Oficina» en portugués brasileño suele designar un taller de reparaciones; «oficina» en español suele designar un despacho o lugar de trabajo."
   },
   {
-    "pregunta": "'Esquisito' (PT) = ...",
+    "pregunta": "Si un brasileño dice «que situação esquisita», quiere decir…",
     "opciones": [
-      "Exquisito",
-      "Raro/extrano",
-      "Delicado",
-      "Sencillo"
+      "qué situación exquisita",
+      "qué situación sencilla",
+      "qué situación extraña",
+      "qué situación deliciosa"
     ],
-    "correcta": 1,
-    "explicacion": "Exquisito en ES es 'delicioso'."
+    "correcta": 2,
+    "explicacion": "«Esquisito» en portugués puede significar raro; «exquisito» en español suele ser delicioso o de gran calidad."
   },
   {
-    "pregunta": "'Sobrenome' (PT) = ...",
+    "pregunta": "En un formulario brasileño, «sobrenome» equivale a…",
     "opciones": [
-      "Sobrenombre",
-      "Apellido",
-      "Nickname",
-      "Seudonimo"
+      "apodo",
+      "nombre de pila",
+      "profesión",
+      "apellido"
     ],
-    "correcta": 1,
-    "explicacion": "El apodo en PT es 'apelido'."
+    "correcta": 3,
+    "explicacion": "En portugués brasileño «sobrenome» identifica el apellido familiar; «sobrenombre» en español es un apodo."
   },
   {
-    "pregunta": "'Vassoura' (PT) = ...",
+    "pregunta": "«Preciso de uma vassoura» significa que necesito…",
     "opciones": [
-      "Basura",
-      "Escoba",
-      "Vasija",
-      "Cesta"
+      "una escoba",
+      "la basura",
+      "un vaso",
+      "una mochila"
+    ],
+    "correcta": 0,
+    "explicacion": "«Vassoura» es escoba; «basura» en español son residuos, que en portugués brasileño suelen llamarse «lixo»."
+  },
+  {
+    "pregunta": "En portugués brasileño, el animal «polvo» es…",
+    "opciones": [
+      "el polvo de una mesa",
+      "un pulpo",
+      "una paloma",
+      "un pez espada"
     ],
     "correcta": 1,
-    "explicacion": "La basura en ES es 'lixo'."
+    "explicacion": "El portugués «polvo» significa pulpo; en español «polvo» puede designar partículas finas."
+  },
+  {
+    "pregunta": "¿Qué significa «propina» habitualmente en Brasil frente a la de un restaurante español?",
+    "opciones": [
+      "Propina de camarero en ambos países",
+      "Matrícula escolar en Brasil y España",
+      "Soborno en Brasil; gratificación en el restaurante español",
+      "Pensión alimenticia en ambos países"
+    ],
+    "correcta": 2,
+    "explicacion": "En portugués de Brasil «propina» suele significar soborno; en español, en un restaurante, es la gratificación por el servicio. El uso cambia por país y contexto."
+  },
+  {
+    "pregunta": "¿Qué palabra española corresponde al «apelido» brasileño usado entre amigos?",
+    "opciones": [
+      "Apellido de familia",
+      "Dirección postal",
+      "Número de documento",
+      "Apodo"
+    ],
+    "correcta": 3,
+    "explicacion": "En Brasil «apelido» es nombre informal o mote; «apellido» en español es el nombre familiar. En Portugal, «apelido» puede significar apellido."
+  },
+  {
+    "pregunta": "En una papelería de Brasil, «borracha» para el lápiz es…",
+    "opciones": [
+      "goma de borrar",
+      "una bebida",
+      "una cuchara",
+      "una piedra"
+    ],
+    "correcta": 0,
+    "explicacion": "«Borracha» en portugués brasileño suele ser goma de borrar o material de caucho; «borracha» en español también puede ser adjetivo de alguien ebrio."
+  },
+  {
+    "pregunta": "En portugués, «um rato entrou na cozinha» significa que entró…",
+    "opciones": [
+      "un rato de tiempo",
+      "un ratón",
+      "un gato",
+      "un murciélago"
+    ],
+    "correcta": 1,
+    "explicacion": "«Rato» en portugués es ratón; «rato» en español designa un período corto de tiempo."
+  },
+  {
+    "pregunta": "En una casa brasileña, «cadeira» equivale a…",
+    "opciones": [
+      "cadera",
+      "escalera",
+      "silla",
+      "cama"
+    ],
+    "correcta": 2,
+    "explicacion": "«Cadeira» es silla; «cadera» en español es parte del cuerpo."
+  },
+  {
+    "pregunta": "«A camisa é roxa» se traduce como «la camisa es…»",
+    "opciones": [
+      "roja",
+      "rosa",
+      "naranja",
+      "morada"
+    ],
+    "correcta": 3,
+    "explicacion": "«Roxo/roxa» en portugués se refiere a morado/violeta; «rojo/roja» en español es otra tonalidad."
+  },
+  {
+    "pregunta": "En portugués brasileño, «salada de frutas» es…",
+    "opciones": [
+      "ensalada de frutas",
+      "fruta salada con sal",
+      "una sopa",
+      "una tarta"
+    ],
+    "correcta": 0,
+    "explicacion": "«Salada» en portugués es ensalada; «salada» en español suele ser el femenino del adjetivo salado."
+  },
+  {
+    "pregunta": "En Brasil «um copo de água» es…",
+    "opciones": [
+      "un copo de nieve",
+      "un vaso de agua",
+      "un plato de agua",
+      "una botella de agua"
+    ],
+    "correcta": 1,
+    "explicacion": "«Copo» es vaso para beber. En español, «copo» designa entre otras cosas un copo de nieve."
+  },
+  {
+    "pregunta": "El portugués «taça de vinho» normalmente corresponde a…",
+    "opciones": [
+      "taza de café",
+      "jarra de agua",
+      "copa de vino",
+      "tetera"
+    ],
+    "correcta": 2,
+    "explicacion": "«Taça» portuguesa es copa; «taza» española suele ser un recipiente con asa para bebidas calientes."
+  },
+  {
+    "pregunta": "«Que azar!» en portugués brasileño expresa…",
+    "opciones": [
+      "qué casualidad afortunada",
+      "qué precisión",
+      "qué sorpresa agradable",
+      "qué mala suerte"
+    ],
+    "correcta": 3,
+    "explicacion": "«Azar» en portugués suele significar mala suerte; en español «azar» se refiere a casualidad o aleatoriedad."
+  },
+  {
+    "pregunta": "En español, «la cena está lista» se refiere…",
+    "opciones": [
+      "a la comida de la noche",
+      "a una escena de teatro",
+      "a una lección",
+      "a un paisaje"
+    ],
+    "correcta": 0,
+    "explicacion": "«Cena» en español es la comida nocturna; «cena» en portugués es escena de una película u obra."
+  },
+  {
+    "pregunta": "En portugués brasileño «escova de dentes» significa…",
+    "opciones": [
+      "escoba de dientes",
+      "cepillo de dientes",
+      "bote de dientes",
+      "esponja"
+    ],
+    "correcta": 1,
+    "explicacion": "«Escova» en portugués es cepillo; en español «escoba» se usa para barrer."
+  },
+  {
+    "pregunta": "«Uma criança brinca no parque» se traduce con…",
+    "opciones": [
+      "la crianza de una persona",
+      "un médico",
+      "un niño o una niña",
+      "una mascota"
+    ],
+    "correcta": 2,
+    "explicacion": "«Criança» es niño/a en portugués; «crianza» en español designa el proceso de criar."
+  },
+  {
+    "pregunta": "En portugués «um doce» se refiere habitualmente a…",
+    "opciones": [
+      "el número doce",
+      "el día doce del mes",
+      "una docena de huevos",
+      "un dulce"
+    ],
+    "correcta": 3,
+    "explicacion": "«Doce» en portugués es dulce; en español «doce» es el número 12."
+  },
+  {
+    "pregunta": "En portugués «mas» sin tilde significa…",
+    "opciones": [
+      "pero",
+      "más cantidad",
+      "quizá",
+      "aún"
+    ],
+    "correcta": 0,
+    "explicacion": "Portugués «mas» es adversativo (español «pero»); español «más» lleva tilde diacrítica y añade cantidad."
+  },
+  {
+    "pregunta": "En portugués «mais» expresa…",
+    "opciones": [
+      "pero",
+      "más cantidad",
+      "menos cantidad",
+      "tal vez"
+    ],
+    "correcta": 1,
+    "explicacion": "Portugués «mais» significa más; no debe confundirse con el español «mas» literario (pero), ni con «más» sin perder el acento."
+  },
+  {
+    "pregunta": "¿Cómo traducirías al español «todavia não acabou» en portugués brasileño?",
+    "opciones": [
+      "Todavía no empezó",
+      "Siempre terminará",
+      "Sin embargo, aún no terminó",
+      "Nunca sucedió"
+    ],
+    "correcta": 2,
+    "explicacion": "En portugués formal «todavia» puede ser «sin embargo»; para «todavía» temporal en español suele usarse «ainda» en portugués. El sentido depende de la oración."
+  },
+  {
+    "pregunta": "En «volto logo» (PT-BR), «logo» expresa…",
+    "opciones": [
+      "luego de muchas horas necesariamente",
+      "ayer",
+      "en silencio",
+      "pronto"
+    ],
+    "correcta": 3,
+    "explicacion": "Portugués «logo» suele indicar pronto; español «luego» indica después y no siempre significa pronto."
+  },
+  {
+    "pregunta": "¿Qué significa «vamos brincar» en portugués brasileño?",
+    "opciones": [
+      "vamos a jugar",
+      "vamos a saltar obligatoriamente",
+      "vamos a estudiar",
+      "vamos a cocinar"
+    ],
+    "correcta": 0,
+    "explicacion": "«Brincar» en portugués brasileño es jugar; en español «brincar» significa saltar."
+  },
+  {
+    "pregunta": "¿Qué significa «uma rua larga» en portugués?",
+    "opciones": [
+      "una calle larga",
+      "una calle ancha",
+      "una calle cerrada",
+      "una calle estrecha"
+    ],
+    "correcta": 1,
+    "explicacion": "«Largo» en portugués suele significar ancho; en español «largo» significa de gran longitud."
+  },
+  {
+    "pregunta": "¿Cómo traducir «acordei às sete» desde PT-BR?",
+    "opciones": [
+      "Acordé una reunión a las siete",
+      "Acudí a las siete",
+      "Me desperté a las siete",
+      "Olvidé las siete"
+    ],
+    "correcta": 2,
+    "explicacion": "El verbo portugués «acordar» significa despertarse. En español «acordar» puede ser ponerse de acuerdo o recordar según el contexto."
+  },
+  {
+    "pregunta": "Si alguien dice «assisti a um filme», en español vio…",
+    "opciones": [
+      "obligatoriamente una clase presencial",
+      "a un enfermo",
+      "un taller mecánico",
+      "una película"
+    ],
+    "correcta": 3,
+    "explicacion": "«Assistir a» en portugués brasileño significa ver contenidos audiovisuales. En español «asistir a» suele ser acudir a un evento o clase."
+  },
+  {
+    "pregunta": "En Brasil «pegar o ônibus» se traduce naturalmente como…",
+    "opciones": [
+      "tomar el autobús",
+      "golpear el autobús",
+      "pegar un adhesivo al autobús",
+      "dejar el autobús"
+    ],
+    "correcta": 0,
+    "explicacion": "Portugués «pegar» en este contexto es tomar/coger transporte. Español «pegar» tiene otros usos y también puede ser golpear."
+  },
+  {
+    "pregunta": "En una tienda de Portugal o Brasil, «presunto» suele nombrar…",
+    "opciones": [
+      "una persona supuesta culpable",
+      "jamón",
+      "pan tostado",
+      "pescado crudo"
+    ],
+    "correcta": 1,
+    "explicacion": "En portugués «presunto» es jamón; en español «presunto» significa supuesto, no demostrado."
+  },
+  {
+    "pregunta": "Al contar que me equivoqué delante de todos, traduzco «fiquei embaraçado» como…",
+    "opciones": [
+      "me quedé embarazado",
+      "me sentí hambriento",
+      "me sentí avergonzado",
+      "me quedé dormido"
+    ],
+    "correcta": 2,
+    "explicacion": "El contexto social apunta a vergüenza o incomodidad, no a embarazo. En portugués brasileño es común también «constrangido»."
+  },
+  {
+    "pregunta": "«Meu carro está na oficina» se expresa mejor como…",
+    "opciones": [
+      "mi coche está en la oficina de recursos humanos",
+      "mi coche está en el aula",
+      "mi coche está en la biblioteca",
+      "mi coche está en el taller"
+    ],
+    "correcta": 3,
+    "explicacion": "El vehículo está en un taller de reparación; la elección cambia porque la palabra «oficina» no tiene el mismo uso habitual."
+  },
+  {
+    "pregunta": "En un documento de Brasil «nome e sobrenome», debes completar…",
+    "opciones": [
+      "nombre y apellido",
+      "nombre y apodo",
+      "nombre y profesión",
+      "nombre y barrio"
+    ],
+    "correcta": 0,
+    "explicacion": "En formularios brasileños «sobrenome» equivale al apellido familiar, no al apodo español «sobrenombre»."
+  },
+  {
+    "pregunta": "«A comida ficou esquisita» quiere decir que la comida quedó…",
+    "opciones": [
+      "exquisita",
+      "extraña",
+      "más cara",
+      "congelada"
+    ],
+    "correcta": 1,
+    "explicacion": "El adjetivo portugués «esquisita» puede indicar algo extraño; no presupongas que la comida resultó deliciosa."
+  },
+  {
+    "pregunta": "Para borrar una palabra en el cuaderno brasileño necesito «uma borracha»:",
+    "opciones": [
+      "una botella",
+      "una escoba",
+      "una goma de borrar",
+      "una moneda"
+    ],
+    "correcta": 2,
+    "explicacion": "En material escolar, «borracha» es la goma de borrar. Evita interpretar por su homógrafo español."
+  },
+  {
+    "pregunta": "«Cheguei cedo à escola» se traduce como…",
+    "opciones": [
+      "cedí la escuela",
+      "llegué tarde a la escuela",
+      "me fui de la escuela",
+      "llegué temprano a la escuela"
+    ],
+    "correcta": 3,
+    "explicacion": "El portugués «cedo» es temprano. El español «cedo» es primera persona del verbo ceder."
+  },
+  {
+    "pregunta": "Si un brasileño describe una situación «rara» en portugués, suele indicar que…",
+    "opciones": [
+      "es poco frecuente",
+      "es necesariamente extraña",
+      "es muy cara",
+      "es roja"
+    ],
+    "correcta": 0,
+    "explicacion": "Portugués «raro» suele expresar rareza o poca frecuencia. En español «raro» suele describir lo extraño; ambos usos pueden solaparse."
+  },
+  {
+    "pregunta": "Para expresar que echo de menos a alguien, «estou com saudade» se traduce como…",
+    "opciones": [
+      "tengo hambre",
+      "te echo de menos",
+      "tengo sueño",
+      "estoy enfadado"
+    ],
+    "correcta": 1,
+    "explicacion": "«Saudade» expresa añoranza; en español se usan «echar de menos» o «sentir nostalgia», según contexto."
+  },
+  {
+    "pregunta": "En Brasil «foi muito legal!» hablando de una excursión significa…",
+    "opciones": [
+      "¡fue legal según una norma jurídica!",
+      "¡fue secreto!",
+      "¡fue genial!",
+      "¡fue peligroso!"
+    ],
+    "correcta": 2,
+    "explicacion": "«Legal» coloquial en portugués brasileño puede significar estupendo; en español generalmente remite a lo conforme a la ley."
+  },
+  {
+    "pregunta": "Para decir «vamos a jugar» en lugar de «vamos a brincar» en español, elijo…",
+    "opciones": [
+      "vamos a saltar exclusivamente",
+      "vamos a discutir",
+      "vamos a llorar",
+      "vamos a jugar"
+    ],
+    "correcta": 3,
+    "explicacion": "En portugués brasileño «brincar» es jugar. En español «brincar» suele equivaler a saltar. La corrección depende de la intención."
   }
 ]

@@ -1,12 +1,40 @@
-name: CI
-on: [push, pull_request]
+name: Lingua Aberta / product and curriculum gates
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
 jobs:
-  lint:
+  validate:
+    name: Learning material, privacy, typecheck and site
     runs-on: ubuntu-latest
+    timeout-minutes: 25
     steps:
       - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
       - uses: pnpm/action-setup@v4
+        with:
+          version: 10.4.1
       - uses: actions/setup-node@v4
-        with: { node-version: '20', cache: 'pnpm' }
-      - run: pnpm install
-      - run: pnpm lint
+        with:
+          node-version: '22'
+          cache: pnpm
+      - name: Frozen lockfile installation
+        run: pnpm install --frozen-lockfile
+      - name: Actual campus JavaScript syntax
+        run: |
+          node --check campus/app.js
+          node --check campus/course-data.mjs
+          node --check campus/sw.js
+      - name: Source curriculum and privacy contracts
+        run: node --test tests/campus-product.test.mjs tests/student-site.test.mjs tests/pt-es-course-content.test.mjs tests/miara-learning.test.mjs tests/privacy-fixtures.test.mjs
+      - name: Native TypeScript typecheck
+        run: pnpm run check
+      - name: Real Vite production build
+        run: pnpm run build
+      - name: Validate generated home page
+        run: test -s dist/public/index.html
