@@ -1,12 +1,43 @@
-name: CI
-on: [push, pull_request]
+name: Lingua Aberta / quality gates
+on:
+  push:
+    branches: [main, "release/**"]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
 jobs:
-  lint:
+  education-contract:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Curriculum, entrypoint and student route tests
+        run: node --test tests/student-site.test.mjs tests/miara-learning.test.mjs tests/privacy-fixtures.test.mjs
+      - name: Source integrity
+        run: |
+          test -s client/index.html
+          test -s campus/index.html
+          test -s server/miara_content.json
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
       - uses: pnpm/action-setup@v4
+        with:
+          version: 9.0.0
       - uses: actions/setup-node@v4
-        with: { node-version: '20', cache: 'pnpm' }
-      - run: pnpm install
-      - run: pnpm lint
+        with:
+          node-version: "22"
+          cache: pnpm
+      - name: Reproducible installation
+        run: pnpm install --frozen-lockfile
+      - name: Typecheck and production compilation
+        run: pnpm build
+      - name: Static artefact presence
+        run: test -s dist/public/index.html
