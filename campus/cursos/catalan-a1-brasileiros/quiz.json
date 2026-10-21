@@ -1,57 +1,266 @@
 [
   {
-    "pregunta": "¿Como se dice 'gracias' en catalan?",
+    "pregunta": "¿Qué saludo catalán es adecuado al llegar por la mañana?",
     "opciones": [
-      "Obrigado",
-      "Gracies/Merci",
-      "Grazie",
-      "Thanks"
-    ],
-    "correcta": 1,
-    "explicacion": "Gracies o merci; 'obrigado' es portugues."
-  },
-  {
-    "pregunta": "'Deures' significa...",
-    "opciones": [
-      "Deberes/tarea",
-      "Duros",
-      "Deudas",
-      "Dudas"
+      "Bon dia!",
+      "Bona nit!",
+      "Adeu!",
+      "Fins demà!"
     ],
     "correcta": 0,
-    "explicacion": "Deures = deberes escolares."
+    "explicacion": "Bon dia se utiliza como buenos días; bona nit es para la noche y adeu para despedirse."
   },
   {
-    "pregunta": "Presente de ANAR, 1a persona singular:",
+    "pregunta": "Para preguntar informalmente cómo se llama alguien en catalán dices…",
+    "opciones": [
+      "On és la plaça?",
+      "Com et dius?",
+      "Quina hora és?",
+      "Què vols?"
+    ],
+    "correcta": 1,
+    "explicacion": "Com et dius pregunta el nombre; las otras fórmulas preguntan dónde, a qué hora o qué quiere alguien."
+  },
+  {
+    "pregunta": "¿Qué significa la frase catalana «Em dic Maria»?",
+    "opciones": [
+      "Voy con María",
+      "Conozco a María",
+      "Me llamo María",
+      "Tengo un libro de María"
+    ],
+    "correcta": 2,
+    "explicacion": "Em dic es la manera corriente de presentarse y decir el propio nombre en catalán."
+  },
+  {
+    "pregunta": "Si quieres decir «soy de Brasil», ¿qué opción es catalana?",
+    "opciones": [
+      "Soy de Brasil",
+      "Eu sou do Brasil",
+      "Sono del Brasile",
+      "Soc del Brasil"
+    ],
+    "correcta": 3,
+    "explicacion": "Soc es primera persona de ser en catalán; las otras expresiones pertenecen a lenguas distintas."
+  },
+  {
+    "pregunta": "¿Cómo se pide un producto de manera cortés en catalán?",
+    "opciones": [
+      "Un entrepà, si us plau",
+      "Un entrepà, mai",
+      "Un entrepà, ahir",
+      "Un entrepà, lluny"
+    ],
+    "correcta": 0,
+    "explicacion": "Si us plau significa por favor; és una fórmula básica para pedir algo en una tienda."
+  },
+  {
+    "pregunta": "¿Cómo se escribe el número ocho en catalán?",
+    "opciones": [
+      "ocho",
+      "vuit",
+      "oito",
+      "otto"
+    ],
+    "correcta": 1,
+    "explicacion": "La forma catalana para el número ocho es vuit; ocho y oito corresponden a otras lenguas."
+  },
+  {
+    "pregunta": "¿Qué significa «Gràcies» cuando alguien te ayuda?",
+    "opciones": [
+      "Hasta mañana",
+      "Perdona",
+      "Gracias",
+      "Me llamo"
+    ],
+    "correcta": 2,
+    "explicacion": "Gràcies se utiliza para agradecer, y de res es una respuesta habitual a ese agradecimiento."
+  },
+  {
+    "pregunta": "Al contestar a «Gràcies», ¿qué expresión catalana es natural?",
+    "opciones": [
+      "Bon dia",
+      "A les nou",
+      "Quina hora",
+      "De res"
+    ],
+    "correcta": 3,
+    "explicacion": "De res equivale a de nada y completa un intercambio elemental de cortesía."
+  },
+  {
+    "pregunta": "En el instituto, ¿qué significa «deures»?",
+    "opciones": [
+      "Deberes escolares",
+      "Deudas bancarias",
+      "Puertas del aula",
+      "Días festivos"
+    ],
+    "correcta": 0,
+    "explicacion": "Deures son tareas o deberes escolares; aunque se parezca a otras palabras, el contexto es educativo."
+  },
+  {
+    "pregunta": "¿Qué es una «motxilla» en el vocabulario escolar?",
+    "opciones": [
+      "Un lápiz",
+      "Una mochila",
+      "Una biblioteca",
+      "Un libro"
+    ],
+    "correcta": 1,
+    "explicacion": "Motxilla es mochila y sirve para llevar materiales, no designa un cuaderno o un aula."
+  },
+  {
+    "pregunta": "¿Qué día de la semana indica «dimecres»?",
+    "opciones": [
+      "Martes",
+      "Jueves",
+      "Miércoles",
+      "Viernes"
+    ],
+    "correcta": 2,
+    "explicacion": "En catalán dimecres es miércoles; dimarts es martes y dijous es jueves."
+  },
+  {
+    "pregunta": "¿Qué significa «dijous» en un horario escolar?",
+    "opciones": [
+      "Lunes",
+      "Domingo",
+      "Sábado",
+      "Jueves"
+    ],
+    "correcta": 3,
+    "explicacion": "Dijous se refiere al jueves; reconocer los días ayuda a interpretar horarios de clase."
+  },
+  {
+    "pregunta": "¿Cuál es la pregunta catalana «¿Dónde está la biblioteca?»?",
+    "opciones": [
+      "On és la biblioteca?",
+      "Quants llibres tens?",
+      "Què menges avui?",
+      "Qui ets?"
+    ],
+    "correcta": 0,
+    "explicacion": "On és pregunta por la ubicación de un lugar; las demás preguntas se refieren a otros asuntos."
+  },
+  {
+    "pregunta": "En un horario, «A les nou» significa…",
+    "opciones": [
+      "Nueve libros",
+      "A las nueve",
+      "Dentro de nueve días",
+      "Los nueve alumnos"
+    ],
+    "correcta": 1,
+    "explicacion": "La estructura a les + hora expresa cuándo sucede una actividad, por ejemplo una clase."
+  },
+  {
+    "pregunta": "Completa con ser: «Jo ___ estudiant».",
+    "opciones": [
+      "ets",
+      "és",
+      "soc",
+      "som"
+    ],
+    "correcta": 2,
+    "explicacion": "Con el pronombre jo, el presente del verbo ser es soc; ets corresponde a tu."
+  },
+  {
+    "pregunta": "Completa con tenir: «Ella ___ un llibre».",
+    "opciones": [
+      "tinc",
+      "tens",
+      "tenim",
+      "té"
+    ],
+    "correcta": 3,
+    "explicacion": "La tercera persona singular de tenir es té y lleva acento escrito."
+  },
+  {
+    "pregunta": "Completa con voler: «Jo ___ aprendre català».",
+    "opciones": [
+      "vull",
+      "vols",
+      "volem",
+      "volen"
+    ],
+    "correcta": 0,
+    "explicacion": "Vull es la primera persona singular de voler; aquí expresa un deseo de aprendizaje."
+  },
+  {
+    "pregunta": "Completa con anar: «Nosaltres ___ a l'institut».",
     "opciones": [
       "vaig",
-      "va",
       "anem",
-      "vagi"
-    ],
-    "correcta": 0,
-    "explicacion": "Jo vaig a l'institut."
-  },
-  {
-    "pregunta": "'Pati' en el instituto es...",
-    "opciones": [
-      "Patio/recreo",
-      "Clase",
-      "Comedor",
-      "Gimnasio"
-    ],
-    "correcta": 0,
-    "explicacion": "Pati = patio de recreo."
-  },
-  {
-    "pregunta": "Los dias de la semana en CA empiezan por...",
-    "opciones": [
-      "lunes...",
-      "dilluns...",
-      "segunda...",
-      "diumenge..."
+      "van",
+      "vas"
     ],
     "correcta": 1,
-    "explicacion": "Dilluns, dimarts, dimecres, dijous, divendres."
+    "explicacion": "Anem es la primera persona plural de anar y acompaña a nosaltres en presente."
+  },
+  {
+    "pregunta": "Completa con menjar: «Vosaltres ___ fruita».",
+    "opciones": [
+      "menjo",
+      "menja",
+      "mengeu",
+      "mengen"
+    ],
+    "correcta": 2,
+    "explicacion": "Mengeu es la segunda persona plural; menjo es primera singular, y mengen es tercera plural."
+  },
+  {
+    "pregunta": "¿Qué frase dice «yo voy a la biblioteca» en catalán?",
+    "opciones": [
+      "Vull a la biblioteca",
+      "Menjo la biblioteca",
+      "Soc a la biblioteca per anar",
+      "Vaig a la biblioteca"
+    ],
+    "correcta": 3,
+    "explicacion": "Vaig es primera persona de anar; vull expresa querer y no sustituye el verbo de movimiento."
+  },
+  {
+    "pregunta": "En un plano, «Gira a l'esquerra» te pide…",
+    "opciones": [
+      "Girar a la izquierda",
+      "Girar a la derecha",
+      "Seguir recto",
+      "Volver a casa"
+    ],
+    "correcta": 0,
+    "explicacion": "Esquerra significa izquierda; dreta es derecha y recte significa recto."
+  },
+  {
+    "pregunta": "En indicaciones, «Segueix recte» quiere decir…",
+    "opciones": [
+      "Para aquí",
+      "Sigue recto",
+      "Gira a la izquierda",
+      "Compra un billete"
+    ],
+    "correcta": 1,
+    "explicacion": "Segueix recte indica continuar hacia delante, sin hacer un giro."
+  },
+  {
+    "pregunta": "Para preguntar si hay una parada cerca, ¿qué dices?",
+    "opciones": [
+      "Tinc una parada a prop",
+      "Quants llibres hi ha",
+      "Hi ha una parada a prop?",
+      "Vols menjar? "
+    ],
+    "correcta": 2,
+    "explicacion": "Hi ha significa hay y a prop indica proximidad; la pregunta busca una parada cercana."
+  },
+  {
+    "pregunta": "¿Qué afirmación sobre el examen de este curso es correcta?",
+    "opciones": [
+      "Equivale automáticamente a un título A1",
+      "Acredita el nivel sin docente ni pruebas externas",
+      "Requiere introducir la dirección del alumno",
+      "Es una autoevaluación y no da un certificado oficial"
+    ],
+    "correcta": 3,
+    "explicacion": "El cuestionario es formativo; la acreditación oficial exige otros procedimientos que este campus no ofrece."
   }
 ]

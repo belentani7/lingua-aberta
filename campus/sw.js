@@ -3,7 +3,7 @@
  * An installed service worker is not a promise of offline availability
  * until its installation has completed successfully under HTTPS/localhost.
  */
-const CACHE = "lingua-aberta-campus-v2";
+const CACHE = "lingua-aberta-campus-v3";
 const PREFIX = "lingua-aberta-campus-";
 const ROOT = self.registration.scope;
 const CONTENT = [
