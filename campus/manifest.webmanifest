@@ -1,9 +1,20 @@
 {
-  "name": "Campus lingua-aberta",
-  "short_name": "lingua-aberta",
+  "name": "Lingua Aberta — Campus",
+  "short_name": "Lingua Aberta",
+  "description": "Cursos lingüísticos abiertos y tres itinerarios disponibles sin conexión tras instalar los materiales.",
+  "id": "./",
   "start_url": "./",
+  "scope": "./",
   "display": "standalone",
-  "background_color": "#0c1018",
-  "theme_color": "#0c1018",
-  "icons": []
+  "background_color": "#0b1220",
+  "theme_color": "#0b1220",
+  "lang": "es",
+  "icons": [
+    {
+      "src": "./icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
 }

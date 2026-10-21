@@ -7,14 +7,16 @@
   <meta name="description" content="Campus abierto lingua-aberta: cursos gratuitos estilo Harvard/Coursera, offline-first.">
   <title>Campus lingua-aberta</title>
   <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" type="image/svg+xml" href="icon.svg">
   <link rel="stylesheet" href="tokens.css">
 </head>
 <body>
   <a class="skip-link" href="#cursos">Saltar al contenido</a>
   <header class="topbar">
-    <div class="brand">Campus <span>lingua-aberta</span></div>
+    <div class="brand"><img src="icon.svg" width="35" height="35" alt=""><span>lingua-aberta</span> <small>campus</small></div>
     <nav aria-label="Principal">
       <a class="btn btn-ghost" href="#cursos">Cursos</a>
+      <a class="btn btn-ghost" href="#leer">Estudiar</a>
       <a class="btn btn-ghost" href="#quiz">Quiz</a>
       <a class="btn btn-ghost" href="#voz">Voz IA</a>
     </nav>
@@ -23,8 +25,8 @@
   <main class="wrap">
     <section class="hero">
       <h1>Educación abierta, sin barreras.</h1>
-      <p class="lead">Cursos modulares con evidencia, material de bancos
-      abiertos y voz humana en 4 idiomas. Funciona sin conexión.</p>
+      <p class="lead">Tres cursos reales de idiomas con once unidades descargables, lectura guiada, ejercicios y progreso que conservas en tu navegador. Material educativo abierto para aprender a tu ritmo.</p>
+      <p class="hero-note">Disponible sin conexión después de instalar el campus desde HTTPS con acceso a Internet. No requiere registro ni acredita niveles oficiales.</p>
     </section>
 
     <section id="cursos" class="grid-cursos">
@@ -33,28 +35,69 @@
         <h3><a href="cursos/falsos-amigos-pt-es/syllabus.md">Puente PT->ES: Falsos Amigos</a></h3>
         <p>Curso intensivo para jovenes brasileños: domina los falsos amigos mas peligrosos entre portugues y español y deja de cometer error…</p>
         <p class="meta">4 semanas · 12 h · examen de 40 casos</p>
-        <div><a class="btn" href="cursos/falsos-amigos-pt-es/syllabus.md">Ver syllabus</a></div>
+        <p class="course-progress" data-course-state="falsos-amigos-pt-es" aria-live="polite">Sin evaluación completada</p>
+        
+        <div><a class="btn" href="cursos/falsos-amigos-pt-es/syllabus.md">Ver syllabus</a> <button type="button" class="btn btn-ghost" data-course="falsos-amigos-pt-es" aria-pressed="true">Abrir en el campus</button></div>
       </article>
       <article class="card">
         <span class="badge">CA · A1</span>
         <h3><a href="cursos/catalan-a1-brasileiros/syllabus.md">Catalán A1: Supervivencia</a></h3>
         <p>Catalan desde cero con pistas en portugues: saludos, instituto, ciudad y verbos basicos. Disenado para jovenes brasileños recien l…</p>
         <p class="meta">4 semanas · 16 h · quiz 5 items</p>
-        <div><a class="btn" href="cursos/catalan-a1-brasileiros/syllabus.md">Ver syllabus</a></div>
+        <p class="course-progress" data-course-state="catalan-a1-brasileiros" aria-live="polite">Sin evaluación completada</p>
+        
+        <div><a class="btn" href="cursos/catalan-a1-brasileiros/syllabus.md">Ver syllabus</a> <button type="button" class="btn btn-ghost" data-course="catalan-a1-brasileiros" aria-pressed="false">Abrir en el campus</button></div>
       </article>
       <article class="card">
         <span class="badge">ES · B1</span>
         <h3><a href="cursos/espanol-academico-eso/syllabus.md">Español Académico para la ESO</a></h3>
         <p>Lectura critica, ensayo y argumentacion en español para rendir en el instituto catalan.…</p>
         <p class="meta">3 semanas · 10 h · quiz 3 items</p>
-        <div><a class="btn" href="cursos/espanol-academico-eso/syllabus.md">Ver syllabus</a></div>
+        <p class="course-progress" data-course-state="espanol-academico-eso" aria-live="polite">Sin evaluación completada</p>
+        
+        <div><a class="btn" href="cursos/espanol-academico-eso/syllabus.md">Ver syllabus</a> <button type="button" class="btn btn-ghost" data-course="espanol-academico-eso" aria-pressed="false">Abrir en el campus</button></div>
       </article>
     </section>
 
-    <section id="quiz" aria-label="Quiz de ejemplo">
-      <h2>Quiz interactivo</h2>
-      <div class="quiz-box quiz-json"
-           data-src="cursos/falsos-amigos-pt-es/quiz.json">
+    <section id="leer" class="study-section" aria-labelledby="study-title">
+      <div class="section-heading"><span class="eyebrow">02 / CAMPUS DE ESTUDIO</span>
+        <h2 id="study-title">Tu aula, tu ritmo.</h2>
+        <p>Lee el syllabus, las unidades y los recursos del curso sin salir de la web. Los documentos permanecen intactos y puedes abrirlos también como archivos Markdown.</p>
+      </div>
+      <div class="study-grid">
+        <div class="study-panel">
+          <p class="eyebrow">CURSO SELECCIONADO</p>
+          <h3 id="selected-course-title">Cargando curso…</h3>
+          <p id="selected-course-meta" class="meta"></p>
+          <p id="selected-course-purpose"></p>
+          <label for="material-choice">Selecciona un documento del programa</label>
+          <select id="material-choice" class="opcion" aria-label="Documento del curso"></select>
+          <p class="meta">Lectura de material original. Las fechas, ritmos y duraciones son orientativos.</p>
+        </div>
+        <article id="lesson-document" class="lesson-document" aria-label="Material de la unidad" aria-live="polite">
+          <p>Selecciona uno de los tres cursos para comenzar.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="progreso" class="progress-panel" aria-labelledby="progress-title">
+      <div><span class="eyebrow">03 / PROGRESO PERSONAL</span>
+        <h2 id="progress-title">El avance se demuestra.</h2>
+        <p id="progress-description">Los cursos se marcan superados con al menos 70% en un quiz completo.</p>
+        <p id="campus-status" class="meta" role="status" aria-live="polite"></p>
+      </div>
+      <div class="progress-controls">
+        <strong id="progress-figure" aria-label="Cursos superados">0 / 3</strong>
+        <button id="export-progress" type="button" class="btn">Exportar mis resultados</button>
+        <button id="reset-progress" type="button" class="btn btn-ghost">Borrar avance</button>
+      </div>
+    </section>
+
+    <section id="quiz" aria-label="Cuestionario interactivo">
+      <h2>Comprueba lo que has aprendido</h2>
+      <p id="quiz-course-title" class="meta">Curso seleccionado</p>
+      <p>Selecciona cualquier curso arriba y responde a todas sus preguntas. Al terminar conocerás el resultado y podrás repetirlo.</p>
+      <div class="quiz-box">
         <h3 class="quiz-titulo">Cargando quiz…</h3>
         <div class="opciones"></div>
         <p class="feedback" aria-live="polite"></p>
@@ -64,7 +107,7 @@
     </section>
 
     <section id="voz" aria-label="Voz IA">
-      <h2>Voz humana por idioma</h2>
+      <h2>Escucha la bienvenida en tu idioma</h2>
       <div class="voz-player">
         <label for="idioma">Idioma:</label>
         <select id="idioma" class="opcion" style="width:auto;min-height:44px">
@@ -77,17 +120,13 @@
           <source id="audio-src" src="voces/bienvenida-pt.mp3" type="audio/mpeg">
         </audio>
       </div>
-      <p class="meta">Voces generadas por edge-tts (gratuito) o Kokoro vía
-      Hugging Face. Sin coste, con acento humano real.</p>
+      <p class="meta">Grabaciones existentes del repositorio en cuatro idiomas. El audio puede reproducirse sin conexión después de instalar el contenido del campus.</p>
     </section>
 
     <section id="agente" aria-label="Agente tutor">
-      <h2>Agente tutor vivo en GitHub</h2>
-      <p>Este campus tiene un agente IA que vive en GitHub Actions
-      (caja Linux): responde issues etiquetados <code>tutor</code> y publica
-      una cápsula didáctica diaria en <code>campus/capsulas/</code>.</p>
-      <p class="meta">Cero secretos: usa el token efímero de GitHub y modelos
-      gratuitos con fallback local.</p>
+      <h2>Investigación: tutor educativo y automatizaciones</h2>
+      <p>El repositorio conserva experimentos de un tutor para GitHub y una colección de cápsulas didácticas en <code>campus/capsulas/</code>. Las automatizaciones dependen de que los workflows funcionen y no se presentan aquí como tutor disponible en tiempo real.</p>
+      <p class="meta">Las lecciones y sus cuestionarios funcionan sin credenciales ni acceso a servicios de IA. El tutor automatizado es una función separada y pendiente de verificación operativa.</p>
     </section>
   </main>
 
@@ -95,14 +134,6 @@
     <p>Material abierto: Khan Academy · Parla.cat · GCF Global · MIT OCW ·
     Drive do Pobre. Generado por edu-forge.</p>
   </footer>
-  <script>
-    const sel = document.getElementById('idioma');
-    if (sel) sel.addEventListener('change', e => {
-      const a = document.getElementById('audio-src');
-      a.src = `voces/bienvenida-${e.target.value}.mp3`;
-      document.getElementById('audio').load();
-    });
-  </script>
-  <script src="app.js"></script>
+  <script type="module" src="app.js"></script>
 </body>
 </html>
