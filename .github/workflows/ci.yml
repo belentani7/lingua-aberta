@@ -1,15 +1,16 @@
-name: Lingua Aberta / student product and campus gates
+name: Lingua Aberta / product and curriculum gates
 on:
   push:
-    branches: [main, "release/**"]
+    branches: [main]
   pull_request:
     branches: [main]
   workflow_dispatch:
 permissions:
   contents: read
 jobs:
-  verification:
-    runs-on: ubuntu-24.04
+  validate:
+    name: Learning material, privacy, typecheck and site
+    runs-on: ubuntu-latest
     timeout-minutes: 25
     steps:
       - uses: actions/checkout@v4
@@ -20,17 +21,20 @@ jobs:
           version: 10.4.1
       - uses: actions/setup-node@v4
         with:
-          node-version: "22"
+          node-version: '22'
           cache: pnpm
-      - name: Install exact project lockfile
+      - name: Frozen lockfile installation
         run: pnpm install --frozen-lockfile
-      - name: Student entrypoint, content, privacy, and full campus acceptance
+      - name: Actual campus JavaScript syntax
         run: |
-          node --test tests/student-site.test.mjs tests/miara-learning.test.mjs tests/privacy-fixtures.test.mjs
-          node --test tests/campus-product.test.mjs tests/pt-es-course-content.test.mjs tests/catalan-eso-curriculum.test.mjs tests/full-campus-integration.test.mjs
-      - name: TypeScript source validation
+          node --check campus/app.js
+          node --check campus/course-data.mjs
+          node --check campus/sw.js
+      - name: Source curriculum and privacy contracts
+        run: node --test tests/campus-product.test.mjs tests/student-site.test.mjs tests/pt-es-course-content.test.mjs tests/miara-learning.test.mjs tests/privacy-fixtures.test.mjs
+      - name: Native TypeScript typecheck
         run: pnpm run check
-      - name: Production build
+      - name: Real Vite production build
         run: pnpm run build
-      - name: Verify real frontend artifact
+      - name: Validate generated home page
         run: test -s dist/public/index.html

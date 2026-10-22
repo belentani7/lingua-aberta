@@ -161,3 +161,15 @@ pnpm build
 Las pruebas de campus verifican existencia y contenido de las once unidades y tres kits, integridad del precache, seguridad de las entradas JSON, compatibilidad del HTML con los controles y rechazo de resultados inválidos. Además de la suite hay que comprobar en navegador real el primer uso con red y la segunda visita sin red.
 
 **Separación de estados**: la API remota, autenticación, tutor de IA en vivo, motor de voz generativo, juegos dependientes de servicios y despliegues externos siguen siendo tareas distintas. No presentar esta rama como publicación completa del monorepositorio ni fusionarla sin resultado verificable de los gates.
+
+## Entrega reunificada (22 octubre 2026)
+
+- Restaurada la identidad original Vite/React: `package.json` y `tsconfig.json` que corresponden al `pnpm-lock.yaml` real de 267 KiB, en lugar del manifiesto genérico de plantilla.
+- `client/index.html`: entrada accesible en pt-BR y semántica HTML válida, sin mezclar los enlaces de otros productos.
+- `campus/index.html`: lector de materiales, controles y progreso local; el curso Falsos Amigos PT→ES contiene cuatro semanas completas y **examen de 40 casos**, no cinco.
+- Service worker `v3` actualiza el paquete offline para no conservar en la caché la edición antigua del examen.
+- `tests/student-site.test.mjs`, `tests/campus-product.test.mjs`, `tests/pt-es-course-content.test.mjs`, y pruebas existentes de MIARA/privacidad integradas en el workflow de calidad.
+- Se preservan intactas las lecciones de catalán y de español académico, así como juegos y voces existentes.
+- Contexto adicional de instalación, validación y límites del campus: [docs/STUDENT_RELEASE_2026-10-22.md](docs/STUDENT_RELEASE_2026-10-22.md).
+
+**Estado:** candidato de integración, no publicado ni verificado íntegramente en navegador o CI. La API `/api/trpc`, el tutor IA y los certificados oficiales siguen fuera de esta entrega.
