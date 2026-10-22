@@ -1,4 +1,4 @@
-name: Lingua Aberta / quality gates
+name: Lingua Aberta / student product and campus gates
 on:
   push:
     branches: [main, "release/**"]
@@ -8,42 +8,29 @@ on:
 permissions:
   contents: read
 jobs:
-  education-contract:
-    runs-on: ubuntu-latest
-    timeout-minutes: 15
+  verification:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
     steps:
       - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
       - uses: pnpm/action-setup@v4
         with:
-          version: 9.0.0
+          version: 10.4.1
       - uses: actions/setup-node@v4
         with:
           node-version: "22"
           cache: pnpm
-      - name: Install test dependencies
+      - name: Install exact project lockfile
         run: pnpm install --frozen-lockfile
-      - name: Curriculum, entrypoint and student route tests
-        run: node --test tests/student-site.test.mjs tests/miara-learning.test.mjs tests/privacy-fixtures.test.mjs
-      - name: Source integrity
+      - name: Student entrypoint, content, privacy, and full campus acceptance
         run: |
-          test -s client/index.html
-          test -s campus/index.html
-          test -s server/miara_content.json
-  build:
-    runs-on: ubuntu-latest
-    timeout-minutes: 20
-    steps:
-      - uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v4
-        with:
-          version: 9.0.0
-      - uses: actions/setup-node@v4
-        with:
-          node-version: "22"
-          cache: pnpm
-      - name: Reproducible installation
-        run: pnpm install --frozen-lockfile
-      - name: Typecheck and production compilation
-        run: pnpm build
-      - name: Static artefact presence
+          node --test tests/student-site.test.mjs tests/miara-learning.test.mjs tests/privacy-fixtures.test.mjs
+          node --test tests/campus-product.test.mjs tests/pt-es-course-content.test.mjs tests/catalan-eso-curriculum.test.mjs tests/full-campus-integration.test.mjs
+      - name: TypeScript source validation
+        run: pnpm run check
+      - name: Production build
+        run: pnpm run build
+      - name: Verify real frontend artifact
         run: test -s dist/public/index.html

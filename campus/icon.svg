@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title desc">
+  <title id="title">Lingua Aberta — símbolo del campus</title>
+  <desc id="desc">Libro abierto en forma de puente con un arco de luz azul sobre fondo azul noche.</desc>
+  <defs>
+    <linearGradient id="book" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#e9ffff"/><stop offset=".5" stop-color="#8ce4ef"/><stop offset="1" stop-color="#2da0bd"/></linearGradient>
+    <radialGradient id="halo"><stop stop-color="#49d5e7" stop-opacity=".55"/><stop offset="1" stop-color="#49d5e7" stop-opacity="0"/></radialGradient>
+  </defs>
+  <rect width="512" height="512" rx="118" fill="#0a1723"/>
+  <circle cx="270" cy="218" r="208" fill="url(#halo)"/>
+  <path d="M84 318V147Q172 125 256 174Q340 125 428 147V318Q340 299 256 355Q172 299 84 318Z" fill="none" stroke="url(#book)" stroke-width="18" stroke-linejoin="round"/>
+  <path d="M256 175V355" stroke="#a3effa" stroke-width="16"/>
+  <path d="M119 191Q173 182 220 208M119 240Q173 231 220 255M293 208Q341 182 394 191M293 255Q341 231 394 240" stroke="#91e1f0" stroke-width="10" stroke-linecap="round" opacity=".75" fill="none"/>
+  <path d="M105 371Q256 456 407 371" stroke="#63d0e4" stroke-width="8" stroke-linecap="round" stroke-dasharray="1 23" fill="none"/>
+</svg>

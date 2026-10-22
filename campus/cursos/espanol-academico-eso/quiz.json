@@ -1,35 +1,200 @@
 [
   {
-    "pregunta": "Un ensayo argumentativo necesita...",
+    "pregunta": "¿Qué oración resume mejor la idea principal del texto de la sala de lectura?",
     "opciones": [
-      "Solo opinion",
-      "Tesis + argumentos + evidencia",
-      "Resumen",
-      "Descripcion"
+      "Se propone estudiar una sala voluntaria, comprobando antes las condiciones",
+      "El centro demostró que mejoraron todas las notas",
+      "El patio debe cerrarse permanentemente",
+      "Todos los estudiantes ya tienen un aula asignada"
     ],
-    "correcta": 1,
-    "explicacion": "Sin evidencia no es argumentativo."
+    "correcta": 0,
+    "explicacion": "El texto plantea una posibilidad condicionada a recursos y evaluación; no anuncia una medida existente ni resultados demostrados."
   },
   {
-    "pregunta": "La refutacion es...",
+    "pregunta": "En el relato educativo se mencionan 21 de 30 estudiantes: ¿qué precaución es correcta?",
     "opciones": [
-      "Ignorar al contrario",
-      "Responder el contraargumento",
-      "Cambiar de tema",
-      "Repetir la tesis"
+      "Demuestran una tendencia nacional",
+      "Son cifras ficticias del ejercicio, no una encuesta real",
+      "Valen como evidencia oficial del instituto",
+      "Pueden atribuirse a un estudio publicado"
     ],
     "correcta": 1,
-    "explicacion": "Anticipar y responder la objecion."
+    "explicacion": "El texto marca expresamente esas cifras como inventadas para practicar; citarlas como datos de campo sería falsear su procedencia."
   },
   {
-    "pregunta": "Un resumen correcto...",
+    "pregunta": "¿Qué es una idea secundaria en un texto expositivo?",
     "opciones": [
-      "Copia frases",
-      "Condensa ideas con tus palabras",
-      "Es mas largo",
-      "Solo el titulo"
+      "Una conclusión sin contexto",
+      "Siempre el primer título",
+      "Un detalle que apoya la idea principal",
+      "Una frase obligatoriamente irrelevante"
+    ],
+    "correcta": 2,
+    "explicacion": "Las ideas secundarias desarrollan o ejemplifican la idea central y ayudan a explicar el contenido sin sustituirla."
+  },
+  {
+    "pregunta": "¿Cuál de las siguientes es una opinión valorativa?",
+    "opciones": [
+      "El texto describe una propuesta voluntaria",
+      "El artículo es un material didáctico ficticio",
+      "La propuesta menciona supervisión adulta",
+      "Leer es la mejor actividad para todo el mundo"
+    ],
+    "correcta": 3,
+    "explicacion": "Afirmar que algo es lo mejor para todas las personas expresa una valoración general, no un hecho verificado."
+  },
+  {
+    "pregunta": "¿Qué debe incluir la referencia a una noticia externa?",
+    "opciones": [
+      "Autor, medio, fecha y enlace comprobado",
+      "Solo el titular, sin origen",
+      "El nombre de un compañero",
+      "Una cifra inventada pero convincente"
+    ],
+    "correcta": 0,
+    "explicacion": "La trazabilidad permite verificar el origen, la fecha y el contexto de una fuente; no basta con una frase encontrada en Internet."
+  },
+  {
+    "pregunta": "¿Cómo debe elaborarse un resumen fiel?",
+    "opciones": [
+      "Copiar todos los párrafos",
+      "Reformular las ideas esenciales sin añadir afirmaciones falsas",
+      "Incluir opiniones propias como si fueran del autor",
+      "Repetir el texto sin reducirlo"
     ],
     "correcta": 1,
-    "explicacion": "Ideas propias, fiel al original."
+    "explicacion": "Un resumen condensa lo principal con palabras propias y respeta el sentido del documento original sin apropiarse de su voz."
+  },
+  {
+    "pregunta": "¿Qué frase es una tesis debatible y concreta?",
+    "opciones": [
+      "Todos piensan lo mismo",
+      "Leer es bueno porque sí",
+      "El centro debería probar una sala de lectura voluntaria un día",
+      "Es imposible discutir sobre recreos"
+    ],
+    "correcta": 2,
+    "explicacion": "Una tesis precisa propone algo que puede discutirse y fundamentarse; los absolutos sin razones son difíciles de evaluar."
+  },
+  {
+    "pregunta": "¿Cuál es la diferencia entre argumento y evidencia?",
+    "opciones": [
+      "Son sinónimos de opinión personal",
+      "La evidencia siempre es una emoción",
+      "El argumento exige una cifra inventada",
+      "El argumento razona una posición; la evidencia la respalda"
+    ],
+    "correcta": 3,
+    "explicacion": "Un argumento enlaza razones con la tesis; la evidencia puede apoyar esas razones mediante información comprobable o ejemplos honestos."
+  },
+  {
+    "pregunta": "¿Por qué una cifra inventada no puede presentarse como dato real?",
+    "opciones": [
+      "Porque distorsiona lo que la fuente realmente permite afirmar",
+      "Porque toda cifra es falsa",
+      "Porque no se pueden usar ejemplos ficticios",
+      "Porque las cifras solo sirven en matemáticas"
+    ],
+    "correcta": 0,
+    "explicacion": "Los ejemplos inventados son útiles si están identificados, pero convertirlos en estadísticas reales vulnera la honestidad académica."
+  },
+  {
+    "pregunta": "¿Qué hace una refutación respetuosa?",
+    "opciones": [
+      "Insulta a quien discrepa",
+      "Reconoce una objeción y contesta sus razones",
+      "Elimina los hechos que no convienen",
+      "Cambia de tema deliberadamente"
+    ],
+    "correcta": 1,
+    "explicacion": "Refutar es examinar una postura contraria con argumentos y responder sin descalificar a las personas."
+  },
+  {
+    "pregunta": "¿Qué conector introduce habitualmente contraste?",
+    "opciones": [
+      "Por ejemplo",
+      "En primer lugar",
+      "Sin embargo",
+      "En conclusión"
+    ],
+    "correcta": 2,
+    "explicacion": "Sin embargo introduce una oposición o matiz; por ejemplo ilustra, en primer lugar ordena y en conclusión cierra."
+  },
+  {
+    "pregunta": "¿Qué debe contener la conclusión de un ensayo argumentativo?",
+    "opciones": [
+      "Una nueva cifra que no se explica",
+      "Una descalificación del lector",
+      "Una copia de tres párrafos",
+      "Una síntesis de la tesis y una propuesta coherente con los argumentos"
+    ],
+    "correcta": 3,
+    "explicacion": "La conclusión recupera la idea central y muestra qué se sigue de las razones expuestas, sin introducir información no justificada."
+  },
+  {
+    "pregunta": "Una buena objeción a la sala de lectura sería…",
+    "opciones": [
+      "La supervisión y el espacio disponible pueden ser insuficientes",
+      "Los que discrepan no saben leer",
+      "Siempre funcionará sin coste",
+      "Nadie necesita descansar"
+    ],
+    "correcta": 0,
+    "explicacion": "Los recursos, la seguridad y la viabilidad son preguntas pertinentes que la propuesta debe afrontar antes de aplicarse."
+  },
+  {
+    "pregunta": "Al convertir un ensayo en exposición oral, conviene…",
+    "opciones": [
+      "Leer rápidamente cada línea sin pausas",
+      "Usar tarjetas con palabras clave y frases claras",
+      "Omitir la tesis para sorprender",
+      "Hablar tres minutos sin estructura"
+    ],
+    "correcta": 1,
+    "explicacion": "Las palabras clave ayudan a comunicar de forma comprensible sin depender de una lectura acelerada del texto completo."
+  },
+  {
+    "pregunta": "¿Qué parte de una exposición presenta explícitamente la posición defendida?",
+    "opciones": [
+      "La bibliografía invisible",
+      "La pausa final",
+      "La tesis",
+      "La lista de asistentes"
+    ],
+    "correcta": 2,
+    "explicacion": "La tesis comunica la idea principal defendida y permite al público seguir la lógica de los argumentos."
+  },
+  {
+    "pregunta": "Si una persona objeta que faltan aulas para una propuesta, ¿qué respuesta es más sólida?",
+    "opciones": [
+      "Ignorar la objeción",
+      "Afirmar que siempre sobran aulas",
+      "Insultar a quien planteó el problema",
+      "Comprobar disponibilidad y posponerla si no hay espacio seguro"
+    ],
+    "correcta": 3,
+    "explicacion": "Responder a una objeción razonable implica comprobar las condiciones reales y adaptar o detener el proyecto si es necesario."
+  },
+  {
+    "pregunta": "¿Qué forma respeta mejor la privacidad en una práctica oral de estudiantes?",
+    "opciones": [
+      "Ensayar sin grabar o compartir solo con autorización adecuada",
+      "Publicar todas las grabaciones automáticamente",
+      "Exigir una dirección particular",
+      "Subir voces de menores a servicios externos sin revisar"
+    ],
+    "correcta": 0,
+    "explicacion": "La exposición puede evaluarse presencialmente o por escrito; la voz y la imagen de menores requieren especial cuidado y permisos adecuados."
+  },
+  {
+    "pregunta": "¿Qué acredita este cuestionario de Español académico B1?",
+    "opciones": [
+      "La obtención automática de un certificado ESO",
+      "Una autoevaluación formativa, no un título oficial",
+      "La superación oficial del nivel B1",
+      "La aprobación de un examen estatal"
+    ],
+    "correcta": 1,
+    "explicacion": "El banco de preguntas sirve para practicar comprensión y argumentación; no es una certificación ni sustituye a la evaluación educativa oficial."
   }
 ]
