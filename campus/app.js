@@ -2,7 +2,7 @@
 // Browser-only module; all dynamic text is inserted with textContent (never innerHTML).
 import {
   COURSES, STORAGE_KEY, STORAGE_EVENT, courseFiles,
-  validateQuiz, parseProgress, saveQuizResult,
+  validateQuiz, parseProgress, saveQuizResult, importProgressBackup,
 } from "./course-data.mjs";
 
 const $ = (selector, root = document) => root.querySelector(selector);
@@ -212,6 +212,25 @@ for (const button of document.querySelectorAll("[data-course]")) {
 $("#reset-progress").addEventListener("click", () => {
   if (!confirm("¿Borrar solo tus resultados de los tres cuestionarios en este dispositivo?")) return;
   if (writeProgress({})) setStatus("Progreso local borrado.");
+});
+
+$("#import-trigger").addEventListener("click", () => $("#import-progress").click());
+
+$("#import-progress").addEventListener("change", async event => {
+  const input = event.currentTarget;
+  const file = input.files?.[0];
+  if (!file) return;
+  try {
+    if (file.size > 15000) throw new Error("El archivo supera el máximo de 15 KB.");
+    const updated = importProgressBackup(await file.text(), readProgress());
+    if (writeProgress(updated)) {
+      setStatus("Resultados importados en este dispositivo. Se conserva la mejor nota de cada curso; los intentos no se duplican.");
+    }
+  } catch (error) {
+    setStatus("No se importó el archivo: " + (error instanceof Error ? error.message : "formato inválido"));
+  } finally {
+    input.value = "";
+  }
 });
 
 $("#export-progress").addEventListener("click", () => {
