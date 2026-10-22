@@ -4,7 +4,7 @@ import { existsSync, readFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import { dirname, join, resolve } from "node:path";
 import {
-  COURSES, courseFiles, validateQuiz, parseProgress, saveQuizResult, STORAGE_KEY,
+  COURSES, courseFiles, validateQuiz, parseProgress, saveQuizResult, importProgressBackup, STORAGE_KEY,
 } from "../campus/course-data.mjs";
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
@@ -105,4 +105,52 @@ test("homepage binds all course selectors and full academic controls", () => {
   assert.match(app, /textContent/);
   assert.doesNotMatch(app, /\.innerHTML\s*=/);
   assert.match(read("manifest.webmanifest"), /icon\.svg/);
+});
+
+test("imported backups merge best scores without double-counting attempts", () => {
+  const first = COURSES[0].id;
+  const second = COURSES[1].id;
+  const existing = {
+    [first]: { best: 85, attempts: 2, updatedAt: "2026-10-21T10:00:00.000Z" },
+  };
+  const exported = JSON.stringify({
+    version: 1,
+    description: "lingua-aberta / progreso local de cuestionarios",
+    courses: {
+      [first]: { best: 70, attempts: 4, updatedAt: "2026-10-20T10:00:00.000Z" },
+      [second]: { best: 90, attempts: 1, updatedAt: "2026-10-22T10:00:00.000Z" },
+    },
+  });
+  const merged = importProgressBackup(exported, existing);
+  assert.equal(merged[first].best, 85);
+  assert.equal(merged[first].attempts, 4);
+  assert.equal(merged[first].updatedAt, "2026-10-21T10:00:00.000Z");
+  assert.equal(merged[second].best, 90);
+  assert.deepEqual(importProgressBackup(exported, merged), merged);
+  assert.deepEqual(existing[first], { best: 85, attempts: 2, updatedAt: "2026-10-21T10:00:00.000Z" });
+});
+
+test("progress import rejects foreign, invalid and oversized backups", () => {
+  const valid = {
+    version: 1,
+    description: "lingua-aberta / progreso local de cuestionarios",
+    courses: {},
+  };
+  assert.deepEqual(importProgressBackup(JSON.stringify(valid)), {});
+  assert.throws(() => importProgressBackup("x".repeat(15001)), /grande/);
+  assert.throws(() => importProgressBackup("not-json"), /JSON/);
+  assert.throws(() => importProgressBackup(JSON.stringify({ ...valid, description: "other" })), /lingua-aberta/);
+  assert.throws(() => importProgressBackup(JSON.stringify({ ...valid, courses: { foreign: {} } })), /reconocidos/);
+  assert.throws(() => importProgressBackup(JSON.stringify({
+    ...valid, courses: { [COURSES[0].id]: { best: 120, attempts: 1, updatedAt: "2026-10-20T10:00:00.000Z" } },
+  })), /inválidos/);
+});
+
+test("campus offers a real import control bound to the local-only flow", () => {
+  const html = read("index.html");
+  const app = read("app.js");
+  assert.match(html, /id="import-trigger"/);
+  assert.match(html, /id="import-progress" type="file"/);
+  assert.match(app, /importProgressBackup\(await file\.text\(\), readProgress\(\)\)/);
+  assert.doesNotMatch(app, /fetch\(.*import-progress/);
 });
