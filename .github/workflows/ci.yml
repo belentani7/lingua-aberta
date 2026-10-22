@@ -1,41 +1,36 @@
-name: CI
-
+name: Lingua Aberta / student product and campus gates
 on:
   push:
-    branches: [main]
+    branches: [main, "release/**"]
   pull_request:
     branches: [main]
   workflow_dispatch:
-
 permissions:
   contents: read
-
 jobs:
-  quality:
-    name: Node.js quality gates
-    runs-on: ubuntu-latest
-    timeout-minutes: 20
+  verification:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Set up pnpm
-        uses: pnpm/action-setup@v4
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
+      - uses: actions/checkout@v4
         with:
-          node-version: 20
+          persist-credentials: false
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10.4.1
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
           cache: pnpm
-
-      - name: Install dependencies
+      - name: Install exact project lockfile
         run: pnpm install --frozen-lockfile
-
-      - name: Typecheck
+      - name: Student entrypoint, content, privacy, and full campus acceptance
+        run: |
+          node --test tests/student-site.test.mjs tests/miara-learning.test.mjs tests/privacy-fixtures.test.mjs
+          node --test tests/campus-product.test.mjs tests/pt-es-course-content.test.mjs tests/catalan-eso-curriculum.test.mjs tests/full-campus-integration.test.mjs
+      - name: TypeScript source validation
         run: pnpm run check
-
-      - name: Protect synthetic learner data
-        run: node --test tests/privacy-fixtures.test.mjs
-
       - name: Production build
         run: pnpm run build
+      - name: Verify real frontend artifact
+        run: test -s dist/public/index.html
