@@ -98,6 +98,45 @@ export function parseProgress(raw) {
   return result;
 }
 
+/**
+ * Import only this campus's own v1 JSON exports. Malformed or foreign data
+ * never replaces the current local achievements.
+ * A backup restored twice must not inflate assessment attempts.
+ */
+export function importProgressBackup(raw, previous = {}) {
+  if (typeof raw !== "string" || raw.length > 15000) {
+    throw new Error("Archivo demasiado grande o no válido.");
+  }
+  let backup;
+  try { backup = JSON.parse(raw); }
+  catch { throw new Error("El archivo no contiene JSON válido."); }
+  if (!backup || typeof backup !== "object" || Array.isArray(backup) ||
+      backup.version !== 1 ||
+      backup.description !== "lingua-aberta / progreso local de cuestionarios" ||
+      !backup.courses || typeof backup.courses !== "object" ||
+      Array.isArray(backup.courses)) {
+    throw new Error("No es una copia de progreso de lingua-aberta.");
+  }
+  const entries = Object.keys(backup.courses);
+  if (entries.length > COURSES.length || entries.some(id => !KNOWN.has(id))) {
+    throw new Error("El archivo incluye cursos no reconocidos.");
+  }
+  const incoming = parseProgress(JSON.stringify({ version: 1, courses: backup.courses }));
+  if (Object.keys(incoming).length !== entries.length) {
+    throw new Error("La copia contiene resultados inválidos.");
+  }
+  const merged = { ...previous };
+  for (const [id, result] of Object.entries(incoming)) {
+    const local = previous[id];
+    merged[id] = local ? {
+      best: Math.max(local.best, result.best),
+      attempts: Math.max(local.attempts, result.attempts),
+      updatedAt: local.updatedAt > result.updatedAt ? local.updatedAt : result.updatedAt,
+    } : result;
+  }
+  return merged;
+}
+
 export function saveQuizResult(previous, id, score, total, at = new Date()) {
   if (!KNOWN.has(id)) throw new Error("Curso no reconocido.");
   if (!Number.isInteger(score) || !Number.isInteger(total) ||
