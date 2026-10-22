@@ -113,5 +113,5 @@ test('Vercel deep links resolve only implemented client routes and never mask AP
   assert.ok(config.rewrites.every(rule => !rule.source.includes('(.*)')), 'No blanket rewrite over /api or open-data');
   assert.equal(config.outputDirectory, 'dist/public');
   assert.match(app, /path="\/study\/:slug"/);
-  assert.match(app, /path="\/games\/:game"/);
+  assert.match(app, /path=(?:"\/games\/:game"|\{"\/games\/:game"\})/);
 });
