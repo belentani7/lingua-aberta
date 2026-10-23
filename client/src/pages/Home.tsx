@@ -137,6 +137,11 @@ export default function Home() {
   const selectedCopy = languageCopy[activeLanguage];
 
   function handleNav(label: string) {
+    if (label === "Juegos") {
+      setIsMobileMenuOpen(false);
+      navigate("/games");
+      return;
+    }
     setActiveNav(label);
     if (label !== "Início") {
       toast(`${label} está entrando no ar`, {
