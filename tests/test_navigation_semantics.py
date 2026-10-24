@@ -23,6 +23,21 @@ class FunctionalNavigationTest(unittest.TestCase):
             "El botón Juegos debe abrir /games, no solo mostrar un aviso.",
         )
 
+    def test_minha_rota_reaches_the_existing_course_section(self):
+        home = (ROOT / "client/src/pages/Home.tsx").read_text(encoding="utf-8")
+        self.assertIn('id="rota"', home)
+        self.assertRegex(
+            home,
+            r'if\\s*\\(label\\s*===\\s*"Minha rota"\\)[\\s\\S]{0,320}getElementById\\("rota"\\)',
+            "Minha rota debe llevar al bloque real de rutas.",
+        )
+
+    def test_unreleased_sections_are_not_clickable_navigation(self):
+        home = (ROOT / "client/src/pages/Home.tsx").read_text(encoding="utf-8")
+        self.assertIn('label: "Biblioteca", icon: BookOpen, available: false', home)
+        self.assertIn('label: "Comunidade", icon: MessageCircle, available: false', home)
+        self.assertIn('disabled={!available}', home)
+
 
 if __name__ == "__main__":
     unittest.main()
