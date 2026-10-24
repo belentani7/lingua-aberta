@@ -104,11 +104,11 @@ const languageCopy: Record<Language, { greeting: string; prompt: string; phrase:
 };
 
 const navItems = [
-  { label: "Início", icon: Compass },
-  { label: "Minha rota", icon: Target },
-  { label: "Biblioteca", icon: BookOpen },
-  { label: "Comunidade", icon: MessageCircle },
-  { label: "Juegos", icon: Gamepad2 },
+  { label: "Início", icon: Compass, available: true },
+  { label: "Minha rota", icon: Target, available: true },
+  { label: "Biblioteca", icon: BookOpen, available: false },
+  { label: "Comunidade", icon: MessageCircle, available: false },
+  { label: "Juegos", icon: Gamepad2, available: true },
 ];
 
 export default function Home() {
@@ -137,13 +137,21 @@ export default function Home() {
   const selectedCopy = languageCopy[activeLanguage];
 
   function handleNav(label: string) {
-    setActiveNav(label);
-    if (label !== "Início") {
-      toast(`${label} está entrando no ar`, {
-        description: "Esta área está preparada para receber os próximos módulos do instituto.",
-      });
+    if (label === "Juegos") {
+      setIsMobileMenuOpen(false);
+      navigate("/games");
+      return;
     }
     setIsMobileMenuOpen(false);
+    if (label === "Minha rota") {
+      setActiveNav(label);
+      document.getElementById("rota")?.scrollIntoView({ behavior: "smooth", block: "start" });
+      return;
+    }
+    if (label === "Início") {
+      setActiveNav(label);
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
   }
 
   function toggleListening() {
@@ -192,19 +200,20 @@ export default function Home() {
           <div className="mt-14">
             <p className="mb-4 px-3 font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-ink/40">Seu espaço</p>
             <nav className="space-y-1" aria-label="Navegação principal">
-              {navItems.map(({ label, icon: Icon }) => {
+              {navItems.map(({ label, icon: Icon, available }) => {
                 const isActive = activeNav === label;
                 return (
                   <button
                     key={label}
                     onClick={() => handleNav(label)}
-                    className={`group flex w-full items-center gap-3 rounded-xl px-3 py-3 text-left text-sm font-semibold transition-all duration-200 ${
+                    disabled={!available}
+                    className={`group flex w-full items-center gap-3 rounded-xl px-3 py-3 text-left text-sm font-semibold transition-all duration-200 disabled:cursor-not-allowed disabled:opacity-50 ${
                       isActive ? "bg-ink text-paper shadow-[0_8px_20px_rgba(14,32,53,0.12)]" : "text-ink/60 hover:bg-white hover:text-ink"
                     }`}
                   >
                     <Icon className={`size-[18px] ${isActive ? "text-saffron" : "text-ink/45 group-hover:text-coral"}`} />
                     {label}
-                    {label === "Comunidade" && <span className="ml-auto size-2 rounded-full bg-coral" />}
+                    {!available && <span className="ml-auto text-[10px] font-bold uppercase tracking-wide opacity-60">Em breve</span>}
                   </button>
                 );
               })}
@@ -243,11 +252,11 @@ export default function Home() {
               <span>Aulas em PT · ES · CA · EN</span>
             </div>
             <div className="flex items-center gap-3">
-              <button className="hidden items-center gap-2 rounded-full border border-ink/10 bg-white px-3 py-2 text-xs font-bold text-ink/65 transition hover:border-ink/30 sm:flex" onClick={() => toast("Aulas locais", { description: "Os exercícios MIARA incluídos no aplicativo não precisam de uma API de IA." })}>
+              <span title="Os exercícios MIARA do currículo funcionam sem API de IA." className="hidden items-center gap-2 rounded-full border border-ink/10 bg-white px-3 py-2 text-xs font-bold text-ink/65 sm:flex">
                 <Download className="size-3.5" />
                 Baixo consumo
-              </button>
-              <button className="relative grid size-10 place-items-center rounded-full border border-ink/10 bg-white transition hover:border-coral" aria-label="Abrir mensagens" onClick={() => toast("Comunidade em desenvolvimento", { description: "Não existe ainda uma caixa de mensagens sincronizada." })}>
+              </span>
+              <button type="button" className="relative grid size-10 place-items-center rounded-full border border-ink/10 bg-white disabled:cursor-not-allowed disabled:opacity-45" aria-label="Mensagens em breve" disabled title="Mensagens ainda não disponíveis">
                 <MessageCircle className="size-[18px]" />
               </button>
               <span className="hidden rounded-full bg-ink px-3 py-2 text-xs font-bold text-white sm:block">Sem conta</span>
@@ -289,7 +298,7 @@ export default function Home() {
                   <p className="eyebrow">Sua rota</p>
                   <h2 className="mt-2 font-display text-3xl font-black tracking-[-0.04em] sm:text-4xl">Um pouco por dia.</h2>
                 </div>
-                <button onClick={() => toast("Rota completa", { description: "Em breve: diagnóstico, metas vocacionais e trilhas personalizadas." })} className="group inline-flex items-center gap-2 text-sm font-extrabold text-ink/55 transition hover:text-coral">Ver rota completa <ArrowUpRight className="size-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" /></button>
+                <span className="text-sm font-semibold text-ink/50">Diagnóstico em preparação</span>
               </div>
               <div className="grid gap-4 md:grid-cols-3">
                 {coursesForDisplay.map((course) => {
@@ -355,21 +364,21 @@ export default function Home() {
 
             <section className="mt-12 border-t border-ink/10 pt-7">
               <div className="grid gap-5 md:grid-cols-3">
-                <button onClick={() => toast("Modo offline preparado", { description: "O próximo módulo poderá ser baixado para estudar no metrô." })} className="group flex items-center gap-4 rounded-2xl border border-ink/10 p-4 text-left transition hover:-translate-y-0.5 hover:border-ink/25 hover:bg-white"><div className="grid size-11 shrink-0 place-items-center rounded-xl bg-saffron"><Download className="size-5" /></div><div className="min-w-0"><p className="font-display text-[17px] font-extrabold">Estudar offline</p><p className="mt-1 text-xs text-ink/50">Baixe sua próxima lição</p></div><ChevronRight className="ml-auto size-4 text-ink/30 transition group-hover:translate-x-1" /></button>
-                <button onClick={() => toast("Mapa da comunidade", { description: "Em breve: grupos de estudo por bairro e interesse." })} className="group flex items-center gap-4 rounded-2xl border border-ink/10 p-4 text-left transition hover:-translate-y-0.5 hover:border-ink/25 hover:bg-white"><div className="grid size-11 shrink-0 place-items-center rounded-xl bg-coral text-white"><MapPin className="size-5" /></div><div className="min-w-0"><p className="font-display text-[17px] font-extrabold">Perto de você</p><p className="mt-1 text-xs text-ink/50">Encontre gente para praticar</p></div><ChevronRight className="ml-auto size-4 text-ink/30 transition group-hover:translate-x-1" /></button>
-                <button onClick={() => toast("Diagnóstico em breve", { description: "Vamos medir seu ponto de partida em menos de 5 minutos." })} className="group flex items-center gap-4 rounded-2xl border border-ink/10 p-4 text-left transition hover:-translate-y-0.5 hover:border-ink/25 hover:bg-white"><div className="grid size-11 shrink-0 place-items-center rounded-xl bg-ink text-white"><CircleHelp className="size-5" /></div><div className="min-w-0"><p className="font-display text-[17px] font-extrabold">Descobrir meu nível</p><p className="mt-1 text-xs text-ink/50">Faça um diagnóstico rápido</p></div><ChevronRight className="ml-auto size-4 text-ink/30 transition group-hover:translate-x-1" /></button>
+                <article className="flex items-center gap-4 rounded-2xl border border-ink/10 bg-white/40 p-4 text-left"><div className="grid size-11 shrink-0 place-items-center rounded-xl bg-saffron"><Download className="size-5" /></div><div className="min-w-0"><p className="font-display text-[17px] font-extrabold">Estudar offline</p><p className="mt-1 text-xs text-ink/50">Download em preparação</p></div><span className="ml-auto text-[10px] font-bold uppercase tracking-wide text-ink/50">Em breve</span></article>
+                <article className="flex items-center gap-4 rounded-2xl border border-ink/10 bg-white/40 p-4 text-left"><div className="grid size-11 shrink-0 place-items-center rounded-xl bg-coral text-white"><MapPin className="size-5" /></div><div className="min-w-0"><p className="font-display text-[17px] font-extrabold">Perto de você</p><p className="mt-1 text-xs text-ink/50">Grupos em preparação</p></div><span className="ml-auto text-[10px] font-bold uppercase tracking-wide text-ink/50">Em breve</span></article>
+                <article className="flex items-center gap-4 rounded-2xl border border-ink/10 bg-white/40 p-4 text-left"><div className="grid size-11 shrink-0 place-items-center rounded-xl bg-ink text-white"><CircleHelp className="size-5" /></div><div className="min-w-0"><p className="font-display text-[17px] font-extrabold">Descobrir meu nível</p><p className="mt-1 text-xs text-ink/50">Avaliação em preparação</p></div><span className="ml-auto text-[10px] font-bold uppercase tracking-wide text-ink/50">Em breve</span></article>
               </div>
             </section>
 
             <footer className="mt-14 flex flex-col gap-4 border-t border-ink/10 py-7 text-xs text-ink/40 sm:flex-row sm:items-center sm:justify-between">
               <p className="font-mono text-[10px] uppercase tracking-[0.14em]">Feito para quem está construindo seu próximo capítulo.</p>
-              <div className="flex gap-4"><button onClick={() => toast("Acessibilidade", { description: "Atalhos de teclado, alto contraste e modo sem animação estarão disponíveis." })} className="hover:text-ink">Acessibilidade</button><button onClick={() => toast("Privacidade", { description: "Seus dados de aprendizagem pertencem a você." })} className="hover:text-ink">Privacidade</button></div>
+              <div className="flex gap-4"><span title="Novos ajustes de leitura em desenvolvimento">Acessibilidade em evolução</span><span title="O progresso de aprendizagem desta experiência é guardado localmente neste navegador">Progresso local</span></div>
             </footer>
           </div>
         </main>
       </div>
 
-      {isMobileMenuOpen && <div className="fixed inset-0 z-50 flex lg:hidden"><button className="absolute inset-0 bg-ink/40 backdrop-blur-sm" aria-label="Fechar menu" onClick={() => setIsMobileMenuOpen(false)} /><aside className="relative z-10 flex h-full w-[280px] flex-col bg-paper p-6 shadow-2xl"><div className="flex items-center justify-between"><span className="font-display text-2xl font-black">Lingua aberta</span><button className="grid size-9 place-items-center rounded-lg border border-ink/10" onClick={() => setIsMobileMenuOpen(false)} aria-label="Fechar menu"><X className="size-4" /></button></div><nav className="mt-12 space-y-2">{navItems.map(({ label, icon: Icon }) => <button key={label} onClick={() => handleNav(label)} className={`flex w-full items-center gap-3 rounded-xl px-3 py-3 text-left font-bold ${activeNav === label ? "bg-ink text-white" : "text-ink/60"}`}><Icon className="size-[18px]" />{label}</button>)}</nav><div className="mt-auto rounded-2xl bg-mint p-4"><Headphones className="size-5" /><p className="mt-4 font-display text-xl font-extrabold leading-tight">Seu tutor está pronto para ouvir.</p><button onClick={() => { setIsMobileMenuOpen(false); document.getElementById("tutor")?.scrollIntoView({ behavior: "smooth" }); }} className="mt-4 text-sm font-extrabold underline underline-offset-4">Abrir tutor</button></div></aside></div>}
+      {isMobileMenuOpen && <div className="fixed inset-0 z-50 flex lg:hidden"><button className="absolute inset-0 bg-ink/40 backdrop-blur-sm" aria-label="Fechar menu" onClick={() => setIsMobileMenuOpen(false)} /><aside className="relative z-10 flex h-full w-[280px] flex-col bg-paper p-6 shadow-2xl"><div className="flex items-center justify-between"><span className="font-display text-2xl font-black">Lingua aberta</span><button className="grid size-9 place-items-center rounded-lg border border-ink/10" onClick={() => setIsMobileMenuOpen(false)} aria-label="Fechar menu"><X className="size-4" /></button></div><nav className="mt-12 space-y-2">{navItems.map(({ label, icon: Icon, available }) => <button key={label} onClick={() => handleNav(label)} disabled={!available} className={`flex w-full items-center gap-3 rounded-xl px-3 py-3 text-left font-bold disabled:cursor-not-allowed disabled:opacity-50 ${activeNav === label ? "bg-ink text-white" : "text-ink/60"}`}><Icon className="size-[18px]" />{label}{!available && <span className="ml-auto text-xs">Em breve</span>}</button>)}</nav><div className="mt-auto rounded-2xl bg-mint p-4"><Headphones className="size-5" /><p className="mt-4 font-display text-xl font-extrabold leading-tight">Seu tutor está pronto para ouvir.</p><button onClick={() => { setIsMobileMenuOpen(false); document.getElementById("tutor")?.scrollIntoView({ behavior: "smooth" }); }} className="mt-4 text-sm font-extrabold underline underline-offset-4">Abrir tutor</button></div></aside></div>}
     </div>
   );
 }
