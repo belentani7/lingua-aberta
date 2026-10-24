@@ -16,7 +16,7 @@ class FunctionalNavigationTest(unittest.TestCase):
         app = (ROOT / "client/src/App.tsx").read_text(encoding="utf-8")
 
         self.assertIn('label: "Juegos"', home)
-        self.assertIn('<Route path="/games">', app)
+        self.assertRegex(app, r'<Route\s+path=(?:\{\s*)?"/games"(?:\s*\})?')
         self.assertRegex(
             home,
             r'if\s*\(label\s*===\s*"Juegos"\)\s*\{[^}]*navigate\("/games"\)',
