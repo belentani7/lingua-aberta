@@ -104,11 +104,11 @@ const languageCopy: Record<Language, { greeting: string; prompt: string; phrase:
 };
 
 const navItems = [
-  { label: "Início", icon: Compass },
-  { label: "Minha rota", icon: Target },
-  { label: "Biblioteca", icon: BookOpen },
-  { label: "Comunidade", icon: MessageCircle },
-  { label: "Juegos", icon: Gamepad2 },
+  { label: "Início", icon: Compass, available: true },
+  { label: "Minha rota", icon: Target, available: true },
+  { label: "Biblioteca", icon: BookOpen, available: false },
+  { label: "Comunidade", icon: MessageCircle, available: false },
+  { label: "Juegos", icon: Gamepad2, available: true },
 ];
 
 export default function Home() {
@@ -142,13 +142,16 @@ export default function Home() {
       navigate("/games");
       return;
     }
-    setActiveNav(label);
-    if (label !== "Início") {
-      toast(`${label} está entrando no ar`, {
-        description: "Esta área está preparada para receber os próximos módulos do instituto.",
-      });
-    }
     setIsMobileMenuOpen(false);
+    if (label === "Minha rota") {
+      setActiveNav(label);
+      document.getElementById("rota")?.scrollIntoView({ behavior: "smooth", block: "start" });
+      return;
+    }
+    if (label === "Início") {
+      setActiveNav(label);
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
   }
 
   function toggleListening() {
@@ -197,19 +200,20 @@ export default function Home() {
           <div className="mt-14">
             <p className="mb-4 px-3 font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-ink/40">Seu espaço</p>
             <nav className="space-y-1" aria-label="Navegação principal">
-              {navItems.map(({ label, icon: Icon }) => {
+              {navItems.map(({ label, icon: Icon, available }) => {
                 const isActive = activeNav === label;
                 return (
                   <button
                     key={label}
                     onClick={() => handleNav(label)}
-                    className={`group flex w-full items-center gap-3 rounded-xl px-3 py-3 text-left text-sm font-semibold transition-all duration-200 ${
+                    disabled={!available}
+                    className={`group flex w-full items-center gap-3 rounded-xl px-3 py-3 text-left text-sm font-semibold transition-all duration-200 disabled:cursor-not-allowed disabled:opacity-50 ${
                       isActive ? "bg-ink text-paper shadow-[0_8px_20px_rgba(14,32,53,0.12)]" : "text-ink/60 hover:bg-white hover:text-ink"
                     }`}
                   >
                     <Icon className={`size-[18px] ${isActive ? "text-saffron" : "text-ink/45 group-hover:text-coral"}`} />
                     {label}
-                    {label === "Comunidade" && <span className="ml-auto size-2 rounded-full bg-coral" />}
+                    {!available && <span className="ml-auto text-[10px] font-bold uppercase tracking-wide opacity-60">Em breve</span>}
                   </button>
                 );
               })}
@@ -374,7 +378,7 @@ export default function Home() {
         </main>
       </div>
 
-      {isMobileMenuOpen && <div className="fixed inset-0 z-50 flex lg:hidden"><button className="absolute inset-0 bg-ink/40 backdrop-blur-sm" aria-label="Fechar menu" onClick={() => setIsMobileMenuOpen(false)} /><aside className="relative z-10 flex h-full w-[280px] flex-col bg-paper p-6 shadow-2xl"><div className="flex items-center justify-between"><span className="font-display text-2xl font-black">Lingua aberta</span><button className="grid size-9 place-items-center rounded-lg border border-ink/10" onClick={() => setIsMobileMenuOpen(false)} aria-label="Fechar menu"><X className="size-4" /></button></div><nav className="mt-12 space-y-2">{navItems.map(({ label, icon: Icon }) => <button key={label} onClick={() => handleNav(label)} className={`flex w-full items-center gap-3 rounded-xl px-3 py-3 text-left font-bold ${activeNav === label ? "bg-ink text-white" : "text-ink/60"}`}><Icon className="size-[18px]" />{label}</button>)}</nav><div className="mt-auto rounded-2xl bg-mint p-4"><Headphones className="size-5" /><p className="mt-4 font-display text-xl font-extrabold leading-tight">Seu tutor está pronto para ouvir.</p><button onClick={() => { setIsMobileMenuOpen(false); document.getElementById("tutor")?.scrollIntoView({ behavior: "smooth" }); }} className="mt-4 text-sm font-extrabold underline underline-offset-4">Abrir tutor</button></div></aside></div>}
+      {isMobileMenuOpen && <div className="fixed inset-0 z-50 flex lg:hidden"><button className="absolute inset-0 bg-ink/40 backdrop-blur-sm" aria-label="Fechar menu" onClick={() => setIsMobileMenuOpen(false)} /><aside className="relative z-10 flex h-full w-[280px] flex-col bg-paper p-6 shadow-2xl"><div className="flex items-center justify-between"><span className="font-display text-2xl font-black">Lingua aberta</span><button className="grid size-9 place-items-center rounded-lg border border-ink/10" onClick={() => setIsMobileMenuOpen(false)} aria-label="Fechar menu"><X className="size-4" /></button></div><nav className="mt-12 space-y-2">{navItems.map(({ label, icon: Icon, available }) => <button key={label} onClick={() => handleNav(label)} disabled={!available} className={`flex w-full items-center gap-3 rounded-xl px-3 py-3 text-left font-bold disabled:cursor-not-allowed disabled:opacity-50 ${activeNav === label ? "bg-ink text-white" : "text-ink/60"}`}><Icon className="size-[18px]" />{label}{!available && <span className="ml-auto text-xs">Em breve</span>}</button>)}</nav><div className="mt-auto rounded-2xl bg-mint p-4"><Headphones className="size-5" /><p className="mt-4 font-display text-xl font-extrabold leading-tight">Seu tutor está pronto para ouvir.</p><button onClick={() => { setIsMobileMenuOpen(false); document.getElementById("tutor")?.scrollIntoView({ behavior: "smooth" }); }} className="mt-4 text-sm font-extrabold underline underline-offset-4">Abrir tutor</button></div></aside></div>}
     </div>
   );
 }
