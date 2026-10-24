@@ -252,11 +252,11 @@ export default function Home() {
               <span>Aulas em PT · ES · CA · EN</span>
             </div>
             <div className="flex items-center gap-3">
-              <button className="hidden items-center gap-2 rounded-full border border-ink/10 bg-white px-3 py-2 text-xs font-bold text-ink/65 transition hover:border-ink/30 sm:flex" onClick={() => toast("Aulas locais", { description: "Os exercícios MIARA incluídos no aplicativo não precisam de uma API de IA." })}>
+              <span title="Os exercícios MIARA do currículo funcionam sem API de IA." className="hidden items-center gap-2 rounded-full border border-ink/10 bg-white px-3 py-2 text-xs font-bold text-ink/65 sm:flex">
                 <Download className="size-3.5" />
                 Baixo consumo
-              </button>
-              <button className="relative grid size-10 place-items-center rounded-full border border-ink/10 bg-white transition hover:border-coral" aria-label="Abrir mensagens" onClick={() => toast("Comunidade em desenvolvimento", { description: "Não existe ainda uma caixa de mensagens sincronizada." })}>
+              </span>
+              <button type="button" className="relative grid size-10 place-items-center rounded-full border border-ink/10 bg-white disabled:cursor-not-allowed disabled:opacity-45" aria-label="Mensagens em breve" disabled title="Mensagens ainda não disponíveis">
                 <MessageCircle className="size-[18px]" />
               </button>
               <span className="hidden rounded-full bg-ink px-3 py-2 text-xs font-bold text-white sm:block">Sem conta</span>
@@ -298,7 +298,7 @@ export default function Home() {
                   <p className="eyebrow">Sua rota</p>
                   <h2 className="mt-2 font-display text-3xl font-black tracking-[-0.04em] sm:text-4xl">Um pouco por dia.</h2>
                 </div>
-                <button onClick={() => toast("Rota completa", { description: "Em breve: diagnóstico, metas vocacionais e trilhas personalizadas." })} className="group inline-flex items-center gap-2 text-sm font-extrabold text-ink/55 transition hover:text-coral">Ver rota completa <ArrowUpRight className="size-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" /></button>
+                <span className="text-sm font-semibold text-ink/50">Diagnóstico em preparação</span>
               </div>
               <div className="grid gap-4 md:grid-cols-3">
                 {coursesForDisplay.map((course) => {
@@ -364,15 +364,15 @@ export default function Home() {
 
             <section className="mt-12 border-t border-ink/10 pt-7">
               <div className="grid gap-5 md:grid-cols-3">
-                <button onClick={() => toast("Modo offline preparado", { description: "O próximo módulo poderá ser baixado para estudar no metrô." })} className="group flex items-center gap-4 rounded-2xl border border-ink/10 p-4 text-left transition hover:-translate-y-0.5 hover:border-ink/25 hover:bg-white"><div className="grid size-11 shrink-0 place-items-center rounded-xl bg-saffron"><Download className="size-5" /></div><div className="min-w-0"><p className="font-display text-[17px] font-extrabold">Estudar offline</p><p className="mt-1 text-xs text-ink/50">Baixe sua próxima lição</p></div><ChevronRight className="ml-auto size-4 text-ink/30 transition group-hover:translate-x-1" /></button>
-                <button onClick={() => toast("Mapa da comunidade", { description: "Em breve: grupos de estudo por bairro e interesse." })} className="group flex items-center gap-4 rounded-2xl border border-ink/10 p-4 text-left transition hover:-translate-y-0.5 hover:border-ink/25 hover:bg-white"><div className="grid size-11 shrink-0 place-items-center rounded-xl bg-coral text-white"><MapPin className="size-5" /></div><div className="min-w-0"><p className="font-display text-[17px] font-extrabold">Perto de você</p><p className="mt-1 text-xs text-ink/50">Encontre gente para praticar</p></div><ChevronRight className="ml-auto size-4 text-ink/30 transition group-hover:translate-x-1" /></button>
-                <button onClick={() => toast("Diagnóstico em breve", { description: "Vamos medir seu ponto de partida em menos de 5 minutos." })} className="group flex items-center gap-4 rounded-2xl border border-ink/10 p-4 text-left transition hover:-translate-y-0.5 hover:border-ink/25 hover:bg-white"><div className="grid size-11 shrink-0 place-items-center rounded-xl bg-ink text-white"><CircleHelp className="size-5" /></div><div className="min-w-0"><p className="font-display text-[17px] font-extrabold">Descobrir meu nível</p><p className="mt-1 text-xs text-ink/50">Faça um diagnóstico rápido</p></div><ChevronRight className="ml-auto size-4 text-ink/30 transition group-hover:translate-x-1" /></button>
+                <article className="flex items-center gap-4 rounded-2xl border border-ink/10 bg-white/40 p-4 text-left"><div className="grid size-11 shrink-0 place-items-center rounded-xl bg-saffron"><Download className="size-5" /></div><div className="min-w-0"><p className="font-display text-[17px] font-extrabold">Estudar offline</p><p className="mt-1 text-xs text-ink/50">Download em preparação</p></div><span className="ml-auto text-[10px] font-bold uppercase tracking-wide text-ink/50">Em breve</span></article>
+                <article className="flex items-center gap-4 rounded-2xl border border-ink/10 bg-white/40 p-4 text-left"><div className="grid size-11 shrink-0 place-items-center rounded-xl bg-coral text-white"><MapPin className="size-5" /></div><div className="min-w-0"><p className="font-display text-[17px] font-extrabold">Perto de você</p><p className="mt-1 text-xs text-ink/50">Grupos em preparação</p></div><span className="ml-auto text-[10px] font-bold uppercase tracking-wide text-ink/50">Em breve</span></article>
+                <article className="flex items-center gap-4 rounded-2xl border border-ink/10 bg-white/40 p-4 text-left"><div className="grid size-11 shrink-0 place-items-center rounded-xl bg-ink text-white"><CircleHelp className="size-5" /></div><div className="min-w-0"><p className="font-display text-[17px] font-extrabold">Descobrir meu nível</p><p className="mt-1 text-xs text-ink/50">Avaliação em preparação</p></div><span className="ml-auto text-[10px] font-bold uppercase tracking-wide text-ink/50">Em breve</span></article>
               </div>
             </section>
 
             <footer className="mt-14 flex flex-col gap-4 border-t border-ink/10 py-7 text-xs text-ink/40 sm:flex-row sm:items-center sm:justify-between">
               <p className="font-mono text-[10px] uppercase tracking-[0.14em]">Feito para quem está construindo seu próximo capítulo.</p>
-              <div className="flex gap-4"><button onClick={() => toast("Acessibilidade", { description: "Atalhos de teclado, alto contraste e modo sem animação estarão disponíveis." })} className="hover:text-ink">Acessibilidade</button><button onClick={() => toast("Privacidade", { description: "Seus dados de aprendizagem pertencem a você." })} className="hover:text-ink">Privacidade</button></div>
+              <div className="flex gap-4"><span title="Novos ajustes de leitura em desenvolvimento">Acessibilidade em evolução</span><span title="O progresso de aprendizagem desta experiência é guardado localmente neste navegador">Progresso local</span></div>
             </footer>
           </div>
         </main>
