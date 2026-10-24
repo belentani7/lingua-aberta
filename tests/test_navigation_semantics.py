@@ -28,7 +28,7 @@ class FunctionalNavigationTest(unittest.TestCase):
         self.assertIn('id="rota"', home)
         self.assertRegex(
             home,
-            r'if\\s*\\(label\\s*===\\s*"Minha rota"\\)[\\s\\S]{0,320}getElementById\\("rota"\\)',
+            r'if\s*\(label\s*===\s*"Minha rota"\)[\s\S]{0,320}getElementById\("rota"\)',
             "Minha rota debe llevar al bloque real de rutas.",
         )
 
