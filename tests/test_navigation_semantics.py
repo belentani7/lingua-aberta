@@ -38,6 +38,22 @@ class FunctionalNavigationTest(unittest.TestCase):
         self.assertIn('label: "Comunidade", icon: MessageCircle, available: false', home)
         self.assertIn('disabled={!available}', home)
 
+    def test_unavailable_actions_are_not_fake_clickable_buttons(self):
+        home = (ROOT / "client/src/pages/Home.tsx").read_text(encoding="utf-8")
+        for fake_action in (
+            'toast("Rota completa"',
+            'toast("Modo offline preparado"',
+            'toast("Mapa da comunidade"',
+            'toast("Diagnóstico em breve"',
+            'toast("Acessibilidade"',
+            'toast("Privacidade"',
+            'toast("Comunidade em desenvolvimento"',
+        ):
+            self.assertNotIn(fake_action, home)
+        self.assertIn('aria-label="Mensagens em breve" disabled', home)
+        self.assertIn('Diagnóstico em preparação', home)
+        self.assertIn('Progresso local', home)
+
 
 if __name__ == "__main__":
     unittest.main()
