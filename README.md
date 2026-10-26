@@ -43,7 +43,6 @@ para cerrar esa brecha con software libre y datos abiertos.
 ```bash
 # Opción A — pnpm (recomendada: es el package manager declarado)
 pnpm install
-cp .env.example .env      # rellena lo que tu entorno necesite
 pnpm dev                  # vite
 
 # Configuración Docker existente (integración API todavía pendiente)
