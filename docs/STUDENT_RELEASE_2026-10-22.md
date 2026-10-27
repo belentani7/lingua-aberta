@@ -18,11 +18,11 @@
 
 ## Executar
 
-Requer Node.js 22 e pnpm 9 conforme a configuração de dependências do repositório. A raiz possui mais de uma configuração histórica de pacotes; o comando só deve ser considerado válido após o gate de compilação.
+O workflow atual declara Node.js 22 e pnpm 10.4.1, conforme `package.json`. O manifesto e o lockfile existem, mas a instalação e o build deste HEAD ainda precisam de execução integral verificável antes da publicação.
 
 ```bash
 corepack enable
-corepack prepare pnpm@9.0.0 --activate
+corepack prepare pnpm@10.4.1 --activate
 pnpm install --frozen-lockfile
 pnpm build
 pnpm dev
