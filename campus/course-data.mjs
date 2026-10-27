@@ -66,7 +66,14 @@ export function validateQuiz(value) {
       typeof explicacion !== "string" || !explicacion.trim() || explicacion.length > 1000) {
       throw new Error("Pregunta " + (index + 1) + " no supera la validación.");
     }
-    const id = pregunta.trim().toLocaleLowerCase("es");
+    // Identical-looking choices make correct and incorrect answers indistinguishable.
+    // Normalize Unicode, whitespace and case before grading a quiz.
+    const normalizedOptions = opciones.map(option =>
+      option.normalize("NFC").trim().replace(/\s+/gu, " ").toLocaleLowerCase("es"));
+    if (new Set(normalizedOptions).size !== opciones.length) {
+      throw new Error("Pregunta " + (index + 1) + " contiene opciones duplicadas.");
+    }
+    const id = pregunta.normalize("NFC").trim().replace(/\s+/gu, " ").toLocaleLowerCase("es");
     if (ids.has(id)) throw new Error("Pregunta duplicada.");
     ids.add(id);
     return { pregunta, opciones, correcta, explicacion };
