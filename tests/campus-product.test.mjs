@@ -74,6 +74,19 @@ test("malformed quizzes fail closed without executable markup", () => {
   assert.throws(() => validateQuiz([question, { ...question }]), /duplicada/i);
 });
 
+test("quiz validation rejects indistinguishable choices and repeated questions", () => {
+  const question = {
+    pregunta: "¿Qué significan los falsos amigos?",
+    opciones: ["Correcta", "Incorrecta"],
+    correcta: 0,
+    explicacion: "Las opciones deben ser inequívocas para evaluar.",
+  };
+  assert.throws(() => validateQuiz([{ ...question, opciones: ["Sí", " sí  "] }]), /opciones duplicadas/);
+  assert.throws(() => validateQuiz([{ ...question, opciones: ["café", "cafe\u0301"] }]), /opciones duplicadas/);
+  assert.throws(() => validateQuiz([question, { ...question, pregunta: "¿Qué   significan los falsos amigos? " }]), /Pregunta duplicada/);
+  assert.equal(validateQuiz([question])[0].correcta, 0);
+});
+
 test("all resources required by offline worker exist; it touches no other app caches", () => {
   const sw = read("sw.js");
   const assets = [...sw.matchAll(/"(\.\/[^"]+)"/g)].map(m => m[1]).filter(path => !path.includes("?"));
