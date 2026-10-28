@@ -31,5 +31,10 @@ jobs:
         run: pnpm run check
       - name: Production build
         run: pnpm run build
-      - name: Verify real frontend artifact
-        run: test -s dist/public/index.html
+      - name: Verify real frontend artifact and standalone course portals
+        run: |
+          test -s dist/public/index.html
+          test -s dist/public/campus/index.html
+          test -s dist/public/campus/pratica-rapida.html
+          test -s dist/public/campus/tokens.css
+          test -s dist/public/campus/course-data.mjs
