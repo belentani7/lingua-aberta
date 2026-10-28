@@ -23,6 +23,8 @@ jobs:
           cache: pnpm
       - name: Install exact project lockfile
         run: pnpm install --frozen-lockfile
+      - name: Reject false-green deployment workflows
+        run: node --test tests/deployment-gates.test.mjs
       - name: Student entrypoint, content, privacy, and full campus acceptance
         run: |
           node --test tests/student-site.test.mjs tests/miara-learning.test.mjs tests/privacy-fixtures.test.mjs

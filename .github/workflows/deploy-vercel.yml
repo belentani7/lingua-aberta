@@ -1,42 +1,76 @@
-name: Deploy Vercel
+name: Deploy Vercel (verified manual release)
 
 on:
-  push:
-    branches: [main]
   workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: lingua-aberta-${{ github.workflow }}
+  cancel-in-progress: false
 
 jobs:
   deploy:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
     steps:
-      - name: Check Vercel credentials
-        id: creds
+      - name: Require main and configured credentials
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+        shell: bash
         run: |
-          if [ -n "${{ secrets.VERCEL_TOKEN }}" ] && [ -n "${{ secrets.VERCEL_ORG_ID }}" ] && [ -n "${{ secrets.VERCEL_PROJECT_ID }}" ]; then
-            echo "ready=true" >> "$GITHUB_OUTPUT"
-          else
-            echo "ready=false" >> "$GITHUB_OUTPUT"
-            echo "::notice::Skipping deploy - set VERCEL_TOKEN, VERCEL_ORG_ID and VERCEL_PROJECT_ID repository secrets to enable it."
+          set -euo pipefail
+          if [[ "$GITHUB_REF" != "refs/heads/main" ]]; then
+            echo "::error::Production deployment must run from main."
+            exit 1
           fi
+          for key in VERCEL_TOKEN VERCEL_ORG_ID VERCEL_PROJECT_ID; do
+            if [[ -z "${!key:-}" ]]; then
+              echo "::error::Missing ${key}. Deployment was not attempted."
+              exit 1
+            fi
+          done
+
       - uses: actions/checkout@v5
-        if: steps.creds.outputs.ready == 'true'
+        with:
+          persist-credentials: false
       - uses: pnpm/action-setup@v4
-        if: steps.creds.outputs.ready == 'true'
       - uses: actions/setup-node@v5
-        if: steps.creds.outputs.ready == 'true'
         with:
-          node-version: 22
+          node-version: '22'
           cache: pnpm
-      - name: Install dependencies
-        if: steps.creds.outputs.ready == 'true'
-        run: pnpm install --no-frozen-lockfile
-      - name: Build
-        if: steps.creds.outputs.ready == 'true'
-        run: pnpm build
-      - uses: amondnet/vercel-action@v25
-        if: steps.creds.outputs.ready == 'true'
-        with:
-          vercel-token: ${{ secrets.VERCEL_TOKEN }}
-          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
-          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
-          vercel-args: "--prod"
+      - name: Install locked dependencies
+        run: pnpm install --frozen-lockfile
+      - name: Validate student flows and types
+        run: |
+          set -euo pipefail
+          node --test tests/student-site.test.mjs tests/miara-learning.test.mjs tests/privacy-fixtures.test.mjs
+          node --test tests/campus-product.test.mjs tests/pt-es-course-content.test.mjs tests/catalan-eso-curriculum.test.mjs tests/full-campus-integration.test.mjs
+          pnpm run check
+      - name: Build actual release artifact
+        run: |
+          set -euo pipefail
+          pnpm run build
+          test -s dist/public/index.html
+          test -s dist/public/campus/index.html
+          test -s dist/public/campus/pratica-rapida.html
+          test -s dist/public/campus/course-data.mjs
+
+      - name: Install pinned Vercel CLI
+        run: npm install --global vercel@64.5.0
+      - name: Deploy and verify live response
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+        run: |
+          set -euo pipefail
+          vercel pull --yes --environment=production
+          url="$(vercel deploy --yes --prod)"
+          test -n "$url"
+          vercel inspect "$url"
+          vercel curl / --deployment "$url" --fail >/dev/null
+          echo "Production deployment verified: $url" >> "$GITHUB_STEP_SUMMARY"
