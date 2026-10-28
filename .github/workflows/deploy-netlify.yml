@@ -59,7 +59,7 @@ jobs:
           test -s dist/public/campus/course-data.mjs
 
       - name: Deploy to existing Netlify site
-        uses: nwtgck/actions-netlify@v3.0
+        uses: nwtgck/actions-netlify@v4.0
         with:
           publish-dir: ./dist/public
           production-branch: main
