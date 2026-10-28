@@ -8,7 +8,8 @@
     "build": "vite build",
     "start": "vite preview",
     "check": "tsc --noEmit",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "test": "node --test"
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.693.0",
@@ -102,5 +103,8 @@
     "overrides": {
       "tailwindcss>nanoid": "3.3.7"
     }
+  },
+  "engines": {
+    "node": ">=18"
   }
 }
