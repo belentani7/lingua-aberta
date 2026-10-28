@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#0d2631"><meta name="description" content="Prática rápida e gratuita de espanhol, catalão e inglês. Frases reais e feedback local, sem IA remota nem conta.">
+<title>Prática rápida — Lingua Aberta</title>
+<style>
+:root{--bg:#071b25;--ink:#f0fbf9;--muted:#bedbd8;--mint:#82e6d8;--yellow:#ffdc88;--panel:#113441;--stroke:#559b9f68;--shadow:#07151a}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,"Segoe UI",sans-serif;line-height:1.6}
+a{color:var(--mint)}a:focus-visible,button:focus-visible{outline:3px solid var(--yellow);outline-offset:3px}
+.wrap{width:min(1060px,calc(100% - 2rem));margin:auto}.top{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;padding:1.4rem 0}.brand{font-size:1.1rem;font-weight:850;letter-spacing:-.04em;text-decoration:none;color:var(--ink)}.brand span{color:var(--mint)}
+nav{display:flex;gap:1rem}nav a{color:var(--ink);text-underline-offset:4px}
+.hero{position:relative;isolation:isolate;border-radius:30px;background:linear-gradient(135deg,#144754,#091e2c);padding:clamp(2rem,7vw,6rem);overflow:hidden;border:1px solid var(--stroke)}
+.hero:before{content:"";position:absolute;right:-8%;top:-35%;width:440px;aspect-ratio:1;border:1px solid #77dbce5c;border-radius:50%;box-shadow:inset 0 0 0 50px #7bfae40c,0 0 0 55px #a5fae414,0 0 0 110px #d9ffec07;z-index:-1}
+.kicker{font:800 .73rem ui-monospace,monospace;letter-spacing:.16em;color:var(--mint)}
+h1{font-size:clamp(2.6rem,7vw,6rem);line-height:1.03;letter-spacing:-.065em;max-width:12ch;margin:1rem 0}
+h1 em{color:var(--yellow);font-style:normal}.hero p:not(.kicker){max-width:58ch;font-size:1.17rem;color:#dbf2f0}
+.steps{display:flex;flex-wrap:wrap;gap:.6rem;margin-top:2rem}.steps span{background:#e3fff20d;border:1px solid var(--stroke);border-radius:999px;padding:.4rem .8rem;font-size:.81rem;color:var(--muted)}
+.shell{display:grid;grid-template-columns:minmax(210px,.75fr) minmax(0,1.4fr);gap:1.3rem;padding:3rem 0 5rem}
+.panel{padding:clamp(1.2rem,3vw,2.5rem);background:#0f303b;border:1px solid var(--stroke);border-radius:22px}
+.panel h2{font-size:1.4rem;margin:0 0 1rem}.language{display:grid;gap:.6rem}
+.language button{min-height:54px;text-align:left;padding:.8rem 1.1rem;background:#ffffff0a;border:1px solid #94c4c247;border-radius:11px;color:var(--ink);font-size:1rem;cursor:pointer}
+.language button[aria-pressed=true]{background:#58e1c21c;border-color:var(--mint);box-shadow:inset 4px 0 var(--mint)}.language button:hover{background:#ffffff15}
+.prompt{color:var(--yellow);font-weight:750;letter-spacing:.04em;text-transform:uppercase;font-size:.78rem}.question{font-size:clamp(1.4rem,3vw,2.25rem);font-weight:850;line-height:1.22;margin:.7rem 0 1.8rem;letter-spacing:-.03em}
+.answers{display:grid;gap:.7rem}.answer{cursor:pointer;min-height:58px;padding:1rem;text-align:left;background:#09252f;color:var(--ink);border:1px solid #7db8b768;border-radius:12px;font-size:1rem}.answer:hover{border-color:var(--mint)}.answer:disabled{cursor:default;opacity:.85}.answer.correct{border-color:#82e6d8;background:#1b6158}.answer.wrong{border-color:#ffc594;background:#6a362b}
+.feedback{min-height:3.5rem;margin-top:1rem;color:#eafaf8;font-weight:650}.controls{display:flex;flex-wrap:wrap;gap:.7rem;align-items:center}.btn{min-height:47px;padding:.8rem 1.2rem;border-radius:10px;background:var(--mint);border:0;color:#06303a;font-size:.95rem;font-weight:850;cursor:pointer}.btn.alt{color:var(--ink);background:#ffffff18;border:1px solid var(--stroke)}.btn:disabled{opacity:.5;cursor:not-allowed}
+footer{padding:2rem 0;border-top:1px solid var(--stroke);font-size:.88rem;color:var(--muted)}
+@media(max-width:700px){.shell{grid-template-columns:1fr;padding-top:1.5rem}.hero:before{right:-50%;top:0}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body><div class="wrap">
+<header class="top"><a class="brand" href="index.html">LINGUA <span>ABERTA</span> / CAMPUS</a><nav aria-label="Voltar"><a href="index.html">Campus</a><a href="../campus.html">Início</a></nav></header>
+<main><section class="hero" aria-labelledby="title"><p class="kicker">MICROLAB / 100% LOCAL</p><h1 id="title">A língua ganha vida <em>quando você usa.</em></h1><p>Três situações da vida real para começar a praticar espanhol, catalão ou inglês. Escolha uma língua, leia a situação e selecione a expressão mais adequada.</p><div class="steps"><span>Sem cadastro</span><span>Feedback imediato</span><span>Sem enviar respostas a servidores</span></div></section>
+<div class="shell"><aside class="panel" aria-labelledby="languages-title"><h2 id="languages-title">Qual língua vamos treinar?</h2><div class="language" role="group" aria-label="Idioma de estudo">
+<button type="button" data-lang="es" aria-pressed="true">🇪🇸 Espanhol · vida diária</button>
+<button type="button" data-lang="ca" aria-pressed="false">🇦🇩 Català · bairro e escola</button>
+<button type="button" data-lang="en" aria-pressed="false">🇬🇧 English · travel &amp; work</button>
+</div><p style="color:var(--muted);font-size:.87rem">Este mini laboratório oferece exemplos orientativos. Para lições completas, volte ao campus.</p></aside>
+<section class="panel" id="pratica" aria-labelledby="practice-title"><p class="prompt" id="counter">PERGUNTA 01 / 03</p><h2 id="practice-title" class="question">Carregando prática…</h2><div class="answers" id="answers" role="group" aria-label="Respostas"></div><p id="feedback" class="feedback" role="status" aria-live="polite"></p>
+<div class="controls"><button id="next" class="btn" type="button" disabled>Próxima pergunta →</button><button id="restart" class="btn alt" type="button">Recomeçar</button><span id="score" aria-live="polite">0 de 3</span></div></section></div></main>
+<footer>Lingua Aberta · Formação aberta. Nenhuma resposta enviada a um servidor. <a href="index.html">Voltar ao campus</a></footer></div>
+<script>
+(function(){
+"use strict";
+const sets={
+es:[
+["Você quer pedir uma informação. Como diz 'Com licença, onde fica a estação?' em espanhol?",["Disculpe, ¿dónde está la estación?","Hola, soy una estación.","Ayer comí una estación."],0,"Disculpe é uma forma educada de abordar alguém."],
+["Como você pede um copo de água?",["Soy un vaso de agua.","¿Me puede dar un vaso de agua, por favor?","Agua me apellido."],1,"Por favor ajuda a manter um pedido educado."],
+["Você deseja informar que procura trabalho.",["Estoy buscando trabajo.","El trabajo me busca.","Trabajo es mi calle."],0,"Estoy buscando trabajo é uma frase comum para procurar emprego."]
+],
+ca:[
+["Você encontra alguém de manhã. Qual cumprimento é adequado em catalão?",["Bona nit","Bon dia","Adéu"],1,"Bon dia é o cumprimento de bom dia em catalão."],
+["Como diz 'Obrigado(a)' em catalão?",["Gràcies","Demà","Hola"],0,"Gràcies é uma palavra essencial para agradecer."],
+["Você precisa perguntar onde fica a biblioteca.",["Quant costa la biblioteca?","On és la biblioteca?","Soc una biblioteca."],1,"On és…? significa Onde fica…?"]
+],
+en:[
+["You want to ask where the train station is.",["Where is the train station?","I station yesterday.","Train is your name."],0,"Where is…? is a direct way to ask for a location."],
+["You need to introduce yourself politely.",["My is Pedro.","I am called a street.","My name is…"],2,"My name is… is a common introduction."],
+["You want to thank a colleague.",["Thank you for your help.","Please train me a building.","Tomorrow is thank."],0,"Thank you for your help is natural and polite."]
+]};
+let lang="es",index=0,score=0,answered=false;
+const $=id=>document.getElementById(id);
+function render(){
+answered=false;const item=sets[lang][index];$("counter").textContent="PERGUNTA "+String(index+1).padStart(2,"0")+" / 03";$("practice-title").textContent=item[0];$("feedback").textContent="Escolha uma resposta";$("answers").replaceChildren();$("next").disabled=true;$("next").textContent=index===2?"Ver resultado →":"Próxima pergunta →";
+item[1].forEach((answer,i)=>{const b=document.createElement("button");b.type="button";b.className="answer";b.textContent=String.fromCharCode(65+i)+". "+answer;b.addEventListener("click",()=>{
+if(answered)return;answered=true;if(i===item[2])score++;$("feedback").textContent=(i===item[2]?"Correto! ":"Ainda não. ")+item[3];[...$("answers").children].forEach((node,j)=>{node.disabled=true;node.classList.add(j===item[2]?"correct":j===i?"wrong":"")});$("next").disabled=false;$("score").textContent=score+" de 3";
+});$("answers").append(b)});
+}
+function reset(language){lang=language;index=0;score=0;$("score").textContent="0 de 3";document.querySelectorAll("[data-lang]").forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.lang===lang)));render();}
+document.querySelectorAll("[data-lang]").forEach(b=>b.addEventListener("click",()=>reset(b.dataset.lang)));
+$("restart").addEventListener("click",()=>reset(lang));
+$("next").addEventListener("click",()=>{if(index===2){$("practice-title").textContent="Prática concluída!";$("feedback").textContent="Você acertou "+score+" de 3. Volte ao campus para avançar."; $("answers").replaceChildren();$("next").disabled=true;return;}index++;render()});
+render();
+})();
+</script></body></html>
