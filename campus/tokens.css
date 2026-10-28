@@ -267,3 +267,25 @@ footer { padding: var(--sp-8) 0; border-top: 1px solid var(--border);
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { scroll-behavior: auto !important; animation: none !important; transition: none !important; }
 }
+
+/* Lingua Aberta / 2026: immersive but restrained editorial educational hero. */
+.lingua-hero-grid{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(270px,.8fr);gap:clamp(2rem,5vw,6rem);align-items:center;min-height:430px}
+.hero:has(.lingua-hero-grid){isolation:isolate;padding:clamp(2.5rem,5vw,5rem) clamp(1rem,3vw,3rem);margin-top:1.2rem;border:1px solid #75dcdd51;border-radius:26px;background:radial-gradient(circle at 78% 45%,#2d839757,transparent 35%),linear-gradient(120deg,#103447,#0a1c29 75%);box-shadow:0 28px 65px #0006;overflow:hidden}
+.lingua-hero-copy{position:relative;z-index:1}
+.lingua-hero-copy h1{font-size:clamp(2.5rem,5.4vw,5.5rem);line-height:1.03;letter-spacing:-.065em;max-width:12ch;margin:1rem 0}
+.lingua-hero-copy h1 em{font-style:normal;color:#8de6e8}
+.lingua-hero-copy .lead{max-width:54ch;color:#e2f4f5;line-height:1.65}
+.lingua-hero-actions{display:flex;gap:.8rem;flex-wrap:wrap;margin:1.8rem 0}
+.lingua-hero-actions a{min-height:48px;font-weight:800}
+.lingua-hero-copy .hero-note{color:#b4d7db;max-width:65ch}
+.lingua-globe{position:relative;width:min(100%,330px);aspect-ratio:1;justify-self:center;display:grid;place-items:center;border-radius:50%;background:radial-gradient(circle at 35% 26%,#e6ffff,#7ad5dc 18%,#206478 49%,#09202a 72%);box-shadow:0 0 90px #3eafc84c,inset -22px -30px 60px #020b14}
+.lingua-orbit{position:absolute;inset:-9%;border:1px solid #82e1ed7f;border-radius:50%;transform:rotate(-30deg);animation:linguaTilt 12s ease-in-out infinite alternate}
+.lingua-orbit:before{content:"";position:absolute;inset:17%;border-radius:50%;border:1px solid #e1ffff9c;transform:rotate3d(1,1,0,60deg)}
+.lingua-core{position:relative;z-index:1;font:900 clamp(4rem,9vw,7rem) var(--font-sans);letter-spacing:-.1em;color:#ecffff;text-shadow:0 6px 23px #065b70}
+.lingua-core span{font-size:.5em;color:#efffc8}
+.lingua-symbol{position:absolute;display:grid;place-items:center;width:50px;height:50px;border-radius:50%;font:800 .75rem var(--font-mono);color:#07313b;background:#bff5ee;border:3px solid #e7ffff;box-shadow:0 6px 25px #021b25}
+.lingua-symbol.s1{top:3%;left:11%}.lingua-symbol.s2{bottom:7%;left:-3%}.lingua-symbol.s3{right:0;top:26%}.lingua-symbol.s4{bottom:2%;right:10%}
+@keyframes linguaTilt{to{transform:rotate(-15deg) scale(1.035)}}
+@media(max-width:860px){.lingua-hero-grid{grid-template-columns:1fr}.lingua-globe{width:250px;margin-block:1rem}.lingua-hero-copy h1{max-width:15ch}}
+@media(max-width:600px){.hero:has(.lingua-hero-grid){padding:2rem 1rem}.lingua-hero-copy h1{font-size:clamp(2.25rem,10vw,3.4rem)}.lingua-symbol{width:42px;height:42px}}
+@media(prefers-reduced-motion:reduce){.lingua-orbit{animation:none}}
