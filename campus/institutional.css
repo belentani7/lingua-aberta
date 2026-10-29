@@ -1,0 +1,32 @@
+/* BELENTANI Education: Lingua Aberta institutional layer, intentionally imported after tokens.css. */
+:root{color-scheme:light;--bg-page:#f7f7f2;--bg-surface:#fff;--bg-sunken:#eef2ed;--bg-muted:#e7eeea;--bg-hover:#dfece4;--text-1:#1b362f;--text-2:#3b564b;--text-3:#597265;--border:#d6e1d8;--accent:#176b62;--accent-soft:#def0e8;--accent-ink:#fff;--focus-ring:0 0 0 3px #b67937a6;--shadow:0 10px 32px #1b362f0b}
+body{font:400 1.05rem/1.65 Inter,"Segoe UI",system-ui,sans-serif;background:var(--bg-page);color:var(--text-1)}
+h1,h2,.brand{font-family:Georgia,"Times New Roman",serif;font-weight:500;letter-spacing:-.04em}
+h1{font-size:clamp(2.6rem,5.7vw,5.6rem)}h2{font-size:clamp(2rem,3.4vw,3rem)}h3{letter-spacing:-.025em}
+.topbar{background:#f7f7f2f2;border-bottom:1px solid var(--border);min-height:82px;gap:1rem;flex-wrap:wrap;padding-block:.6rem}
+.topbar nav{display:flex;flex-wrap:wrap;gap:.6rem}.brand{display:flex;align-items:center;gap:.5rem;font-size:1.5rem;line-height:1.1}
+.brand span{color:#1b362f}.brand small{color:#597265;font:600 .76rem Inter,system-ui,sans-serif;letter-spacing:.12em;text-transform:uppercase}
+.btn{border-radius:6px;transition:background-color .15s ease;min-height:48px}
+.btn:hover{background:#104f46;color:#fff}.btn-ghost{color:#21554b;background:transparent;border-color:#9bb9ab}
+.btn-ghost:hover{background:#d8e9df;color:#183b31}.btn:focus-visible{outline:3px solid #9b611c;outline-offset:3px;box-shadow:none}
+.card{border:1px solid var(--border);box-shadow:0 1px 0 #192d2a06;border-radius:16px;padding:clamp(1.4rem,2.5vw,2rem)}.card:hover{border-color:#9bb8a8}
+.card h3{font:500 1.4rem/1.2 Georgia,serif}.card h3 a{color:#173d34}.badge{background:#dfeee5;color:#195c4c}
+.hero:has(.lingua-hero-grid){background:linear-gradient(112deg,#e4eee5,#f7f7f2 70%);border:1px solid #d1dfd5;border-radius:16px;padding:clamp(2.5rem,5vw,5rem);box-shadow:none;margin-top:1.3rem}
+.lingua-hero-copy h1{font-family:Georgia,serif;font-weight:500;color:#19372c}.lingua-hero-copy h1 em{color:#176b62}
+.lingua-hero-copy .lead{color:#3c594e}.lingua-hero-copy .hero-note{color:#526b61}.lingua-hero-copy .eyebrow{color:#176b62}
+.lingua-globe{background:radial-gradient(circle at 33% 27%,#f5fcf6,#c6e3d3 24%,#4f8f79 63%,#22574a);box-shadow:0 15px 55px #265b4c24,inset -15px -30px 65px #163d3129}
+.lingua-orbit{border-color:#2d73565b}.lingua-orbit:before{border-color:#2d73565b}.lingua-core{color:#fff;text-shadow:0 4px 14px #163d3188}.lingua-symbol{color:#184e3f;background:#e4f5e9;border-color:#fff;box-shadow:0 5px 16px #163d3127}
+.study-section,.progress-panel,.quiz-box,.study-panel,.lesson-document{border-color:var(--border)}.lesson-document{background:#fff;color:#183b31}
+.institutional-page{width:min(100% - 2rem,1120px);margin:4rem auto 6rem}
+.institutional-page .intro{max-width:850px;margin-bottom:3rem}.institutional-page .intro h1{line-height:1.07;max-width:14ch}
+.institutional-page .intro .lede{font-size:clamp(1.1rem,2vw,1.33rem);line-height:1.7;color:#415e51}
+.institutional-page .paths{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1rem}
+.institutional-page .path{background:#fff;padding:clamp(1.4rem,3vw,2.2rem);border:1px solid var(--border);border-radius:15px;display:flex;align-items:flex-start;flex-direction:column;gap:1rem}
+.institutional-page .path h2{font:500 1.9rem/1.18 Georgia,serif}.institutional-page .path .btn{margin-top:auto}
+.institutional-page .path p{margin:0;color:#466055}.institutional-page .label{font:800 .77rem/1.4 system-ui,sans-serif;letter-spacing:.12em;text-transform:uppercase;color:#176b62}
+.institutional-page .wide{margin:3rem 0 0;padding:clamp(1.6rem,3vw,2.7rem);border-left:4px solid #176b62;background:#e8f0e9;border-radius:0 12px 12px 0}
+.institutional-page .wide h2{margin-bottom:1.2rem}.institutional-page .wide li{margin:.55rem 0;max-width:80ch}
+.institutional-page .navback{display:inline-flex;margin-top:2rem;text-underline-offset:.25em}
+.institutional-page footer{margin-top:2.5rem;color:#526b61}
+@media(max-width:860px){.institutional-page .paths{grid-template-columns:1fr}.topbar nav{width:100%}.lingua-globe{max-width:220px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.lingua-orbit{animation:none}.btn{transition:none}}

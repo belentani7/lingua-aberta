@@ -3,11 +3,11 @@
  * An installed service worker is not a promise of offline availability
  * until its installation has completed successfully under HTTPS/localhost.
  */
-const CACHE = "lingua-aberta-campus-v3";
+const CACHE = "lingua-aberta-campus-v4";
 const PREFIX = "lingua-aberta-campus-";
 const ROOT = self.registration.scope;
 const CONTENT = [
-  "./", "./index.html", "./tokens.css", "./app.js", "./course-data.mjs",
+  "./", "./index.html", "./empezar.html", "./metodo.html", "./tokens.css", "./institutional.css", "./app.js", "./course-data.mjs",
   "./icon.svg", "./manifest.webmanifest",
   "./cursos/falsos-amigos-pt-es/syllabus.md",
   "./cursos/falsos-amigos-pt-es/semana-01.md",
