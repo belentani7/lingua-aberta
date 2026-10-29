@@ -11,7 +11,7 @@ test("public site is validly organized and accessible without a forced portal li
   const html = read("client/index.html");
   assert.match(html, /<html lang="pt-BR">/);
   assert.match(html, /<main|id="root"/);
-  assert.match(html, /href="#root"/);
+  assert.match(html, /href="#main-content"/);
   assert.match(html, /<meta name="description"/);
   assert.ok(html.indexOf("</body>") > html.indexOf('id="root"'));
   assert.equal((html.match(/<body>/g)||[]).length,1);
@@ -53,4 +53,19 @@ test("original alternate campus and resources are retained",()=>{
   for(const file of ["campus/index.html","campus/app.js","campus/tokens.css","campus/cursos/falsos-amigos-pt-es/syllabus.md","client/public/open-data/index.html","client/src/components/games/GameArena.tsx"]){
     assert.ok(existsSync(resolve(root,file)),file);
   }
+});
+
+
+test("keyboard skip link reaches one focusable content landmark for every route", () => {
+  assert.match(read("client/index.html"), /href="#main-content"/);
+  for (const page of [
+    "client/src/pages/Home.tsx",
+    "client/src/pages/Practice.tsx",
+    "client/src/pages/NotFound.tsx",
+  ]) {
+    assert.match(read(page), /<main id="main-content" tabIndex=\{-1\}/, page);
+  }
+  const game = read("client/src/components/games/GameArena.tsx");
+  assert.equal((game.match(/<main id="main-content" tabIndex=\{-1\}/g) || []).length, 3);
+  assert.doesNotMatch(read("client/index.html"), /href="#root"/);
 });
