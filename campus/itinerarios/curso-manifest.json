@@ -1,0 +1,38 @@
+{
+  "project": "LÍNGUA ABERTA",
+  "base": "../cursos",
+  "courses": [
+    {
+      "slug": "catalan-a1-brasileiros",
+      "title": "Català A1 · Primeiros passos",
+      "description": "Contenido original por unidades, con material de estudio, actividad y evaluación cuando está disponible.",
+      "weeks": [
+        1,
+        2,
+        3,
+        4
+      ]
+    },
+    {
+      "slug": "falsos-amigos-pt-es",
+      "title": "Espanhol · Falsos amigos PT–ES",
+      "description": "Contenido original por unidades, con material de estudio, actividad y evaluación cuando está disponible.",
+      "weeks": [
+        1,
+        2,
+        3,
+        4
+      ]
+    },
+    {
+      "slug": "espanol-academico-eso",
+      "title": "Espanhol acadêmico para a ESO",
+      "description": "Contenido original por unidades, con material de estudio, actividad y evaluación cuando está disponible.",
+      "weeks": [
+        1,
+        2,
+        3
+      ]
+    }
+  ]
+}
