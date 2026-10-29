@@ -286,7 +286,7 @@ export default function GameArena({
         </section>
 
         {screen === "home" && (
-          <main>
+          <main id="main-content" tabIndex={-1}>
             <section className="route-hero glass-panel" style={{ backgroundImage: "linear-gradient(90deg, rgba(12,4,25,.98) 0%, rgba(12,4,25,.82) 45%, rgba(12,4,25,.16) 100%), url('/manus-storage/catalonia-route-bg_bb5c81cf.png')" }}>
               <div className="hero-copy"><p className="kicker"><span className="map-pin-mark">+</span> RUTA ACTIVA · LLEGADA A CATALUÑA</p><h2>Aprende para <span>moverte</span> sin miedo.</h2><p>Microlecciones para tus primeras conversaciones, desde Brasil hasta tu nuevo mapa.</p><button className="primary-button" onClick={() => setScreen("lesson")}>Continuar ruta <ChevronRight size={17} /></button></div>
               <div className="hero-orbit"><span>CA</span><span>ES</span><span>EN</span><div>3</div></div>
@@ -312,7 +312,7 @@ export default function GameArena({
         )}
 
         {screen === "lesson" && (
-          <main className="lesson-screen">
+          <main id="main-content" tabIndex={-1} className="lesson-screen">
             <button className="back-button" onClick={() => setScreen("home")}><ArrowLeft size={17} /> Volver al mapa</button>
             <div className="lesson-title-row"><div><span className="eyebrow">LECCIÓN {lessonStep + 1} / 3</span><h2>Primeras frases en catalán</h2></div><div className="lesson-xp"><Star size={15} /> +30 XP</div></div>
             <div className="lesson-progress"><i style={{ width: `${((lessonStep + 1) / 3) * 100}%` }} /></div>
@@ -323,7 +323,7 @@ export default function GameArena({
         )}
 
         {screen === "game" && (
-          <main className="game-screen">
+          <main id="main-content" tabIndex={-1} className="game-screen">
             <div className="game-topline"><button className="back-button" onClick={() => setScreen("home")}><ArrowLeft size={17} /> Misiones</button><span className={`game-chip ${meta.color}`}>{meta.icon} {meta.detail}</span></div>
             <section className="game-header glass-panel"><div><span className="eyebrow">MISIÓN {String((wordIndex % WORDS.length) + 1).padStart(2, "0")} · {word.topic.toUpperCase()}</span><h2>{meta.title}</h2><p>Ruta: {LANG_NAMES[sourceLang]} <span>→</span> {LANG_NAMES[targetLang]}</p></div><button className="swap-button" onClick={swapLanguages} aria-label="Cambiar dirección"><Languages size={18} /></button></section>
             <div className="game-progress"><div><span>RACHA</span><b>{streak}</b></div><div className="game-progress-track"><i style={{ width: `${Math.min(100, ((wordIndex % WORDS.length) + 1) * 12.5)}%` }} /></div><div><span>XP</span><b>{xp}</b></div></div>
