@@ -41,7 +41,7 @@ export default function Practice() {
   }, [lessonIndex, slug]);
 
   if (!course || !courseEntry) {
-    return <main className="mx-auto max-w-3xl px-5 py-12">
+    return <main id="main-content" tabIndex={-1} className="mx-auto max-w-3xl px-5 py-12">
       <h1 className="text-3xl font-bold">Curso não encontrado</h1>
       <p className="mt-3">Este curso ainda não está disponível no currículo local.</p>
       <Link href="/" className="mt-5 inline-block underline">Voltar ao campus</Link>
@@ -106,7 +106,7 @@ export default function Practice() {
   }
 
   return (
-    <main className="min-h-screen bg-paper px-4 py-8 text-ink sm:px-8">
+    <main id="main-content" tabIndex={-1} className="min-h-screen bg-paper px-4 py-8 text-ink sm:px-8">
       <div className="mx-auto max-w-5xl">
         <Link href="/" className="text-sm font-semibold underline underline-offset-4">← Lingua Aberta</Link>
         <div className="mt-7 rounded-3xl bg-ink p-7 text-paper sm:p-10">
