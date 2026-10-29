@@ -238,7 +238,7 @@ export default function Home() {
           </div>
         </aside>
 
-        <main className="min-w-0 flex-1">
+        <main id="main-content" tabIndex={-1} className="min-w-0 flex-1">
           <header className="flex items-center justify-between border-b border-ink/10 px-5 py-4 sm:px-8 lg:px-10 lg:py-6">
             <div className="flex items-center gap-3 lg:hidden">
               <button className="grid size-10 place-items-center rounded-xl border border-ink/10 bg-white" aria-label="Abrir menu" onClick={() => setIsMobileMenuOpen(true)}>
