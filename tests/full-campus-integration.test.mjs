@@ -54,7 +54,7 @@ test("public homepage includes the correct exam size for all three independent c
 
 test("offline installation must fetch the actual current curriculum instead of stale v2", () => {
   const sw=source("sw.js");
-  assert.match(sw,/const CACHE = "lingua-aberta-campus-v3"/);
+  assert.match(sw,/const CACHE = "lingua-aberta-campus-v4"/);
   assert.match(sw,/const PREFIX = "lingua-aberta-campus-"/);
   assert.match(sw,/const ROOT = self\.registration\.scope/);
   for(const course of COURSES){
