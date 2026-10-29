@@ -9,11 +9,11 @@ const pages=["index.html","empezar.html","metodo.html"];
 test("institutional pages have semantic navigation, meta descriptions and no broken local routes",()=>{
  for(const page of pages){
   const html=read(page);
-  assert.match(html,/<main\\b/);
-  assert.match(html,/<h1\\b/);
+  assert.match(html,/<main\b/);
+  assert.match(html,/<h1\b/);
   assert.match(html,/<meta name="description"/);
-  assert.match(html,/institutional\\.css/);
-  for(const matched of html.matchAll(/\\b(?:href|src)="([^"]+)"/g)){
+  assert.match(html,/institutional\.css/);
+  for(const matched of html.matchAll(/\b(?:href|src)="([^"]+)"/g)){
    const href=matched[1]; if(/^(https?:|mailto:|data:|#)/i.test(href))continue;
    const cleaned=href.split(/[?#]/)[0]; if(!cleaned)continue;
    assert.ok(!cleaned.includes(".."),page+": path traversal "+cleaned);
@@ -24,7 +24,7 @@ test("institutional pages have semantic navigation, meta descriptions and no bro
 test("quick-start links to the three real syllabi, not an absent practice route",()=>{
  const html=read("empezar.html");
  for(const name of ["falsos-amigos-pt-es","catalan-a1-brasileiros","espanol-academico-eso"]){assert.ok(html.includes('cursos/'+name+'/syllabus.md'));}
- assert.doesNotMatch(read("index.html"),/pratica-rapida\\.html/);
+ assert.doesNotMatch(read("index.html"),/pratica-rapida\.html/);
 });
 test("offline app cache includes the new institutional pages and stylesheet",()=>{
  const sw=read("sw.js"); for(const path of ["empezar.html","metodo.html","institutional.css"]){assert.ok(sw.includes('"./'+path+'"'));}
