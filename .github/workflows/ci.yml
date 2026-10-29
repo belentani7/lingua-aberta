@@ -17,7 +17,7 @@ jobs:
           persist-credentials: false
       - name: Verify full-platform security baseline
         run: node scripts/verify-platform-security.mjs
-      - uses: pnpm/action-setup@v4
+      - uses: pnpm/action-setup@v6
         # Version comes from packageManager in package.json to prevent duplicate declarations.
       - uses: actions/setup-node@v4
         with:
